@@ -10,6 +10,8 @@
 
 #define SECS_PER_DAY (60 * 60 * 24)
 
+int special_days[10][2];
+
 struct tm* get_next_day(time_t *t) {
 	*t += SECS_PER_DAY;
 	return localtime(t);
@@ -23,6 +25,18 @@ struct tm* get_prev_day(time_t *t) {
 struct tm* get_next_week(time_t *t) {
 	*t += SECS_PER_DAY * 7;
 	return localtime(t);
+}
+
+int is_special_day(struct tm *timeinfo) {
+	int i = 0;
+	while (special_days[i][0] != -1) {
+		if (timeinfo->tm_mon == special_days[i][0] - 1 &&
+				timeinfo->tm_mday == special_days[i][1]) {
+			return 1;
+		}
+		i++;
+	}
+	return 0;
 }
 
 int is_fixed_holiday(struct tm *timeinfo) {
@@ -150,25 +164,37 @@ void year(cairo_t *cr, int y, int year) {
 			mweek++;
 		}
 
-		cairo_set_source_rgb(cr, 0, 0, 0);
 
 		// Rectangle
+		int filled = 0;
 		cairo_rectangle(cr,
 				i * CELL_WIDTH, y * CELL_HEIGHT,
 				CELL_WIDTH, CELL_HEIGHT);
-		if (timeinfo->tm_wday == 0) {
+		if (is_special_day(timeinfo)) {
+			cairo_set_source_rgb(cr, 0, 0, 1);
 			cairo_fill(cr);
-			cairo_set_source_rgb(cr, 1, 1, 1);
+			filled = 1;
+		} else if (timeinfo->tm_wday == 0) {
+			cairo_set_source_rgb(cr, 0, 0, 0);
+			cairo_fill(cr);
+			filled = 1;
 		} else if (is_holiday(t, mweek, last_mweek[timeinfo->tm_wday])) {
 			cairo_set_source_rgb(cr, 1, 0, 0);
 			cairo_fill(cr);
-			cairo_set_source_rgb(cr, 1, 1, 1);
-		} else {
-			cairo_stroke(cr);
+			filled = 1;
 		}
 		timeinfo = localtime(&t);
 
+		cairo_rectangle(cr,
+				i * CELL_WIDTH, y * CELL_HEIGHT,
+				CELL_WIDTH, CELL_HEIGHT);
+		cairo_set_source_rgb(cr, 0, 0, 0);
+		cairo_stroke(cr);
+
 		// Label
+		if (filled) {
+			cairo_set_source_rgb(cr, 1, 1, 1);
+		}
 		if (timeinfo->tm_mday == 1) {
 			sprintf(buf, "%d", timeinfo->tm_mon + 1);
 			cairo_move_to(cr,
@@ -183,9 +209,14 @@ void year(cairo_t *cr, int y, int year) {
 
 int main(int argc, char *argv[])
 {
-	int i;
+	int i = 0;
+	while (scanf("%d/%d\n", &special_days[i][0], &special_days[i][1]) == 2) {
+		i++;
+	}
+	special_days[i][0] = -1;
+
 	cairo_surface_t *surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32,
-			365 * CELL_WIDTH, MAX_YEAR * CELL_HEIGHT);
+			366 * CELL_WIDTH, MAX_YEAR * CELL_HEIGHT);
 	cairo_t *cr = cairo_create(surface);
 
 	cairo_select_font_face(cr, "serif", CAIRO_FONT_SLANT_NORMAL,
