@@ -166,6 +166,7 @@ void year(cairo_t *cr, int y, int year) {
 		} else {
 			cairo_stroke(cr);
 		}
+		timeinfo = localtime(&t);
 
 		// Label
 		if (timeinfo->tm_mday == 1) {
