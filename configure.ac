@@ -2,6 +2,7 @@ AC_INIT([calendar], [0.1])
 AM_INIT_AUTOMAKE([foreign])
 
 AC_PROG_CC
+AC_PROG_RANLIB
 
 PKG_CHECK_MODULES([CAIRO], [cairo])
 
