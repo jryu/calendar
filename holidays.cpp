@@ -1,4 +1,5 @@
 #include "holidays.h"
+#include <stdio.h>
 
 int is_fixed_holiday(time_t t) {
 	struct tm timeinfo = *localtime(&t);
