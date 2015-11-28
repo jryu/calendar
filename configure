@@ -581,6 +581,7 @@ PACKAGE_STRING='calendar 0.1'
 PACKAGE_BUGREPORT=''
 PACKAGE_URL=''
 
+ac_unique_file="src/main.cpp"
 ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
@@ -2416,6 +2417,8 @@ END
   fi
 fi
 
+
+
 ac_ext=cpp
 ac_cpp='$CXXCPP $CPPFLAGS'
 ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -3512,6 +3515,9 @@ fi
 
 ac_config_files="$ac_config_files Makefile"
 
+ac_config_files="$ac_config_files src/Makefile"
+
+
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -4255,6 +4261,7 @@ do
   case $ac_config_target in
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
