@@ -7,10 +7,10 @@
 
 #include "holidays.h"
 
-#define CELL_WIDTH 100
-#define CELL_HEIGHT 100
-#define FONT_SIZE 50
-#define LINE_WIDTH 10
+#define CELL_WIDTH 30
+#define CELL_HEIGHT 30
+#define FONT_SIZE 15
+#define LINE_WIDTH 3
 #define MAX_YEAR 30
 
 #define RGB_SPECIAL_DAY 63,87,101
