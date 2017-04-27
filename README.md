@@ -14,4 +14,4 @@
 > ./run.sh
 
 ## Example Output ##
-* [example.png](http://jryu.net/calendar/example.png)
+* [example.svg](http://jryu.net/calendar/example.svg)
