@@ -2,11 +2,13 @@
 calendar
 a.png
 special_days
+src/holidays_test*
+test-suite.log
+test-driver
 
 # Autotools
 .deps
 Makefile
-aclocal.m4
 autom4te.cache
 config.log
 config.status
