@@ -160,7 +160,7 @@ int main(int argc, char *argv[])
 
 	cairo_destroy(cr);
 
-	cairo_status_t status = cairo_surface_write_to_png(surface, "a.png");
+	cairo_status_t status = cairo_surface_write_to_png(surface, "example.png");
 	if (status != CAIRO_STATUS_SUCCESS) {
 		puts(cairo_status_to_string(status));
 	}

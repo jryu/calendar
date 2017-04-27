@@ -1,1 +1,1 @@
-make && src/calendar < special_days && xdg-open a.png
+make && src/calendar < special_days && xdg-open example.png
