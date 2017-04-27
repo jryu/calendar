@@ -1,4 +1,5 @@
 #include <cairo.h>
+#include <cairo-svg.h>
 #include <pango/pangocairo.h>
 #include <stdio.h>
 #include <string.h>
@@ -6,9 +7,10 @@
 
 #include "holidays.h"
 
-#define CELL_WIDTH 40
-#define CELL_HEIGHT 40
-#define FONT_SIZE 20
+#define CELL_WIDTH 100
+#define CELL_HEIGHT 100
+#define FONT_SIZE 50
+#define LINE_WIDTH 10
 #define MAX_YEAR 30
 
 #define RGB_SPECIAL_DAY 63,87,101
@@ -147,11 +149,11 @@ int main(int argc, char *argv[])
 	}
 	special_days[i][0] = -1;
 
-	cairo_surface_t *surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32,
+	cairo_surface_t *surface = cairo_svg_surface_create("example.svg",
 			366 * CELL_WIDTH, MAX_YEAR * CELL_HEIGHT);
 	cairo_t *cr = cairo_create(surface);
 
-	cairo_set_line_width(cr, 3);
+	cairo_set_line_width(cr, LINE_WIDTH);
 
 	int this_year = get_this_year();
 	for (i = 0; i < MAX_YEAR; i++) {
@@ -160,11 +162,5 @@ int main(int argc, char *argv[])
 
 	cairo_destroy(cr);
 
-	cairo_status_t status = cairo_surface_write_to_png(surface, "example.png");
-	if (status != CAIRO_STATUS_SUCCESS) {
-		puts(cairo_status_to_string(status));
-	}
-
 	cairo_surface_destroy(surface);
-	return status;
 }
