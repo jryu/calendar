@@ -2,7 +2,7 @@
 
 ### Install Libraries ###
 * For Debian and Debian derivatives including Ubuntu:
-> sudo apt-get install libcairo2-dev libpango1.0-dev libcppunit-dev
+> sudo apt-get install libcairo2-dev libpango1.0-dev libcppunit-dev libprotobuf-dev protobuf-compiler
 
 * Others:
 > Good luck!

@@ -1,0 +1,29 @@
+package config;
+
+message CalendarConfig {
+	optional int32 num_years = 1 [default = 30];
+	repeated MonthDay special_day = 2;
+
+	optional int32 cell_size = 3 [default = 30];
+	optional int32 font_size = 4 [default = 15];
+	optional int32 line_width = 5 [default = 3];
+
+	optional RGB rgb_special_day = 6;
+	optional RGB rgb_sunday = 7;
+	optional RGB rgb_holiday = 8;
+	optional RGB rgb_common_day = 9;
+	optional RGB rgb_line = 10;
+	optional RGB rgb_number_bright = 11;
+	optional RGB rgb_number_dark = 12;
+}
+
+message MonthDay {
+	required int32 month = 1;
+	required int32 day = 2;
+}
+
+message RGB {
+	required int32 red = 1;
+	required int32 green = 2;
+	required int32 blue = 3;
+}

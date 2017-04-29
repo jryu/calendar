@@ -1,0 +1,52 @@
+special_day {
+	month: 4
+	day: 5
+}
+special_day {
+	month: 7
+	day: 16
+}
+special_day {
+	month: 7
+	day: 29
+}
+special_day {
+	month: 10
+	day: 17
+}
+
+rgb_special_day {
+	red: 63
+	green: 87
+	blue: 101
+}
+rgb_sunday {
+	red: 189
+	green: 212
+	blue: 222
+}
+rgb_holiday {
+	red: 255
+	green: 83
+	blue: 13
+}
+rgb_common_day {
+	red: 239
+	green: 239
+	blue: 239
+}
+rgb_line {
+	red: 255
+	green: 255
+	blue: 255
+}
+rgb_number_bright {
+	red: 255
+	green: 255
+	blue: 255
+}
+rgb_number_dark {
+	red: 43
+	green: 58
+	blue: 66
+}

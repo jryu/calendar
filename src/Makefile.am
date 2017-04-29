@@ -1,10 +1,17 @@
+%.pb.cc %.pb.h: %.proto
+	$(PROTOC) --proto_path=$(srcdir) --cpp_out=$(builddir) $^
+
 noinst_LIBRARIES = libholidays.a
+
 libholidays_a_SOURCES = holidays.cpp
 
+dist_noinst_DATA = config.proto
+BUILT_SOURCES = config.pb.cc
+
 noinst_PROGRAMS = calendar
-calendar_SOURCES = main.cpp
+calendar_SOURCES = main.cpp config.pb.cc config.pb.h
 calendar_CPPFLAGS = $(CAIRO_CFLAGS)
-calendar_LDADD = $(CAIRO_LIBS) libholidays.a
+calendar_LDADD = $(CAIRO_LIBS) $(PROTOBUF_LIBS) libholidays.a
 
 check_PROGRAMS = holidays_test
 holidays_test_SOURCES = holidays_test.cpp

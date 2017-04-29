@@ -1,1 +1,1 @@
-make && src/calendar < special_days
+make && src/calendar
