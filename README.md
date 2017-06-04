@@ -29,4 +29,9 @@ git clone https://github.com/jryu/calendar.git
 Teach us to number our days,
     that we may gain a heart of wisdom. - Psalm 90:12
 ```
+
+```
+The world and its desires pass away,
+    but whoever does the will of God lives forever. - 1 John 2:17
+```
 ---
