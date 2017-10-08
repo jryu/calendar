@@ -4,6 +4,7 @@
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 #include <google/protobuf/text_format.h>
 #include <pango/pangocairo.h>
+#include <spdlog/spdlog.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -12,6 +13,7 @@
 #include "config.pb.h"
 
 config::CalendarConfig conf;
+auto console = spdlog::stdout_logger_mt("console");
 
 struct tm* get_next_day(time_t *t) {
 	*t += SECS_PER_DAY;
@@ -138,12 +140,14 @@ bool parse_config() {
 
 	int fd = open("config.txt", O_RDONLY);
 	if (fd < 0) {
+		console->error(strerror(errno));
 		return false;
 	}
 	google::protobuf::io::FileInputStream fileInput(fd);
 	fileInput.SetCloseOnDelete( true );
 
 	if (!google::protobuf::TextFormat::Parse(&fileInput, &conf)) {
+		// protobuf prints error message
 		return false;
 	}
 	return true;
@@ -152,7 +156,8 @@ bool parse_config() {
 int main(int argc, char *argv[])
 {
 	if (!parse_config()) {
-		return -1;
+		console->error("Error");
+		return EXIT_FAILURE;
 	}
 
 	cairo_surface_t *surface = cairo_svg_surface_create("example.svg",
@@ -168,4 +173,5 @@ int main(int argc, char *argv[])
 
 	cairo_destroy(cr);
 	cairo_surface_destroy(surface);
+	return EXIT_SUCCESS;
 }
