@@ -1,4 +1,5 @@
 #include <cairo.h>
+#include <cairo-pdf.h>
 #include <cairo-svg.h>
 #include <fcntl.h>
 #include <google/protobuf/io/zero_copy_stream_impl.h>
@@ -82,6 +83,20 @@ void set_rgb(cairo_t *cr, const config::RGB& rgb) {
 }
 
 
+void month_label(cairo_t *cr) {
+	char buf[4];
+	int days_per_months[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	int d = 0;
+
+	set_rgb(cr, conf.rgb_number_dark());
+
+	for (int m = 0; m < 12; m++) {
+		sprintf(buf, "%d", m + 1);
+		draw_text(cr, d, 0, buf);
+		d += days_per_months[m];
+	}
+}
+
 void year(cairo_t *cr, int y, int year) {
 	int i;
 	char buf[4];
@@ -90,21 +105,24 @@ void year(cairo_t *cr, int y, int year) {
 
 	for (i = 0; timeinfo->tm_year == year; i++) {
 		// Rectangle
-		int filled = 0;
+		bool filled = false;
+		bool draw_label = false;
 		cairo_rectangle(cr,
-				i * conf.cell_size(), y * conf.cell_size(),
+				i * conf.cell_size(), (y + 1) * conf.cell_size(),
 				conf.cell_size(), conf.cell_size());
 		if (is_special_day(timeinfo)) {
 			set_rgb(cr, conf.rgb_special_day());
 			cairo_fill(cr);
-			filled = 1;
+			filled = true;
+			draw_label = true;
 		} else if (timeinfo->tm_wday == 0) {
 			set_rgb(cr, conf.rgb_sunday());
 			cairo_fill(cr);
 		} else if (is_holiday(t)) {
 			set_rgb(cr, conf.rgb_holiday());
 			cairo_fill(cr);
-			filled = 1;
+			filled = true;
+			draw_label = true;
 		} else {
 			set_rgb(cr, conf.rgb_common_day());
 			cairo_fill(cr);
@@ -112,7 +130,7 @@ void year(cairo_t *cr, int y, int year) {
 		timeinfo = localtime(&t);
 
 		cairo_rectangle(cr,
-				i * conf.cell_size(), y * conf.cell_size(),
+				i * conf.cell_size(), (y + 1) * conf.cell_size(),
 				conf.cell_size(), conf.cell_size());
 		set_rgb(cr, conf.rgb_line());
 		cairo_stroke(cr);
@@ -123,9 +141,9 @@ void year(cairo_t *cr, int y, int year) {
 		} else {
 			set_rgb(cr, conf.rgb_number_dark());
 		}
-		if (timeinfo->tm_mday == 1) {
-			sprintf(buf, "%d", timeinfo->tm_mon + 1);
-			draw_text(cr, i, y, buf);
+		if (draw_label) {
+			sprintf(buf, "%d", timeinfo->tm_mday);
+			draw_text(cr, i, y + 1, buf);
 		}
 
 		timeinfo = get_next_day(&t);
@@ -155,17 +173,21 @@ bool parse_config() {
 
 int main(int argc, char *argv[])
 {
+	console->info(cairo_version_string());
 	if (!parse_config()) {
 		console->error("Error");
 		return EXIT_FAILURE;
 	}
 
-	cairo_surface_t *surface = cairo_svg_surface_create("example.svg",
+	cairo_surface_t *surface = NULL;
+//	surface = cairo_pdf_surface_create("example.pdf",
+	surface = cairo_svg_surface_create("example.svg",
 			366 * conf.cell_size(), conf.num_years() * conf.cell_size());
 	cairo_t *cr = cairo_create(surface);
 
 	cairo_set_line_width(cr, conf.line_width());
 
+	month_label(cr);
 	int this_year = get_this_year();
 	for (int i = 0; i < conf.num_years(); i++) {
 		year(cr, i, this_year + i);
