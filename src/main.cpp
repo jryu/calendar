@@ -61,6 +61,38 @@ PangoLayout* init_pango_layout(cairo_t *cr) {
 	return layout;
 }
 
+void draw_text_of_year(cairo_t *cr, int y, const char* text) {
+	PangoLayout *layout = init_pango_layout(cr);
+	pango_layout_set_text(layout, text, -1);
+
+	int width, height;
+	pango_layout_get_size(layout, &width, &height);
+	cairo_move_to(cr,
+			(conf.year_label_width() - ((double)width / PANGO_SCALE)) / 2,
+			(y + 1) * (conf.cell_size() + conf.cell_margin()) +
+			(conf.cell_size() - ((double)height / PANGO_SCALE)) / 2 +
+			conf.month_label_height());
+
+	pango_cairo_show_layout(cr, layout);
+
+	g_object_unref(layout);
+}
+
+void draw_text_of_month(cairo_t *cr, int x, const char* text) {
+	PangoLayout *layout = init_pango_layout(cr);
+	pango_layout_set_text(layout, text, -1);
+
+	int width, height;
+	pango_layout_get_size(layout, &width, &height);
+	cairo_move_to(cr,
+			x * (conf.cell_size() + conf.cell_margin()) +
+			conf.year_label_width(),
+			(conf.month_label_height() - ((double)height / PANGO_SCALE)) / 2);
+	pango_cairo_show_layout(cr, layout);
+
+	g_object_unref(layout);
+}
+
 void draw_text_of_day(cairo_t *cr, int x, int y, const char* text) {
 	PangoLayout *layout = init_pango_layout(cr);
 	pango_layout_set_text(layout, text, -1);
@@ -99,18 +131,48 @@ void set_rgb(cairo_t *cr, const config::RGB& rgb) {
 }
 
 
-void month_label(cairo_t *cr) {
-	char buf[4];
-	int days_per_months[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	int d = 0;
+void year_label(cairo_t *cr, int this_year) {
+	char buf[5];
 
 	set_rgb(cr, conf.rgb_header());
 
+	for (int i = 0; i < conf.num_years(); i++) {
+		sprintf(buf, "%d", this_year + i);
+		draw_text_of_year(cr, i, buf);
+	}
+}
+
+void month_label(cairo_t *cr) {
+	const char *month_text[] = {
+		"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY",
+		"AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
+	const int days_per_months[] = {
+		31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+	set_rgb(cr, conf.rgb_header());
+
+	int d = 0;
 	for (int m = 0; m < 12; m++) {
-		sprintf(buf, "%d", m + 1);
-		draw_text_of_day(cr, d, 0, buf);
+		draw_text_of_month(cr, d, month_text[m]);
 		d += days_per_months[m];
 	}
+}
+
+void wday_label(cairo_t *cr) {
+	const char *wday_text[] = {"M", "T", "W", "Th", "F", "S", "Su"};
+
+	set_rgb(cr, conf.rgb_header());
+
+	for (int d = 0; d < 365 + 6; d++) {
+		draw_text_of_day(cr, d, 0, wday_text[d % 7]);
+	}
+}
+
+int get_wday_index(struct tm const &timeinfo) {
+	if (timeinfo.tm_wday == 0) {
+		return 6;
+	}
+	return timeinfo.tm_wday - 1;
 }
 
 void year(cairo_t *cr, int y, int year) {
@@ -118,13 +180,14 @@ void year(cairo_t *cr, int y, int year) {
 	time_t t = get_first_day_of_year_in_sec(year);
 	struct tm timeinfo = *localtime(&t);
 
-	for (int i = 0; timeinfo.tm_year == year; i++) {
+	int i = get_wday_index(timeinfo);
+	while (timeinfo.tm_year == year) {
 		// Rectangle
 		bool filled = false;
 		bool draw_label = true;
 		draw_rectangle_of_day(cr, i, y + 1);
 		if (is_special_day(timeinfo)) {
-			set_rgb(cr, conf.rgb_day_background());
+			set_rgb(cr, conf.rgb_header());
 			cairo_stroke(cr);
 		} else if (timeinfo.tm_wday == 0) {
 			set_rgb(cr, conf.rgb_day_background());
@@ -151,6 +214,7 @@ void year(cairo_t *cr, int y, int year) {
 		}
 
 		timeinfo = *get_next_day(&t);
+		i++;
 	}
 }
 
@@ -186,7 +250,7 @@ int main(int argc, char *argv[])
 	cairo_surface_t *surface = NULL;
 //	surface = cairo_pdf_surface_create("example.pdf",
 	surface = cairo_svg_surface_create("example.svg",
-			366 * (conf.cell_size() + conf.cell_margin()) +
+			(366 + 6) * (conf.cell_size() + conf.cell_margin()) +
 			conf.year_label_width(),
 			(conf.num_years() + 1) *
 			(conf.cell_size() + conf.cell_margin()) +
@@ -195,8 +259,10 @@ int main(int argc, char *argv[])
 
 	cairo_set_line_width(cr, conf.line_width());
 
-	month_label(cr);
 	int this_year = get_this_year();
+	year_label(cr, this_year + 1900);
+	month_label(cr);
+	wday_label(cr);
 	for (int i = 0; i < conf.num_years(); i++) {
 		year(cr, i, this_year + i);
 	}
