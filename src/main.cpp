@@ -49,8 +49,7 @@ time_t get_first_day_of_year_in_sec(int year) {
 	return mktime(&timeinfo);
 }
 
-void draw_text(cairo_t *cr, int x, int y, const char* text) {
-	int width, height;
+PangoLayout* init_pango_layout(cairo_t *cr) {
 	PangoLayout *layout = pango_cairo_create_layout(cr);
 	PangoFontDescription *font_description =
 		pango_font_description_from_string("Source Code Pro Bold");
@@ -59,18 +58,35 @@ void draw_text(cairo_t *cr, int x, int y, const char* text) {
 
 	pango_layout_set_font_description (layout, font_description);
 	pango_font_description_free(font_description);
+	return layout;
+}
 
+void draw_text_of_day(cairo_t *cr, int x, int y, const char* text) {
+	PangoLayout *layout = init_pango_layout(cr);
 	pango_layout_set_text(layout, text, -1);
 
+	int width, height;
 	pango_layout_get_size(layout, &width, &height);
 	cairo_move_to(cr,
-			(x + 0.5) * conf.cell_size() - ((double)width / PANGO_SCALE) / 2,
-			(y + 0.5) * conf.cell_size() - ((double)height / PANGO_SCALE) / 2);
+			x * (conf.cell_size() + conf.cell_margin()) +
+			(conf.cell_size() - ((double)width / PANGO_SCALE)) / 2 +
+			conf.year_label_width(),
+			y * (conf.cell_size() + conf.cell_margin()) +
+			(conf.cell_size() - ((double)height / PANGO_SCALE)) / 2 +
+			conf.month_label_height());
 	pango_cairo_show_layout(cr, layout);
 
 	g_object_unref(layout);
 }
 
+void draw_rectangle_of_day(cairo_t *cr, int x, int y) {
+	cairo_rectangle(cr,
+			x * (conf.cell_size() + conf.cell_margin()) +
+			conf.year_label_width(),
+			y * (conf.cell_size() + conf.cell_margin()) +
+			conf.month_label_height(),
+			conf.cell_size(), conf.cell_size());
+}
 
 double cairo_color(int color) {
 	return (double) color / 255;
@@ -88,11 +104,11 @@ void month_label(cairo_t *cr) {
 	int days_per_months[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	int d = 0;
 
-	set_rgb(cr, conf.rgb_number_dark());
+	set_rgb(cr, conf.rgb_header());
 
 	for (int m = 0; m < 12; m++) {
 		sprintf(buf, "%d", m + 1);
-		draw_text(cr, d, 0, buf);
+		draw_text_of_day(cr, d, 0, buf);
 		d += days_per_months[m];
 	}
 }
@@ -105,43 +121,33 @@ void year(cairo_t *cr, int y, int year) {
 	for (int i = 0; timeinfo.tm_year == year; i++) {
 		// Rectangle
 		bool filled = false;
-		bool draw_label = false;
-		cairo_rectangle(cr,
-				i * conf.cell_size(), (y + 1) * conf.cell_size(),
-				conf.cell_size(), conf.cell_size());
+		bool draw_label = true;
+		draw_rectangle_of_day(cr, i, y + 1);
 		if (is_special_day(timeinfo)) {
-			set_rgb(cr, conf.rgb_special_day());
-			cairo_fill(cr);
-			filled = true;
-			draw_label = true;
+			set_rgb(cr, conf.rgb_day_background());
+			cairo_stroke(cr);
 		} else if (timeinfo.tm_wday == 0) {
-			set_rgb(cr, conf.rgb_sunday());
+			set_rgb(cr, conf.rgb_day_background());
 			cairo_fill(cr);
 		} else if (is_holiday(t)) {
-			set_rgb(cr, conf.rgb_holiday());
+			set_rgb(cr, conf.rgb_header());
 			cairo_fill(cr);
 			filled = true;
-			draw_label = true;
 		} else {
-			set_rgb(cr, conf.rgb_common_day());
+			set_rgb(cr, conf.rgb_day_background());
 			cairo_fill(cr);
+			draw_label = false;
 		}
-
-		cairo_rectangle(cr,
-				i * conf.cell_size(), (y + 1) * conf.cell_size(),
-				conf.cell_size(), conf.cell_size());
-		set_rgb(cr, conf.rgb_line());
-		cairo_stroke(cr);
 
 		// Label
 		if (filled) {
-			set_rgb(cr, conf.rgb_number_bright());
+			set_rgb(cr, conf.rgb_day_background());
 		} else {
-			set_rgb(cr, conf.rgb_number_dark());
+			set_rgb(cr, conf.rgb_header());
 		}
 		if (draw_label) {
 			sprintf(buf, "%d", timeinfo.tm_mday);
-			draw_text(cr, i, y + 1, buf);
+			draw_text_of_day(cr, i, y + 1, buf);
 		}
 
 		timeinfo = *get_next_day(&t);
@@ -180,7 +186,11 @@ int main(int argc, char *argv[])
 	cairo_surface_t *surface = NULL;
 //	surface = cairo_pdf_surface_create("example.pdf",
 	surface = cairo_svg_surface_create("example.svg",
-			366 * conf.cell_size(), conf.num_years() * conf.cell_size());
+			366 * (conf.cell_size() + conf.cell_margin()) +
+			conf.year_label_width(),
+			(conf.num_years() + 1) *
+			(conf.cell_size() + conf.cell_margin()) +
+			conf.month_label_height());
 	cairo_t *cr = cairo_create(surface);
 
 	cairo_set_line_width(cr, conf.line_width());

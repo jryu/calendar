@@ -1,3 +1,10 @@
+num_years: 10
+cell_size: 40
+cell_margin: 10
+font_size: 20
+line_width: 2
+month_label_height: 70
+year_label_width: 70
 special_day {
 	month: 4
 	day: 5
@@ -15,38 +22,13 @@ special_day {
 	day: 17
 }
 
-rgb_special_day {
-	red: 63
-	green: 87
-	blue: 101
+rgb_day_background {
+	red: 240
+	green: 240
+	blue: 240
 }
-rgb_sunday {
-	red: 189
-	green: 212
-	blue: 222
-}
-rgb_holiday {
-	red: 255
-	green: 83
-	blue: 13
-}
-rgb_common_day {
-	red: 239
-	green: 239
-	blue: 239
-}
-rgb_line {
-	red: 255
-	green: 255
-	blue: 255
-}
-rgb_number_bright {
-	red: 255
-	green: 255
-	blue: 255
-}
-rgb_number_dark {
-	red: 43
-	green: 58
-	blue: 66
+rgb_header {
+	red: 77
+	green: 77
+	blue: 77
 }
