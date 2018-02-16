@@ -21,10 +21,10 @@ struct tm* get_next_day(time_t *t) {
 	return localtime(t);
 }
 
-bool is_special_day(struct tm *timeinfo) {
+bool is_special_day(struct tm const &timeinfo) {
 	for (int i = 0; i < conf.special_day_size(); i++) {
-		if (timeinfo->tm_mon == conf.special_day(i).month() - 1 &&
-				timeinfo->tm_mday == conf.special_day(i).day()) {
+		if (timeinfo.tm_mon == conf.special_day(i).month() - 1 &&
+				timeinfo.tm_mday == conf.special_day(i).day()) {
 			return true;
 		}
 	}
@@ -98,12 +98,11 @@ void month_label(cairo_t *cr) {
 }
 
 void year(cairo_t *cr, int y, int year) {
-	int i;
 	char buf[4];
 	time_t t = get_first_day_of_year_in_sec(year);
-	struct tm *timeinfo = localtime(&t);
+	struct tm timeinfo = *localtime(&t);
 
-	for (i = 0; timeinfo->tm_year == year; i++) {
+	for (int i = 0; timeinfo.tm_year == year; i++) {
 		// Rectangle
 		bool filled = false;
 		bool draw_label = false;
@@ -115,7 +114,7 @@ void year(cairo_t *cr, int y, int year) {
 			cairo_fill(cr);
 			filled = true;
 			draw_label = true;
-		} else if (timeinfo->tm_wday == 0) {
+		} else if (timeinfo.tm_wday == 0) {
 			set_rgb(cr, conf.rgb_sunday());
 			cairo_fill(cr);
 		} else if (is_holiday(t)) {
@@ -127,7 +126,6 @@ void year(cairo_t *cr, int y, int year) {
 			set_rgb(cr, conf.rgb_common_day());
 			cairo_fill(cr);
 		}
-		timeinfo = localtime(&t);
 
 		cairo_rectangle(cr,
 				i * conf.cell_size(), (y + 1) * conf.cell_size(),
@@ -142,11 +140,11 @@ void year(cairo_t *cr, int y, int year) {
 			set_rgb(cr, conf.rgb_number_dark());
 		}
 		if (draw_label) {
-			sprintf(buf, "%d", timeinfo->tm_mday);
+			sprintf(buf, "%d", timeinfo.tm_mday);
 			draw_text(cr, i, y + 1, buf);
 		}
 
-		timeinfo = get_next_day(&t);
+		timeinfo = *get_next_day(&t);
 	}
 }
 
