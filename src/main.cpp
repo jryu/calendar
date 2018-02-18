@@ -31,6 +31,16 @@ bool is_special_day(struct tm const &timeinfo) {
 	return false;
 }
 
+const char* get_special_day_label(struct tm const &timeinfo) {
+	for (int i = 0; i < conf.special_day_size(); i++) {
+		if (timeinfo.tm_mon == conf.special_day(i).month() - 1 &&
+				timeinfo.tm_mday == conf.special_day(i).day()) {
+			return conf.special_day(i).label().c_str();
+		}
+	}
+	return NULL;
+}
+
 int get_this_year() {
 	time_t rawtime;
 	struct tm *timeinfo;
@@ -242,8 +252,12 @@ void year(cairo_t *cr, int y, int year) {
 			set_rgb(cr, conf.rgb_header());
 		}
 		if (draw_label) {
-			sprintf(buf, "%d", timeinfo.tm_mday);
-			draw_text_of_day(cr, i, y + 1, buf);
+			const char* label = get_special_day_label(timeinfo);
+			if (label == NULL) {
+				sprintf(buf, "%d", timeinfo.tm_mday);
+				label = buf;
+			}
+			draw_text_of_day(cr, i, y + 1, label);
 		} else {
 			draw_symbol_of_day(cr, i, y + 1);
 		}

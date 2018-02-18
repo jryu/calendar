@@ -205,6 +205,18 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::config::RGB* release_rgb_month_line();
   void set_allocated_rgb_month_line(::config::RGB* rgb_month_line);
 
+  // repeated .config.RGB rgb_day = 13;
+  int rgb_day_size() const;
+  void clear_rgb_day();
+  static const int kRgbDayFieldNumber = 13;
+  const ::config::RGB& rgb_day(int index) const;
+  ::config::RGB* mutable_rgb_day(int index);
+  ::config::RGB* add_rgb_day();
+  ::google::protobuf::RepeatedPtrField< ::config::RGB >*
+      mutable_rgb_day();
+  const ::google::protobuf::RepeatedPtrField< ::config::RGB >&
+      rgb_day() const;
+
   // @@protoc_insertion_point(class_scope:config.CalendarConfig)
  private:
   inline void set_has_num_years();
@@ -245,6 +257,7 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::config::RGB* rgb_day_background_;
   ::config::RGB* rgb_header_;
   ::config::RGB* rgb_month_line_;
+  ::google::protobuf::RepeatedPtrField< ::config::RGB > rgb_day_;
   friend void  protobuf_AddDesc_config_2eproto();
   friend void protobuf_AssignDesc_config_2eproto();
   friend void protobuf_ShutdownFile_config_2eproto();
@@ -336,12 +349,26 @@ class MonthDay : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::int32 day() const;
   void set_day(::google::protobuf::int32 value);
 
+  // optional string label = 3;
+  bool has_label() const;
+  void clear_label();
+  static const int kLabelFieldNumber = 3;
+  const ::std::string& label() const;
+  void set_label(const ::std::string& value);
+  void set_label(const char* value);
+  void set_label(const char* value, size_t size);
+  ::std::string* mutable_label();
+  ::std::string* release_label();
+  void set_allocated_label(::std::string* label);
+
   // @@protoc_insertion_point(class_scope:config.MonthDay)
  private:
   inline void set_has_month();
   inline void clear_has_month();
   inline void set_has_day();
   inline void clear_has_day();
+  inline void set_has_label();
+  inline void clear_has_label();
 
   // helper for ByteSize()
   int RequiredFieldsByteSizeFallback() const;
@@ -351,6 +378,7 @@ class MonthDay : public ::google::protobuf::Message /* @@protoc_insertion_point(
   mutable int _cached_size_;
   ::google::protobuf::int32 month_;
   ::google::protobuf::int32 day_;
+  ::google::protobuf::internal::ArenaStringPtr label_;
   friend void  protobuf_AddDesc_config_2eproto();
   friend void protobuf_AssignDesc_config_2eproto();
   friend void protobuf_ShutdownFile_config_2eproto();
@@ -836,6 +864,36 @@ inline void CalendarConfig::set_allocated_rgb_month_line(::config::RGB* rgb_mont
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_month_line)
 }
 
+// repeated .config.RGB rgb_day = 13;
+inline int CalendarConfig::rgb_day_size() const {
+  return rgb_day_.size();
+}
+inline void CalendarConfig::clear_rgb_day() {
+  rgb_day_.Clear();
+}
+inline const ::config::RGB& CalendarConfig::rgb_day(int index) const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.rgb_day)
+  return rgb_day_.Get(index);
+}
+inline ::config::RGB* CalendarConfig::mutable_rgb_day(int index) {
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.rgb_day)
+  return rgb_day_.Mutable(index);
+}
+inline ::config::RGB* CalendarConfig::add_rgb_day() {
+  // @@protoc_insertion_point(field_add:config.CalendarConfig.rgb_day)
+  return rgb_day_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::config::RGB >*
+CalendarConfig::mutable_rgb_day() {
+  // @@protoc_insertion_point(field_mutable_list:config.CalendarConfig.rgb_day)
+  return &rgb_day_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::config::RGB >&
+CalendarConfig::rgb_day() const {
+  // @@protoc_insertion_point(field_list:config.CalendarConfig.rgb_day)
+  return rgb_day_;
+}
+
 // -------------------------------------------------------------------
 
 // MonthDay
@@ -886,6 +944,60 @@ inline void MonthDay::set_day(::google::protobuf::int32 value) {
   set_has_day();
   day_ = value;
   // @@protoc_insertion_point(field_set:config.MonthDay.day)
+}
+
+// optional string label = 3;
+inline bool MonthDay::has_label() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MonthDay::set_has_label() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MonthDay::clear_has_label() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MonthDay::clear_label() {
+  label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_label();
+}
+inline const ::std::string& MonthDay::label() const {
+  // @@protoc_insertion_point(field_get:config.MonthDay.label)
+  return label_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void MonthDay::set_label(const ::std::string& value) {
+  set_has_label();
+  label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:config.MonthDay.label)
+}
+inline void MonthDay::set_label(const char* value) {
+  set_has_label();
+  label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:config.MonthDay.label)
+}
+inline void MonthDay::set_label(const char* value, size_t size) {
+  set_has_label();
+  label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:config.MonthDay.label)
+}
+inline ::std::string* MonthDay::mutable_label() {
+  set_has_label();
+  // @@protoc_insertion_point(field_mutable:config.MonthDay.label)
+  return label_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* MonthDay::release_label() {
+  // @@protoc_insertion_point(field_release:config.MonthDay.label)
+  clear_has_label();
+  return label_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void MonthDay::set_allocated_label(::std::string* label) {
+  if (label != NULL) {
+    set_has_label();
+  } else {
+    clear_has_label();
+  }
+  label_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), label);
+  // @@protoc_insertion_point(field_set_allocated:config.MonthDay.label)
 }
 
 // -------------------------------------------------------------------
