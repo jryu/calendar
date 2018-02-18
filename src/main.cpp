@@ -49,20 +49,18 @@ time_t get_first_day_of_year_in_sec(int year) {
 	return mktime(&timeinfo);
 }
 
-PangoLayout* init_pango_layout(cairo_t *cr) {
+PangoLayout* init_pango_layout(cairo_t *cr, int font_size) {
 	PangoLayout *layout = pango_cairo_create_layout(cr);
-	PangoFontDescription *font_description =
-		pango_font_description_from_string("Source Code Pro Bold");
-	pango_font_description_set_absolute_size(font_description,
-			conf.font_size() * PANGO_SCALE);
-
-	pango_layout_set_font_description (layout, font_description);
-	pango_font_description_free(font_description);
+	PangoFontDescription *desc = pango_font_description_from_string("Roboto");
+	pango_font_description_set_weight(desc, PANGO_WEIGHT_SEMIBOLD);
+	pango_font_description_set_absolute_size(desc, font_size * PANGO_SCALE);
+	pango_layout_set_font_description (layout, desc);
+	pango_font_description_free(desc);
 	return layout;
 }
 
 void draw_text_of_year(cairo_t *cr, int y, const char* text) {
-	PangoLayout *layout = init_pango_layout(cr);
+	PangoLayout *layout = init_pango_layout(cr, conf.font_size());
 	pango_layout_set_text(layout, text, -1);
 
 	int width, height;
@@ -89,7 +87,8 @@ int get_day_y(int year_index) {
 }
 
 double draw_text_of_month(cairo_t *cr, int x, const char* text) {
-	PangoLayout *layout = init_pango_layout(cr);
+	PangoLayout *layout =
+		init_pango_layout(cr, conf.bigger_font_size());
 	pango_layout_set_text(layout, text, -1);
 
 	int width, height;
@@ -106,7 +105,7 @@ double draw_text_of_month(cairo_t *cr, int x, const char* text) {
 }
 
 void draw_text_of_day(cairo_t *cr, int x, int y, const char* text) {
-	PangoLayout *layout = init_pango_layout(cr);
+	PangoLayout *layout = init_pango_layout(cr, conf.font_size());
 	pango_layout_set_text(layout, text, -1);
 
 	int width, height;
@@ -126,7 +125,7 @@ void draw_text_of_day(cairo_t *cr, int x, int y, const char* text) {
 void draw_symbol_of_day(cairo_t *cr, int day_index, int year_index) {
 	int x = get_day_x(day_index) + conf.cell_size() / 2;
 	int y = get_day_y(year_index) + conf.cell_size() / 2;
-	int size = 4;
+	int size = 5;
 
 	cairo_set_line_width(cr, 1);
 	cairo_move_to(cr, x - size, y - size);
@@ -170,12 +169,12 @@ void month_label(cairo_t *cr) {
 	const int days_per_months[] = {
 		31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 + 6};
 
-	set_rgb(cr, conf.rgb_header());
-
 	int d = 0;
 	for (int m = 0; m < 12; m++) {
+		set_rgb(cr, conf.rgb_header());
 		double end_of_label = draw_text_of_month(cr, d, month_text[m]);
 
+		set_rgb(cr, conf.rgb_month_line());
 		cairo_move_to(cr,
 				end_of_label + conf.cell_size() / 2,
 				conf.month_label_height() / 2);

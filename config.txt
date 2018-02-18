@@ -1,10 +1,11 @@
 num_years: 30
-cell_size: 40
-cell_margin: 10
-font_size: 20
+cell_size: 32
+cell_margin: 8
+font_size: 18
+bigger_font_size: 24
 line_width: 2
-month_label_height: 50
-year_label_width: 100
+month_label_height: 70
+year_label_width: 120
 special_day {
 	month: 4
 	day: 5
@@ -31,4 +32,9 @@ rgb_header {
 	red: 77
 	green: 77
 	blue: 77
+}
+rgb_month_line {
+	red: 215
+	green: 215
+	blue: 215
 }

@@ -150,24 +150,31 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::int32 font_size() const;
   void set_font_size(::google::protobuf::int32 value);
 
-  // optional int32 line_width = 6;
+  // optional int32 bigger_font_size = 6;
+  bool has_bigger_font_size() const;
+  void clear_bigger_font_size();
+  static const int kBiggerFontSizeFieldNumber = 6;
+  ::google::protobuf::int32 bigger_font_size() const;
+  void set_bigger_font_size(::google::protobuf::int32 value);
+
+  // optional int32 line_width = 7;
   bool has_line_width() const;
   void clear_line_width();
-  static const int kLineWidthFieldNumber = 6;
+  static const int kLineWidthFieldNumber = 7;
   ::google::protobuf::int32 line_width() const;
   void set_line_width(::google::protobuf::int32 value);
 
-  // optional int32 month_label_height = 7;
+  // optional int32 month_label_height = 8;
   bool has_month_label_height() const;
   void clear_month_label_height();
-  static const int kMonthLabelHeightFieldNumber = 7;
+  static const int kMonthLabelHeightFieldNumber = 8;
   ::google::protobuf::int32 month_label_height() const;
   void set_month_label_height(::google::protobuf::int32 value);
 
-  // optional int32 year_label_width = 8;
+  // optional int32 year_label_width = 9;
   bool has_year_label_width() const;
   void clear_year_label_width();
-  static const int kYearLabelWidthFieldNumber = 8;
+  static const int kYearLabelWidthFieldNumber = 9;
   ::google::protobuf::int32 year_label_width() const;
   void set_year_label_width(::google::protobuf::int32 value);
 
@@ -189,6 +196,15 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::config::RGB* release_rgb_header();
   void set_allocated_rgb_header(::config::RGB* rgb_header);
 
+  // optional .config.RGB rgb_month_line = 12;
+  bool has_rgb_month_line() const;
+  void clear_rgb_month_line();
+  static const int kRgbMonthLineFieldNumber = 12;
+  const ::config::RGB& rgb_month_line() const;
+  ::config::RGB* mutable_rgb_month_line();
+  ::config::RGB* release_rgb_month_line();
+  void set_allocated_rgb_month_line(::config::RGB* rgb_month_line);
+
   // @@protoc_insertion_point(class_scope:config.CalendarConfig)
  private:
   inline void set_has_num_years();
@@ -199,6 +215,8 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   inline void clear_has_cell_margin();
   inline void set_has_font_size();
   inline void clear_has_font_size();
+  inline void set_has_bigger_font_size();
+  inline void clear_has_bigger_font_size();
   inline void set_has_line_width();
   inline void clear_has_line_width();
   inline void set_has_month_label_height();
@@ -209,6 +227,8 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   inline void clear_has_rgb_day_background();
   inline void set_has_rgb_header();
   inline void clear_has_rgb_header();
+  inline void set_has_rgb_month_line();
+  inline void clear_has_rgb_month_line();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 _has_bits_[1];
@@ -218,11 +238,13 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::int32 cell_size_;
   ::google::protobuf::int32 cell_margin_;
   ::google::protobuf::int32 font_size_;
+  ::google::protobuf::int32 bigger_font_size_;
   ::google::protobuf::int32 line_width_;
   ::google::protobuf::int32 month_label_height_;
+  ::google::protobuf::int32 year_label_width_;
   ::config::RGB* rgb_day_background_;
   ::config::RGB* rgb_header_;
-  ::google::protobuf::int32 year_label_width_;
+  ::config::RGB* rgb_month_line_;
   friend void  protobuf_AddDesc_config_2eproto();
   friend void protobuf_AssignDesc_config_2eproto();
   friend void protobuf_ShutdownFile_config_2eproto();
@@ -586,15 +608,39 @@ inline void CalendarConfig::set_font_size(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.font_size)
 }
 
-// optional int32 line_width = 6;
-inline bool CalendarConfig::has_line_width() const {
+// optional int32 bigger_font_size = 6;
+inline bool CalendarConfig::has_bigger_font_size() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void CalendarConfig::set_has_line_width() {
+inline void CalendarConfig::set_has_bigger_font_size() {
   _has_bits_[0] |= 0x00000020u;
 }
-inline void CalendarConfig::clear_has_line_width() {
+inline void CalendarConfig::clear_has_bigger_font_size() {
   _has_bits_[0] &= ~0x00000020u;
+}
+inline void CalendarConfig::clear_bigger_font_size() {
+  bigger_font_size_ = 0;
+  clear_has_bigger_font_size();
+}
+inline ::google::protobuf::int32 CalendarConfig::bigger_font_size() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.bigger_font_size)
+  return bigger_font_size_;
+}
+inline void CalendarConfig::set_bigger_font_size(::google::protobuf::int32 value) {
+  set_has_bigger_font_size();
+  bigger_font_size_ = value;
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.bigger_font_size)
+}
+
+// optional int32 line_width = 7;
+inline bool CalendarConfig::has_line_width() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void CalendarConfig::set_has_line_width() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void CalendarConfig::clear_has_line_width() {
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void CalendarConfig::clear_line_width() {
   line_width_ = 0;
@@ -610,15 +656,15 @@ inline void CalendarConfig::set_line_width(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.line_width)
 }
 
-// optional int32 month_label_height = 7;
+// optional int32 month_label_height = 8;
 inline bool CalendarConfig::has_month_label_height() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void CalendarConfig::set_has_month_label_height() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void CalendarConfig::clear_has_month_label_height() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void CalendarConfig::clear_month_label_height() {
   month_label_height_ = 0;
@@ -634,15 +680,15 @@ inline void CalendarConfig::set_month_label_height(::google::protobuf::int32 val
   // @@protoc_insertion_point(field_set:config.CalendarConfig.month_label_height)
 }
 
-// optional int32 year_label_width = 8;
+// optional int32 year_label_width = 9;
 inline bool CalendarConfig::has_year_label_width() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void CalendarConfig::set_has_year_label_width() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000100u;
 }
 inline void CalendarConfig::clear_has_year_label_width() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void CalendarConfig::clear_year_label_width() {
   year_label_width_ = 0;
@@ -660,13 +706,13 @@ inline void CalendarConfig::set_year_label_width(::google::protobuf::int32 value
 
 // optional .config.RGB rgb_day_background = 10;
 inline bool CalendarConfig::has_rgb_day_background() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void CalendarConfig::set_has_rgb_day_background() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void CalendarConfig::clear_has_rgb_day_background() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void CalendarConfig::clear_rgb_day_background() {
   if (rgb_day_background_ != NULL) rgb_day_background_->::config::RGB::Clear();
@@ -704,13 +750,13 @@ inline void CalendarConfig::set_allocated_rgb_day_background(::config::RGB* rgb_
 
 // optional .config.RGB rgb_header = 11;
 inline bool CalendarConfig::has_rgb_header() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void CalendarConfig::set_has_rgb_header() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void CalendarConfig::clear_has_rgb_header() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void CalendarConfig::clear_rgb_header() {
   if (rgb_header_ != NULL) rgb_header_->::config::RGB::Clear();
@@ -744,6 +790,50 @@ inline void CalendarConfig::set_allocated_rgb_header(::config::RGB* rgb_header) 
     clear_has_rgb_header();
   }
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_header)
+}
+
+// optional .config.RGB rgb_month_line = 12;
+inline bool CalendarConfig::has_rgb_month_line() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void CalendarConfig::set_has_rgb_month_line() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void CalendarConfig::clear_has_rgb_month_line() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void CalendarConfig::clear_rgb_month_line() {
+  if (rgb_month_line_ != NULL) rgb_month_line_->::config::RGB::Clear();
+  clear_has_rgb_month_line();
+}
+inline const ::config::RGB& CalendarConfig::rgb_month_line() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.rgb_month_line)
+  return rgb_month_line_ != NULL ? *rgb_month_line_ : *default_instance_->rgb_month_line_;
+}
+inline ::config::RGB* CalendarConfig::mutable_rgb_month_line() {
+  set_has_rgb_month_line();
+  if (rgb_month_line_ == NULL) {
+    rgb_month_line_ = new ::config::RGB;
+  }
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.rgb_month_line)
+  return rgb_month_line_;
+}
+inline ::config::RGB* CalendarConfig::release_rgb_month_line() {
+  // @@protoc_insertion_point(field_release:config.CalendarConfig.rgb_month_line)
+  clear_has_rgb_month_line();
+  ::config::RGB* temp = rgb_month_line_;
+  rgb_month_line_ = NULL;
+  return temp;
+}
+inline void CalendarConfig::set_allocated_rgb_month_line(::config::RGB* rgb_month_line) {
+  delete rgb_month_line_;
+  rgb_month_line_ = rgb_month_line;
+  if (rgb_month_line) {
+    set_has_rgb_month_line();
+  } else {
+    clear_has_rgb_month_line();
+  }
+  // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_month_line)
 }
 
 // -------------------------------------------------------------------

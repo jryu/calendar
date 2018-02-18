@@ -7,12 +7,14 @@ message CalendarConfig {
 	optional int32 cell_size = 3;
 	optional int32 cell_margin = 4;
 	optional int32 font_size = 5;
-	optional int32 line_width = 6;
-	optional int32 month_label_height = 7;
-	optional int32 year_label_width = 8;
+	optional int32 bigger_font_size = 6;
+	optional int32 line_width = 7;
+	optional int32 month_label_height = 8;
+	optional int32 year_label_width = 9;
 
 	optional RGB rgb_day_background = 10;
 	optional RGB rgb_header = 11;
+	optional RGB rgb_month_line = 12;
 }
 
 message MonthDay {
