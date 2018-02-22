@@ -1,4 +1,4 @@
-num_years: 3
+num_years: 30
 cell_size: 32
 cell_margin: 8
 font_size: 18
@@ -27,11 +27,6 @@ special_day {
 	label: "♪"
 }
 
-rgb_day_background {
-	red: 240
-	green: 240
-	blue: 240
-}
 rgb_header {
 	red: 77
 	green: 77

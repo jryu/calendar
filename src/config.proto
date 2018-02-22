@@ -12,7 +12,6 @@ message CalendarConfig {
 	optional int32 month_label_height = 8;
 	optional int32 year_label_width = 9;
 
-	optional RGB rgb_day_background = 10;
 	optional RGB rgb_header = 11;
 	optional RGB rgb_month_line = 12;
 }

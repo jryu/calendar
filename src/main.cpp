@@ -35,7 +35,9 @@ const char* get_special_day_label(struct tm const &timeinfo) {
 	for (int i = 0; i < conf.special_day_size(); i++) {
 		if (timeinfo.tm_mon == conf.special_day(i).month() - 1 &&
 				timeinfo.tm_mday == conf.special_day(i).day()) {
-			return conf.special_day(i).label().c_str();
+			if (conf.special_day(i).has_label()) {
+				return conf.special_day(i).label().c_str();
+			}
 		}
 	}
 	return NULL;
@@ -132,17 +134,22 @@ void draw_text_of_day(cairo_t *cr, int x, int y, const char* text) {
 	g_object_unref(layout);
 }
 
-void draw_symbol_of_day(cairo_t *cr, int day_index, int year_index) {
+void draw_symbol_of_day(cairo_t *cr, int day_index, int year_index, int month) {
 	int x = get_day_x(day_index) + conf.cell_size() / 2;
 	int y = get_day_y(year_index) + conf.cell_size() / 2;
-	int size = 5;
 
-	cairo_set_line_width(cr, 1);
-	cairo_move_to(cr, x - size, y - size);
-	cairo_line_to(cr, x + size, y + size);
-	cairo_move_to(cr, x + size, y - size);
-	cairo_line_to(cr, x - size, y + size);
-	cairo_stroke(cr);
+	if ((year_index + month) % 2) {
+		int size = 3;
+		cairo_set_line_width(cr, 1);
+		cairo_move_to(cr, x - size, y - size);
+		cairo_line_to(cr, x + size, y + size);
+		cairo_move_to(cr, x + size, y - size);
+		cairo_line_to(cr, x - size, y + size);
+		cairo_stroke(cr);
+	} else {
+		cairo_arc(cr, x, y, 2, 0, 2*M_PI);
+		cairo_fill(cr);
+	}
 }
 
 void draw_rectangle_of_day(cairo_t *cr, int x, int y) {
@@ -164,10 +171,15 @@ void set_rgb(cairo_t *cr, const config::RGB& rgb) {
 void year_label(cairo_t *cr, int this_year) {
 	char buf[5];
 
-	set_rgb(cr, conf.rgb_header());
 
 	for (int i = 0; i < conf.num_years(); i++) {
-		sprintf(buf, "%d", this_year + i);
+		int year = this_year + i;
+		sprintf(buf, "%d", year);
+		if (year % 5) {
+			set_rgb(cr, conf.rgb_header());
+		} else {
+			cairo_set_source_rgb(cr, 0, 0, 0);
+		}
 		draw_text_of_year(cr, i, buf);
 	}
 }
@@ -202,9 +214,13 @@ void month_label(cairo_t *cr) {
 void wday_label(cairo_t *cr) {
 	const char *wday_text[] = {"M", "T", "W", "Th", "F", "S", "Su"};
 
-	set_rgb(cr, conf.rgb_header());
 
 	for (int d = 0; d < 365 + 6; d++) {
+		if (d % 7 == 6) {
+			cairo_set_source_rgb(cr, 0, 0, 0);
+		} else {
+			set_rgb(cr, conf.rgb_header());
+		}
 		draw_text_of_day(cr, d, 0, wday_text[d % 7]);
 	}
 }
@@ -224,33 +240,22 @@ void year(cairo_t *cr, int y, int year) {
 	int i = get_wday_index(timeinfo);
 	while (timeinfo.tm_year == year) {
 		// Rectangle
-		bool filled = false;
 		bool draw_label = true;
 
-		cairo_set_line_width(cr, conf.line_width());
-		draw_rectangle_of_day(cr, i, y + 1);
+		cairo_set_source_rgb(cr, 0, 0, 0);
 		if (is_special_day(timeinfo)) {
-			set_rgb(cr, conf.rgb_header());
-			cairo_stroke(cr);
 		} else if (timeinfo.tm_wday == 0) {
-			set_rgb(cr, conf.rgb_day_background());
-			cairo_fill(cr);
 		} else if (is_holiday(t)) {
+			draw_rectangle_of_day(cr, i, y + 1);
 			set_rgb(cr, conf.rgb_header());
 			cairo_fill(cr);
-			filled = true;
+
+			cairo_set_source_rgb(cr, 1, 1, 1);
 		} else {
-			set_rgb(cr, conf.rgb_day_background());
-			cairo_fill(cr);
 			draw_label = false;
 		}
 
 		// Label
-		if (filled) {
-			set_rgb(cr, conf.rgb_day_background());
-		} else {
-			set_rgb(cr, conf.rgb_header());
-		}
 		if (draw_label) {
 			const char* label = get_special_day_label(timeinfo);
 			if (label == NULL) {
@@ -259,7 +264,7 @@ void year(cairo_t *cr, int y, int year) {
 			}
 			draw_text_of_day(cr, i, y + 1, label);
 		} else {
-			draw_symbol_of_day(cr, i, y + 1);
+			draw_symbol_of_day(cr, i, y + 1, timeinfo.tm_mon);
 		}
 
 		timeinfo = *get_next_day(&t);
@@ -305,8 +310,6 @@ int main(int argc, char *argv[])
 			(conf.cell_size() + conf.cell_margin()) +
 			conf.month_label_height());
 	cairo_t *cr = cairo_create(surface);
-
-	cairo_set_line_width(cr, conf.line_width());
 
 	int this_year = get_this_year();
 	year_label(cr, this_year + 1900);
