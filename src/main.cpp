@@ -31,7 +31,8 @@ const config::SpecialDay* get_special_day(struct tm const &timeinfo) {
 	for (int i = 0; i < conf.special_day_size(); i++) {
 		const config::SpecialDay& d = conf.special_day(i);
 		if (timeinfo.tm_mon == d.month() - 1 &&
-				timeinfo.tm_mday == d.day()) {
+				timeinfo.tm_mday == d.day() &&
+				(!d.has_year() || timeinfo.tm_year + 1900 == d.year())) {
 			if (special_day == nullptr ||
 					(d.has_first_year() &&
 					 is_every_tenth_year(d.first_year(), timeinfo))) {
@@ -254,8 +255,9 @@ void year(cairo_t *cr, int y, int year) {
 		bool draw_label = true;
 
 		if (special_day != nullptr) {
-			if (special_day->has_first_year() &&
-					is_every_tenth_year(special_day->first_year(), timeinfo)) {
+			if (special_day->has_year() || (
+						special_day->has_first_year() &&
+						is_every_tenth_year(special_day->first_year(), timeinfo))) {
 				draw_rectangle_of_day(cr, i, y + 1);
 				set_rgb(cr, special_day->rgb());
 				cairo_fill(cr);

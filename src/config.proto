@@ -22,7 +22,8 @@ message SpecialDay {
 	required int32 day = 2;
 	optional string label = 3;
 	optional int32 first_year = 4;
-	optional RGB rgb = 5;
+	optional int32 year = 5;
+	optional RGB rgb = 6;
 }
 
 message RGB {

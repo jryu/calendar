@@ -355,10 +355,17 @@ class SpecialDay : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::int32 first_year() const;
   void set_first_year(::google::protobuf::int32 value);
 
-  // optional .config.RGB rgb = 5;
+  // optional int32 year = 5;
+  bool has_year() const;
+  void clear_year();
+  static const int kYearFieldNumber = 5;
+  ::google::protobuf::int32 year() const;
+  void set_year(::google::protobuf::int32 value);
+
+  // optional .config.RGB rgb = 6;
   bool has_rgb() const;
   void clear_rgb();
-  static const int kRgbFieldNumber = 5;
+  static const int kRgbFieldNumber = 6;
   const ::config::RGB& rgb() const;
   ::config::RGB* mutable_rgb();
   ::config::RGB* release_rgb();
@@ -374,6 +381,8 @@ class SpecialDay : public ::google::protobuf::Message /* @@protoc_insertion_poin
   inline void clear_has_label();
   inline void set_has_first_year();
   inline void clear_has_first_year();
+  inline void set_has_year();
+  inline void clear_has_year();
   inline void set_has_rgb();
   inline void clear_has_rgb();
 
@@ -386,8 +395,9 @@ class SpecialDay : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::int32 month_;
   ::google::protobuf::int32 day_;
   ::google::protobuf::internal::ArenaStringPtr label_;
-  ::config::RGB* rgb_;
   ::google::protobuf::int32 first_year_;
+  ::google::protobuf::int32 year_;
+  ::config::RGB* rgb_;
   friend void  protobuf_AddDesc_config_2eproto();
   friend void protobuf_AssignDesc_config_2eproto();
   friend void protobuf_ShutdownFile_config_2eproto();
@@ -1003,15 +1013,39 @@ inline void SpecialDay::set_first_year(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:config.SpecialDay.first_year)
 }
 
-// optional .config.RGB rgb = 5;
-inline bool SpecialDay::has_rgb() const {
+// optional int32 year = 5;
+inline bool SpecialDay::has_year() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void SpecialDay::set_has_rgb() {
+inline void SpecialDay::set_has_year() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void SpecialDay::clear_has_rgb() {
+inline void SpecialDay::clear_has_year() {
   _has_bits_[0] &= ~0x00000010u;
+}
+inline void SpecialDay::clear_year() {
+  year_ = 0;
+  clear_has_year();
+}
+inline ::google::protobuf::int32 SpecialDay::year() const {
+  // @@protoc_insertion_point(field_get:config.SpecialDay.year)
+  return year_;
+}
+inline void SpecialDay::set_year(::google::protobuf::int32 value) {
+  set_has_year();
+  year_ = value;
+  // @@protoc_insertion_point(field_set:config.SpecialDay.year)
+}
+
+// optional .config.RGB rgb = 6;
+inline bool SpecialDay::has_rgb() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void SpecialDay::set_has_rgb() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void SpecialDay::clear_has_rgb() {
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void SpecialDay::clear_rgb() {
   if (rgb_ != NULL) rgb_->::config::RGB::Clear();

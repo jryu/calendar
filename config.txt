@@ -61,6 +61,28 @@ special_day {
 		blue: 0
 	}
 }
+special_day {
+	month: 4
+	day: 8
+	label: "☀"
+	year: 2024
+	rgb {
+		red: 198
+		green: 145
+		blue: 0
+	}
+}
+special_day {
+	month: 8
+	day: 12
+	label: "☀"
+	year: 2045
+	rgb {
+		red: 198
+		green: 145
+		blue: 0
+	}
+}
 
 rgb_header {
 	red: 77
