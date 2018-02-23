@@ -152,9 +152,19 @@ void draw_symbol_of_day(cairo_t *cr, int day_index, int year_index, int month) {
 	}
 }
 
-void draw_rectangle_of_day(cairo_t *cr, int x, int y) {
-	cairo_rectangle(cr, get_day_x(x), get_day_y(y),
-			conf.cell_size(), conf.cell_size());
+void draw_rectangle_of_day(cairo_t *cr, int day_index, int year_index) {
+	int x = get_day_x(day_index);
+	int y = get_day_y(year_index);
+	int size = conf.cell_size();
+	int r = conf.cell_size() / 8;
+	double degrees = M_PI / 180.0;
+
+	cairo_new_sub_path(cr);
+	cairo_arc(cr, x + size - r, y + r, r, -90 * degrees, 0 * degrees);
+	cairo_arc(cr, x + size - r, y + size - r, r, 0 * degrees, 90 * degrees);
+	cairo_arc(cr, x + r, y + size - r, r, 90 * degrees, 180 * degrees);
+	cairo_arc(cr, x + r, y + r, r, 180 * degrees, 270 * degrees);
+	cairo_close_path(cr);
 }
 
 double cairo_color(int color) {
