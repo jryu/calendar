@@ -10,27 +10,67 @@ special_day {
 	month: 4
 	day: 5
 	label: "♥"
+	first_year: 2008
+	rgb {
+		red: 218
+		green: 40
+		blue: 162
+	}
 }
 special_day {
 	month: 7
 	day: 16
 	label: "♫"
+	first_year: 2010
+	rgb {
+		red: 248
+		green: 167
+		blue: 26
+	}
+}
+special_day {
+	month: 7
+	day: 16
+	label: "♫"
+	first_year: 2012
+	rgb {
+		red: 198
+		green: 0
+		blue: 51
+	}
 }
 special_day {
 	month: 7
 	day: 29
 	label: "✔"
+	first_year: 1981
+	rgb {
+		red: 0
+		green: 67
+		blue: 196
+	}
 }
 special_day {
 	month: 10
 	day: 17
 	label: "♪"
+	first_year: 1979
+	rgb {
+		red: 0
+		green: 198
+		blue: 0
+	}
 }
 
 rgb_header {
 	red: 77
 	green: 77
 	blue: 77
+}
+rgb_header_sunday {
+	red: 198
+	green: 0
+	blue: 51
 }
 rgb_month_line {
 	red: 215

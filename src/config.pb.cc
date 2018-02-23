@@ -24,9 +24,9 @@ namespace {
 const ::google::protobuf::Descriptor* CalendarConfig_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   CalendarConfig_reflection_ = NULL;
-const ::google::protobuf::Descriptor* MonthDay_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* SpecialDay_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  MonthDay_reflection_ = NULL;
+  SpecialDay_reflection_ = NULL;
 const ::google::protobuf::Descriptor* RGB_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   RGB_reflection_ = NULL;
@@ -42,7 +42,7 @@ void protobuf_AssignDesc_config_2eproto() {
       "config.proto");
   GOOGLE_CHECK(file != NULL);
   CalendarConfig_descriptor_ = file->message_type(0);
-  static const int CalendarConfig_offsets_[11] = {
+  static const int CalendarConfig_offsets_[12] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, num_years_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, special_day_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, cell_size_),
@@ -53,6 +53,7 @@ void protobuf_AssignDesc_config_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, month_label_height_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, year_label_width_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, rgb_header_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, rgb_header_sunday_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, rgb_month_line_),
   };
   CalendarConfig_reflection_ =
@@ -66,22 +67,24 @@ void protobuf_AssignDesc_config_2eproto() {
       sizeof(CalendarConfig),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, _internal_metadata_),
       -1);
-  MonthDay_descriptor_ = file->message_type(1);
-  static const int MonthDay_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MonthDay, month_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MonthDay, day_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MonthDay, label_),
+  SpecialDay_descriptor_ = file->message_type(1);
+  static const int SpecialDay_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SpecialDay, month_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SpecialDay, day_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SpecialDay, label_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SpecialDay, first_year_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SpecialDay, rgb_),
   };
-  MonthDay_reflection_ =
+  SpecialDay_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      MonthDay_descriptor_,
-      MonthDay::default_instance_,
-      MonthDay_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MonthDay, _has_bits_[0]),
+      SpecialDay_descriptor_,
+      SpecialDay::default_instance_,
+      SpecialDay_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SpecialDay, _has_bits_[0]),
       -1,
       -1,
-      sizeof(MonthDay),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MonthDay, _internal_metadata_),
+      sizeof(SpecialDay),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SpecialDay, _internal_metadata_),
       -1);
   RGB_descriptor_ = file->message_type(2);
   static const int RGB_offsets_[3] = {
@@ -116,7 +119,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       CalendarConfig_descriptor_, &CalendarConfig::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      MonthDay_descriptor_, &MonthDay::default_instance());
+      SpecialDay_descriptor_, &SpecialDay::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       RGB_descriptor_, &RGB::default_instance());
 }
@@ -126,8 +129,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_config_2eproto() {
   delete CalendarConfig::default_instance_;
   delete CalendarConfig_reflection_;
-  delete MonthDay::default_instance_;
-  delete MonthDay_reflection_;
+  delete SpecialDay::default_instance_;
+  delete SpecialDay_reflection_;
   delete RGB::default_instance_;
   delete RGB_reflection_;
 }
@@ -140,24 +143,27 @@ void protobuf_AddDesc_config_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\014config.proto\022\006config\"\263\002\n\016CalendarConfi"
-    "g\022\025\n\tnum_years\030\001 \001(\005:\00230\022%\n\013special_day\030"
-    "\002 \003(\0132\020.config.MonthDay\022\021\n\tcell_size\030\003 \001"
-    "(\005\022\023\n\013cell_margin\030\004 \001(\005\022\021\n\tfont_size\030\005 \001"
-    "(\005\022\030\n\020bigger_font_size\030\006 \001(\005\022\022\n\nline_wid"
-    "th\030\007 \001(\005\022\032\n\022month_label_height\030\010 \001(\005\022\030\n\020"
-    "year_label_width\030\t \001(\005\022\037\n\nrgb_header\030\013 \001"
-    "(\0132\013.config.RGB\022#\n\016rgb_month_line\030\014 \001(\0132"
-    "\013.config.RGB\"5\n\010MonthDay\022\r\n\005month\030\001 \002(\005\022"
-    "\013\n\003day\030\002 \002(\005\022\r\n\005label\030\003 \001(\t\"/\n\003RGB\022\013\n\003re"
-    "d\030\001 \002(\005\022\r\n\005green\030\002 \002(\005\022\014\n\004blue\030\003 \002(\005", 436);
+    "\n\014config.proto\022\006config\"\335\002\n\016CalendarConfi"
+    "g\022\025\n\tnum_years\030\001 \001(\005:\00230\022\'\n\013special_day\030"
+    "\002 \003(\0132\022.config.SpecialDay\022\021\n\tcell_size\030\003"
+    " \001(\005\022\023\n\013cell_margin\030\004 \001(\005\022\021\n\tfont_size\030\005"
+    " \001(\005\022\030\n\020bigger_font_size\030\006 \001(\005\022\022\n\nline_w"
+    "idth\030\007 \001(\005\022\032\n\022month_label_height\030\010 \001(\005\022\030"
+    "\n\020year_label_width\030\t \001(\005\022\037\n\nrgb_header\030\n"
+    " \001(\0132\013.config.RGB\022&\n\021rgb_header_sunday\030\013"
+    " \001(\0132\013.config.RGB\022#\n\016rgb_month_line\030\014 \001("
+    "\0132\013.config.RGB\"e\n\nSpecialDay\022\r\n\005month\030\001 "
+    "\002(\005\022\013\n\003day\030\002 \002(\005\022\r\n\005label\030\003 \001(\t\022\022\n\nfirst"
+    "_year\030\004 \001(\005\022\030\n\003rgb\030\005 \001(\0132\013.config.RGB\"/\n"
+    "\003RGB\022\013\n\003red\030\001 \002(\005\022\r\n\005green\030\002 \002(\005\022\014\n\004blue"
+    "\030\003 \002(\005", 526);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "config.proto", &protobuf_RegisterTypes);
   CalendarConfig::default_instance_ = new CalendarConfig();
-  MonthDay::default_instance_ = new MonthDay();
+  SpecialDay::default_instance_ = new SpecialDay();
   RGB::default_instance_ = new RGB();
   CalendarConfig::default_instance_->InitAsDefaultInstance();
-  MonthDay::default_instance_->InitAsDefaultInstance();
+  SpecialDay::default_instance_->InitAsDefaultInstance();
   RGB::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_config_2eproto);
 }
@@ -182,6 +188,7 @@ const int CalendarConfig::kLineWidthFieldNumber;
 const int CalendarConfig::kMonthLabelHeightFieldNumber;
 const int CalendarConfig::kYearLabelWidthFieldNumber;
 const int CalendarConfig::kRgbHeaderFieldNumber;
+const int CalendarConfig::kRgbHeaderSundayFieldNumber;
 const int CalendarConfig::kRgbMonthLineFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -193,6 +200,7 @@ CalendarConfig::CalendarConfig()
 
 void CalendarConfig::InitAsDefaultInstance() {
   rgb_header_ = const_cast< ::config::RGB*>(&::config::RGB::default_instance());
+  rgb_header_sunday_ = const_cast< ::config::RGB*>(&::config::RGB::default_instance());
   rgb_month_line_ = const_cast< ::config::RGB*>(&::config::RGB::default_instance());
 }
 
@@ -215,6 +223,7 @@ void CalendarConfig::SharedCtor() {
   month_label_height_ = 0;
   year_label_width_ = 0;
   rgb_header_ = NULL;
+  rgb_header_sunday_ = NULL;
   rgb_month_line_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -227,6 +236,7 @@ CalendarConfig::~CalendarConfig() {
 void CalendarConfig::SharedDtor() {
   if (this != default_instance_) {
     delete rgb_header_;
+    delete rgb_header_sunday_;
     delete rgb_month_line_;
   }
 }
@@ -278,10 +288,13 @@ void CalendarConfig::Clear() {
     ZR_(cell_size_, month_label_height_);
     num_years_ = 30;
   }
-  if (_has_bits_[8 / 32] & 1792u) {
+  if (_has_bits_[8 / 32] & 3840u) {
     year_label_width_ = 0;
     if (has_rgb_header()) {
       if (rgb_header_ != NULL) rgb_header_->::config::RGB::Clear();
+    }
+    if (has_rgb_header_sunday()) {
+      if (rgb_header_sunday_ != NULL) rgb_header_sunday_->::config::RGB::Clear();
     }
     if (has_rgb_month_line()) {
       if (rgb_month_line_ != NULL) rgb_month_line_->::config::RGB::Clear();
@@ -322,7 +335,7 @@ bool CalendarConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .config.MonthDay special_day = 2;
+      // repeated .config.SpecialDay special_day = 2;
       case 2: {
         if (tag == 18) {
          parse_special_day:
@@ -440,16 +453,29 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(90)) goto parse_rgb_header;
+        if (input->ExpectTag(82)) goto parse_rgb_header;
         break;
       }
 
-      // optional .config.RGB rgb_header = 11;
-      case 11: {
-        if (tag == 90) {
+      // optional .config.RGB rgb_header = 10;
+      case 10: {
+        if (tag == 82) {
          parse_rgb_header:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rgb_header()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(90)) goto parse_rgb_header_sunday;
+        break;
+      }
+
+      // optional .config.RGB rgb_header_sunday = 11;
+      case 11: {
+        if (tag == 90) {
+         parse_rgb_header_sunday:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_rgb_header_sunday()));
         } else {
           goto handle_unusual;
         }
@@ -500,7 +526,7 @@ void CalendarConfig::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->num_years(), output);
   }
 
-  // repeated .config.MonthDay special_day = 2;
+  // repeated .config.SpecialDay special_day = 2;
   for (unsigned int i = 0, n = this->special_day_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->special_day(i), output);
@@ -541,10 +567,16 @@ void CalendarConfig::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->year_label_width(), output);
   }
 
-  // optional .config.RGB rgb_header = 11;
+  // optional .config.RGB rgb_header = 10;
   if (has_rgb_header()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, *this->rgb_header_, output);
+      10, *this->rgb_header_, output);
+  }
+
+  // optional .config.RGB rgb_header_sunday = 11;
+  if (has_rgb_header_sunday()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, *this->rgb_header_sunday_, output);
   }
 
   // optional .config.RGB rgb_month_line = 12;
@@ -568,7 +600,7 @@ void CalendarConfig::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->num_years(), target);
   }
 
-  // repeated .config.MonthDay special_day = 2;
+  // repeated .config.SpecialDay special_day = 2;
   for (unsigned int i = 0, n = this->special_day_size(); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
@@ -610,11 +642,18 @@ void CalendarConfig::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->year_label_width(), target);
   }
 
-  // optional .config.RGB rgb_header = 11;
+  // optional .config.RGB rgb_header = 10;
   if (has_rgb_header()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        11, *this->rgb_header_, false, target);
+        10, *this->rgb_header_, false, target);
+  }
+
+  // optional .config.RGB rgb_header_sunday = 11;
+  if (has_rgb_header_sunday()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        11, *this->rgb_header_sunday_, false, target);
   }
 
   // optional .config.RGB rgb_month_line = 12;
@@ -687,7 +726,7 @@ int CalendarConfig::ByteSize() const {
     }
 
   }
-  if (_has_bits_[8 / 32] & 1792u) {
+  if (_has_bits_[8 / 32] & 3840u) {
     // optional int32 year_label_width = 9;
     if (has_year_label_width()) {
       total_size += 1 +
@@ -695,11 +734,18 @@ int CalendarConfig::ByteSize() const {
           this->year_label_width());
     }
 
-    // optional .config.RGB rgb_header = 11;
+    // optional .config.RGB rgb_header = 10;
     if (has_rgb_header()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *this->rgb_header_);
+    }
+
+    // optional .config.RGB rgb_header_sunday = 11;
+    if (has_rgb_header_sunday()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *this->rgb_header_sunday_);
     }
 
     // optional .config.RGB rgb_month_line = 12;
@@ -710,7 +756,7 @@ int CalendarConfig::ByteSize() const {
     }
 
   }
-  // repeated .config.MonthDay special_day = 2;
+  // repeated .config.SpecialDay special_day = 2;
   total_size += 1 * this->special_day_size();
   for (int i = 0; i < this->special_day_size(); i++) {
     total_size +=
@@ -782,6 +828,9 @@ void CalendarConfig::MergeFrom(const CalendarConfig& from) {
     if (from.has_rgb_header()) {
       mutable_rgb_header()->::config::RGB::MergeFrom(from.rgb_header());
     }
+    if (from.has_rgb_header_sunday()) {
+      mutable_rgb_header_sunday()->::config::RGB::MergeFrom(from.rgb_header_sunday());
+    }
     if (from.has_rgb_month_line()) {
       mutable_rgb_month_line()->::config::RGB::MergeFrom(from.rgb_month_line());
     }
@@ -811,6 +860,9 @@ bool CalendarConfig::IsInitialized() const {
   if (has_rgb_header()) {
     if (!this->rgb_header_->IsInitialized()) return false;
   }
+  if (has_rgb_header_sunday()) {
+    if (!this->rgb_header_sunday_->IsInitialized()) return false;
+  }
   if (has_rgb_month_line()) {
     if (!this->rgb_month_line_->IsInitialized()) return false;
   }
@@ -832,6 +884,7 @@ void CalendarConfig::InternalSwap(CalendarConfig* other) {
   std::swap(month_label_height_, other->month_label_height_);
   std::swap(year_label_width_, other->year_label_width_);
   std::swap(rgb_header_, other->rgb_header_);
+  std::swap(rgb_header_sunday_, other->rgb_header_sunday_);
   std::swap(rgb_month_line_, other->rgb_month_line_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -873,31 +926,31 @@ void CalendarConfig::clear_num_years() {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.num_years)
 }
 
-// repeated .config.MonthDay special_day = 2;
+// repeated .config.SpecialDay special_day = 2;
 int CalendarConfig::special_day_size() const {
   return special_day_.size();
 }
 void CalendarConfig::clear_special_day() {
   special_day_.Clear();
 }
-const ::config::MonthDay& CalendarConfig::special_day(int index) const {
+const ::config::SpecialDay& CalendarConfig::special_day(int index) const {
   // @@protoc_insertion_point(field_get:config.CalendarConfig.special_day)
   return special_day_.Get(index);
 }
-::config::MonthDay* CalendarConfig::mutable_special_day(int index) {
+::config::SpecialDay* CalendarConfig::mutable_special_day(int index) {
   // @@protoc_insertion_point(field_mutable:config.CalendarConfig.special_day)
   return special_day_.Mutable(index);
 }
-::config::MonthDay* CalendarConfig::add_special_day() {
+::config::SpecialDay* CalendarConfig::add_special_day() {
   // @@protoc_insertion_point(field_add:config.CalendarConfig.special_day)
   return special_day_.Add();
 }
-::google::protobuf::RepeatedPtrField< ::config::MonthDay >*
+::google::protobuf::RepeatedPtrField< ::config::SpecialDay >*
 CalendarConfig::mutable_special_day() {
   // @@protoc_insertion_point(field_mutable_list:config.CalendarConfig.special_day)
   return &special_day_;
 }
-const ::google::protobuf::RepeatedPtrField< ::config::MonthDay >&
+const ::google::protobuf::RepeatedPtrField< ::config::SpecialDay >&
 CalendarConfig::special_day() const {
   // @@protoc_insertion_point(field_list:config.CalendarConfig.special_day)
   return special_day_;
@@ -1071,7 +1124,7 @@ void CalendarConfig::clear_year_label_width() {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.year_label_width)
 }
 
-// optional .config.RGB rgb_header = 11;
+// optional .config.RGB rgb_header = 10;
 bool CalendarConfig::has_rgb_header() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
@@ -1115,15 +1168,59 @@ void CalendarConfig::set_allocated_rgb_header(::config::RGB* rgb_header) {
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_header)
 }
 
-// optional .config.RGB rgb_month_line = 12;
-bool CalendarConfig::has_rgb_month_line() const {
+// optional .config.RGB rgb_header_sunday = 11;
+bool CalendarConfig::has_rgb_header_sunday() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
-void CalendarConfig::set_has_rgb_month_line() {
+void CalendarConfig::set_has_rgb_header_sunday() {
   _has_bits_[0] |= 0x00000400u;
 }
-void CalendarConfig::clear_has_rgb_month_line() {
+void CalendarConfig::clear_has_rgb_header_sunday() {
   _has_bits_[0] &= ~0x00000400u;
+}
+void CalendarConfig::clear_rgb_header_sunday() {
+  if (rgb_header_sunday_ != NULL) rgb_header_sunday_->::config::RGB::Clear();
+  clear_has_rgb_header_sunday();
+}
+const ::config::RGB& CalendarConfig::rgb_header_sunday() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.rgb_header_sunday)
+  return rgb_header_sunday_ != NULL ? *rgb_header_sunday_ : *default_instance_->rgb_header_sunday_;
+}
+::config::RGB* CalendarConfig::mutable_rgb_header_sunday() {
+  set_has_rgb_header_sunday();
+  if (rgb_header_sunday_ == NULL) {
+    rgb_header_sunday_ = new ::config::RGB;
+  }
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.rgb_header_sunday)
+  return rgb_header_sunday_;
+}
+::config::RGB* CalendarConfig::release_rgb_header_sunday() {
+  // @@protoc_insertion_point(field_release:config.CalendarConfig.rgb_header_sunday)
+  clear_has_rgb_header_sunday();
+  ::config::RGB* temp = rgb_header_sunday_;
+  rgb_header_sunday_ = NULL;
+  return temp;
+}
+void CalendarConfig::set_allocated_rgb_header_sunday(::config::RGB* rgb_header_sunday) {
+  delete rgb_header_sunday_;
+  rgb_header_sunday_ = rgb_header_sunday;
+  if (rgb_header_sunday) {
+    set_has_rgb_header_sunday();
+  } else {
+    clear_has_rgb_header_sunday();
+  }
+  // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_header_sunday)
+}
+
+// optional .config.RGB rgb_month_line = 12;
+bool CalendarConfig::has_rgb_month_line() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+void CalendarConfig::set_has_rgb_month_line() {
+  _has_bits_[0] |= 0x00000800u;
+}
+void CalendarConfig::clear_has_rgb_month_line() {
+  _has_bits_[0] &= ~0x00000800u;
 }
 void CalendarConfig::clear_rgb_month_line() {
   if (rgb_month_line_ != NULL) rgb_month_line_->::config::RGB::Clear();
@@ -1164,84 +1261,90 @@ void CalendarConfig::set_allocated_rgb_month_line(::config::RGB* rgb_month_line)
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int MonthDay::kMonthFieldNumber;
-const int MonthDay::kDayFieldNumber;
-const int MonthDay::kLabelFieldNumber;
+const int SpecialDay::kMonthFieldNumber;
+const int SpecialDay::kDayFieldNumber;
+const int SpecialDay::kLabelFieldNumber;
+const int SpecialDay::kFirstYearFieldNumber;
+const int SpecialDay::kRgbFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-MonthDay::MonthDay()
+SpecialDay::SpecialDay()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:config.MonthDay)
+  // @@protoc_insertion_point(constructor:config.SpecialDay)
 }
 
-void MonthDay::InitAsDefaultInstance() {
+void SpecialDay::InitAsDefaultInstance() {
+  rgb_ = const_cast< ::config::RGB*>(&::config::RGB::default_instance());
 }
 
-MonthDay::MonthDay(const MonthDay& from)
+SpecialDay::SpecialDay(const SpecialDay& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:config.MonthDay)
+  // @@protoc_insertion_point(copy_constructor:config.SpecialDay)
 }
 
-void MonthDay::SharedCtor() {
+void SpecialDay::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   month_ = 0;
   day_ = 0;
   label_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  first_year_ = 0;
+  rgb_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-MonthDay::~MonthDay() {
-  // @@protoc_insertion_point(destructor:config.MonthDay)
+SpecialDay::~SpecialDay() {
+  // @@protoc_insertion_point(destructor:config.SpecialDay)
   SharedDtor();
 }
 
-void MonthDay::SharedDtor() {
+void SpecialDay::SharedDtor() {
   label_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
+    delete rgb_;
   }
 }
 
-void MonthDay::SetCachedSize(int size) const {
+void SpecialDay::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* MonthDay::descriptor() {
+const ::google::protobuf::Descriptor* SpecialDay::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return MonthDay_descriptor_;
+  return SpecialDay_descriptor_;
 }
 
-const MonthDay& MonthDay::default_instance() {
+const SpecialDay& SpecialDay::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_config_2eproto();
   return *default_instance_;
 }
 
-MonthDay* MonthDay::default_instance_ = NULL;
+SpecialDay* SpecialDay::default_instance_ = NULL;
 
-MonthDay* MonthDay::New(::google::protobuf::Arena* arena) const {
-  MonthDay* n = new MonthDay;
+SpecialDay* SpecialDay::New(::google::protobuf::Arena* arena) const {
+  SpecialDay* n = new SpecialDay;
   if (arena != NULL) {
     arena->Own(n);
   }
   return n;
 }
 
-void MonthDay::Clear() {
-// @@protoc_insertion_point(message_clear_start:config.MonthDay)
+void SpecialDay::Clear() {
+// @@protoc_insertion_point(message_clear_start:config.SpecialDay)
 #if defined(__clang__)
 #define ZR_HELPER_(f) \
   _Pragma("clang diagnostic push") \
   _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
-  __builtin_offsetof(MonthDay, f) \
+  __builtin_offsetof(SpecialDay, f) \
   _Pragma("clang diagnostic pop")
 #else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
-  &reinterpret_cast<MonthDay*>(16)->f)
+  &reinterpret_cast<SpecialDay*>(16)->f)
 #endif
 
 #define ZR_(first, last) do {\
@@ -1249,10 +1352,14 @@ void MonthDay::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  if (_has_bits_[0 / 32] & 7u) {
+  if (_has_bits_[0 / 32] & 31u) {
     ZR_(month_, day_);
     if (has_label()) {
       label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    first_year_ = 0;
+    if (has_rgb()) {
+      if (rgb_ != NULL) rgb_->::config::RGB::Clear();
     }
   }
 
@@ -1265,11 +1372,11 @@ void MonthDay::Clear() {
   }
 }
 
-bool MonthDay::MergePartialFromCodedStream(
+bool SpecialDay::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:config.MonthDay)
+  // @@protoc_insertion_point(parse_start:config.SpecialDay)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -1313,7 +1420,35 @@ bool MonthDay::MergePartialFromCodedStream(
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->label().data(), this->label().length(),
             ::google::protobuf::internal::WireFormat::PARSE,
-            "config.MonthDay.label");
+            "config.SpecialDay.label");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_first_year;
+        break;
+      }
+
+      // optional int32 first_year = 4;
+      case 4: {
+        if (tag == 32) {
+         parse_first_year:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &first_year_)));
+          set_has_first_year();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(42)) goto parse_rgb;
+        break;
+      }
+
+      // optional .config.RGB rgb = 5;
+      case 5: {
+        if (tag == 42) {
+         parse_rgb:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_rgb()));
         } else {
           goto handle_unusual;
         }
@@ -1335,17 +1470,17 @@ bool MonthDay::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:config.MonthDay)
+  // @@protoc_insertion_point(parse_success:config.SpecialDay)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:config.MonthDay)
+  // @@protoc_insertion_point(parse_failure:config.SpecialDay)
   return false;
 #undef DO_
 }
 
-void MonthDay::SerializeWithCachedSizes(
+void SpecialDay::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:config.MonthDay)
+  // @@protoc_insertion_point(serialize_start:config.SpecialDay)
   // required int32 month = 1;
   if (has_month()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->month(), output);
@@ -1361,21 +1496,32 @@ void MonthDay::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->label().data(), this->label().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "config.MonthDay.label");
+      "config.SpecialDay.label");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->label(), output);
+  }
+
+  // optional int32 first_year = 4;
+  if (has_first_year()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->first_year(), output);
+  }
+
+  // optional .config.RGB rgb = 5;
+  if (has_rgb()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      5, *this->rgb_, output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:config.MonthDay)
+  // @@protoc_insertion_point(serialize_end:config.SpecialDay)
 }
 
-::google::protobuf::uint8* MonthDay::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* SpecialDay::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:config.MonthDay)
+  // @@protoc_insertion_point(serialize_to_array_start:config.SpecialDay)
   // required int32 month = 1;
   if (has_month()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->month(), target);
@@ -1391,22 +1537,34 @@ void MonthDay::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->label().data(), this->label().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "config.MonthDay.label");
+      "config.SpecialDay.label");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->label(), target);
+  }
+
+  // optional int32 first_year = 4;
+  if (has_first_year()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->first_year(), target);
+  }
+
+  // optional .config.RGB rgb = 5;
+  if (has_rgb()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        5, *this->rgb_, false, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:config.MonthDay)
+  // @@protoc_insertion_point(serialize_to_array_end:config.SpecialDay)
   return target;
 }
 
-int MonthDay::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:config.MonthDay)
+int SpecialDay::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:config.SpecialDay)
   int total_size = 0;
 
   if (has_month()) {
@@ -1425,8 +1583,8 @@ int MonthDay::RequiredFieldsByteSizeFallback() const {
 
   return total_size;
 }
-int MonthDay::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:config.MonthDay)
+int SpecialDay::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:config.SpecialDay)
   int total_size = 0;
 
   if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
@@ -1443,13 +1601,29 @@ int MonthDay::ByteSize() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  // optional string label = 3;
-  if (has_label()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->label());
-  }
+  if (_has_bits_[2 / 32] & 28u) {
+    // optional string label = 3;
+    if (has_label()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->label());
+    }
 
+    // optional int32 first_year = 4;
+    if (has_first_year()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->first_year());
+    }
+
+    // optional .config.RGB rgb = 5;
+    if (has_rgb()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *this->rgb_);
+    }
+
+  }
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -1461,25 +1635,25 @@ int MonthDay::ByteSize() const {
   return total_size;
 }
 
-void MonthDay::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:config.MonthDay)
+void SpecialDay::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:config.SpecialDay)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  const MonthDay* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const MonthDay>(
+  const SpecialDay* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const SpecialDay>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:config.MonthDay)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:config.SpecialDay)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:config.MonthDay)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:config.SpecialDay)
     MergeFrom(*source);
   }
 }
 
-void MonthDay::MergeFrom(const MonthDay& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:config.MonthDay)
+void SpecialDay::MergeFrom(const SpecialDay& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:config.SpecialDay)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
@@ -1494,156 +1668,235 @@ void MonthDay::MergeFrom(const MonthDay& from) {
       set_has_label();
       label_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.label_);
     }
+    if (from.has_first_year()) {
+      set_first_year(from.first_year());
+    }
+    if (from.has_rgb()) {
+      mutable_rgb()->::config::RGB::MergeFrom(from.rgb());
+    }
   }
   if (from._internal_metadata_.have_unknown_fields()) {
     mutable_unknown_fields()->MergeFrom(from.unknown_fields());
   }
 }
 
-void MonthDay::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:config.MonthDay)
+void SpecialDay::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:config.SpecialDay)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void MonthDay::CopyFrom(const MonthDay& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:config.MonthDay)
+void SpecialDay::CopyFrom(const SpecialDay& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:config.SpecialDay)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool MonthDay::IsInitialized() const {
+bool SpecialDay::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
+  if (has_rgb()) {
+    if (!this->rgb_->IsInitialized()) return false;
+  }
   return true;
 }
 
-void MonthDay::Swap(MonthDay* other) {
+void SpecialDay::Swap(SpecialDay* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void MonthDay::InternalSwap(MonthDay* other) {
+void SpecialDay::InternalSwap(SpecialDay* other) {
   std::swap(month_, other->month_);
   std::swap(day_, other->day_);
   label_.Swap(&other->label_);
+  std::swap(first_year_, other->first_year_);
+  std::swap(rgb_, other->rgb_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata MonthDay::GetMetadata() const {
+::google::protobuf::Metadata SpecialDay::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = MonthDay_descriptor_;
-  metadata.reflection = MonthDay_reflection_;
+  metadata.descriptor = SpecialDay_descriptor_;
+  metadata.reflection = SpecialDay_reflection_;
   return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// MonthDay
+// SpecialDay
 
 // required int32 month = 1;
-bool MonthDay::has_month() const {
+bool SpecialDay::has_month() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-void MonthDay::set_has_month() {
+void SpecialDay::set_has_month() {
   _has_bits_[0] |= 0x00000001u;
 }
-void MonthDay::clear_has_month() {
+void SpecialDay::clear_has_month() {
   _has_bits_[0] &= ~0x00000001u;
 }
-void MonthDay::clear_month() {
+void SpecialDay::clear_month() {
   month_ = 0;
   clear_has_month();
 }
- ::google::protobuf::int32 MonthDay::month() const {
-  // @@protoc_insertion_point(field_get:config.MonthDay.month)
+ ::google::protobuf::int32 SpecialDay::month() const {
+  // @@protoc_insertion_point(field_get:config.SpecialDay.month)
   return month_;
 }
- void MonthDay::set_month(::google::protobuf::int32 value) {
+ void SpecialDay::set_month(::google::protobuf::int32 value) {
   set_has_month();
   month_ = value;
-  // @@protoc_insertion_point(field_set:config.MonthDay.month)
+  // @@protoc_insertion_point(field_set:config.SpecialDay.month)
 }
 
 // required int32 day = 2;
-bool MonthDay::has_day() const {
+bool SpecialDay::has_day() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-void MonthDay::set_has_day() {
+void SpecialDay::set_has_day() {
   _has_bits_[0] |= 0x00000002u;
 }
-void MonthDay::clear_has_day() {
+void SpecialDay::clear_has_day() {
   _has_bits_[0] &= ~0x00000002u;
 }
-void MonthDay::clear_day() {
+void SpecialDay::clear_day() {
   day_ = 0;
   clear_has_day();
 }
- ::google::protobuf::int32 MonthDay::day() const {
-  // @@protoc_insertion_point(field_get:config.MonthDay.day)
+ ::google::protobuf::int32 SpecialDay::day() const {
+  // @@protoc_insertion_point(field_get:config.SpecialDay.day)
   return day_;
 }
- void MonthDay::set_day(::google::protobuf::int32 value) {
+ void SpecialDay::set_day(::google::protobuf::int32 value) {
   set_has_day();
   day_ = value;
-  // @@protoc_insertion_point(field_set:config.MonthDay.day)
+  // @@protoc_insertion_point(field_set:config.SpecialDay.day)
 }
 
 // optional string label = 3;
-bool MonthDay::has_label() const {
+bool SpecialDay::has_label() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-void MonthDay::set_has_label() {
+void SpecialDay::set_has_label() {
   _has_bits_[0] |= 0x00000004u;
 }
-void MonthDay::clear_has_label() {
+void SpecialDay::clear_has_label() {
   _has_bits_[0] &= ~0x00000004u;
 }
-void MonthDay::clear_label() {
+void SpecialDay::clear_label() {
   label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_label();
 }
- const ::std::string& MonthDay::label() const {
-  // @@protoc_insertion_point(field_get:config.MonthDay.label)
+ const ::std::string& SpecialDay::label() const {
+  // @@protoc_insertion_point(field_get:config.SpecialDay.label)
   return label_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void MonthDay::set_label(const ::std::string& value) {
+ void SpecialDay::set_label(const ::std::string& value) {
   set_has_label();
   label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:config.MonthDay.label)
+  // @@protoc_insertion_point(field_set:config.SpecialDay.label)
 }
- void MonthDay::set_label(const char* value) {
+ void SpecialDay::set_label(const char* value) {
   set_has_label();
   label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:config.MonthDay.label)
+  // @@protoc_insertion_point(field_set_char:config.SpecialDay.label)
 }
- void MonthDay::set_label(const char* value, size_t size) {
+ void SpecialDay::set_label(const char* value, size_t size) {
   set_has_label();
   label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:config.MonthDay.label)
+  // @@protoc_insertion_point(field_set_pointer:config.SpecialDay.label)
 }
- ::std::string* MonthDay::mutable_label() {
+ ::std::string* SpecialDay::mutable_label() {
   set_has_label();
-  // @@protoc_insertion_point(field_mutable:config.MonthDay.label)
+  // @@protoc_insertion_point(field_mutable:config.SpecialDay.label)
   return label_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- ::std::string* MonthDay::release_label() {
-  // @@protoc_insertion_point(field_release:config.MonthDay.label)
+ ::std::string* SpecialDay::release_label() {
+  // @@protoc_insertion_point(field_release:config.SpecialDay.label)
   clear_has_label();
   return label_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void MonthDay::set_allocated_label(::std::string* label) {
+ void SpecialDay::set_allocated_label(::std::string* label) {
   if (label != NULL) {
     set_has_label();
   } else {
     clear_has_label();
   }
   label_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), label);
-  // @@protoc_insertion_point(field_set_allocated:config.MonthDay.label)
+  // @@protoc_insertion_point(field_set_allocated:config.SpecialDay.label)
+}
+
+// optional int32 first_year = 4;
+bool SpecialDay::has_first_year() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void SpecialDay::set_has_first_year() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void SpecialDay::clear_has_first_year() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void SpecialDay::clear_first_year() {
+  first_year_ = 0;
+  clear_has_first_year();
+}
+ ::google::protobuf::int32 SpecialDay::first_year() const {
+  // @@protoc_insertion_point(field_get:config.SpecialDay.first_year)
+  return first_year_;
+}
+ void SpecialDay::set_first_year(::google::protobuf::int32 value) {
+  set_has_first_year();
+  first_year_ = value;
+  // @@protoc_insertion_point(field_set:config.SpecialDay.first_year)
+}
+
+// optional .config.RGB rgb = 5;
+bool SpecialDay::has_rgb() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+void SpecialDay::set_has_rgb() {
+  _has_bits_[0] |= 0x00000010u;
+}
+void SpecialDay::clear_has_rgb() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+void SpecialDay::clear_rgb() {
+  if (rgb_ != NULL) rgb_->::config::RGB::Clear();
+  clear_has_rgb();
+}
+const ::config::RGB& SpecialDay::rgb() const {
+  // @@protoc_insertion_point(field_get:config.SpecialDay.rgb)
+  return rgb_ != NULL ? *rgb_ : *default_instance_->rgb_;
+}
+::config::RGB* SpecialDay::mutable_rgb() {
+  set_has_rgb();
+  if (rgb_ == NULL) {
+    rgb_ = new ::config::RGB;
+  }
+  // @@protoc_insertion_point(field_mutable:config.SpecialDay.rgb)
+  return rgb_;
+}
+::config::RGB* SpecialDay::release_rgb() {
+  // @@protoc_insertion_point(field_release:config.SpecialDay.rgb)
+  clear_has_rgb();
+  ::config::RGB* temp = rgb_;
+  rgb_ = NULL;
+  return temp;
+}
+void SpecialDay::set_allocated_rgb(::config::RGB* rgb) {
+  delete rgb_;
+  rgb_ = rgb;
+  if (rgb) {
+    set_has_rgb();
+  } else {
+    clear_has_rgb();
+  }
+  // @@protoc_insertion_point(field_set_allocated:config.SpecialDay.rgb)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

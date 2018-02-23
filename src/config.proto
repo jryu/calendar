@@ -2,7 +2,7 @@ package config;
 
 message CalendarConfig {
 	optional int32 num_years = 1 [default = 30];
-	repeated MonthDay special_day = 2;
+	repeated SpecialDay special_day = 2;
 
 	optional int32 cell_size = 3;
 	optional int32 cell_margin = 4;
@@ -12,14 +12,17 @@ message CalendarConfig {
 	optional int32 month_label_height = 8;
 	optional int32 year_label_width = 9;
 
-	optional RGB rgb_header = 11;
+	optional RGB rgb_header = 10;
+	optional RGB rgb_header_sunday = 11;
 	optional RGB rgb_month_line = 12;
 }
 
-message MonthDay {
+message SpecialDay {
 	required int32 month = 1;
 	required int32 day = 2;
 	optional string label = 3;
+	optional int32 first_year = 4;
+	optional RGB rgb = 5;
 }
 
 message RGB {

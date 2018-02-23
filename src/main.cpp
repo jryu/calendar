@@ -21,26 +21,25 @@ struct tm* get_next_day(time_t *t) {
 	return localtime(t);
 }
 
-bool is_special_day(struct tm const &timeinfo) {
-	for (int i = 0; i < conf.special_day_size(); i++) {
-		if (timeinfo.tm_mon == conf.special_day(i).month() - 1 &&
-				timeinfo.tm_mday == conf.special_day(i).day()) {
-			return true;
-		}
-	}
-	return false;
+bool is_every_tenth_year(int first_year, struct tm const &timeinfo) {
+	int this_year = timeinfo.tm_year + 1900;
+	return (this_year - first_year) % 10 == 0;
 }
 
-const char* get_special_day_label(struct tm const &timeinfo) {
+const config::SpecialDay* get_special_day(struct tm const &timeinfo) {
+	const config::SpecialDay* special_day = nullptr;
 	for (int i = 0; i < conf.special_day_size(); i++) {
-		if (timeinfo.tm_mon == conf.special_day(i).month() - 1 &&
-				timeinfo.tm_mday == conf.special_day(i).day()) {
-			if (conf.special_day(i).has_label()) {
-				return conf.special_day(i).label().c_str();
+		const config::SpecialDay& d = conf.special_day(i);
+		if (timeinfo.tm_mon == d.month() - 1 &&
+				timeinfo.tm_mday == d.day()) {
+			if (special_day == nullptr ||
+					(d.has_first_year() &&
+					 is_every_tenth_year(d.first_year(), timeinfo))) {
+				special_day = &d;
 			}
 		}
 	}
-	return NULL;
+	return special_day;
 }
 
 int get_this_year() {
@@ -61,18 +60,18 @@ time_t get_first_day_of_year_in_sec(int year) {
 	return mktime(&timeinfo);
 }
 
-PangoLayout* init_pango_layout(cairo_t *cr, int font_size) {
+PangoLayout* init_pango_layout(cairo_t *cr, int font_size, PangoWeight weight) {
 	PangoLayout *layout = pango_cairo_create_layout(cr);
 	PangoFontDescription *desc = pango_font_description_from_string("Roboto");
-	pango_font_description_set_weight(desc, PANGO_WEIGHT_SEMIBOLD);
+	pango_font_description_set_weight(desc, weight);
 	pango_font_description_set_absolute_size(desc, font_size * PANGO_SCALE);
 	pango_layout_set_font_description (layout, desc);
 	pango_font_description_free(desc);
 	return layout;
 }
 
-void draw_text_of_year(cairo_t *cr, int y, const char* text) {
-	PangoLayout *layout = init_pango_layout(cr, conf.font_size());
+void draw_text_of_year(cairo_t *cr, int y, const char* text, PangoWeight weight) {
+	PangoLayout *layout = init_pango_layout(cr, conf.font_size(), weight);
 	pango_layout_set_text(layout, text, -1);
 
 	int width, height;
@@ -100,7 +99,7 @@ int get_day_y(int year_index) {
 
 double draw_text_of_month(cairo_t *cr, int x, const char* text) {
 	PangoLayout *layout =
-		init_pango_layout(cr, conf.bigger_font_size());
+		init_pango_layout(cr, conf.bigger_font_size(), PANGO_WEIGHT_SEMIBOLD);
 	pango_layout_set_text(layout, text, -1);
 
 	int width, height;
@@ -116,8 +115,9 @@ double draw_text_of_month(cairo_t *cr, int x, const char* text) {
 	return label_x + width / PANGO_SCALE;
 }
 
-void draw_text_of_day(cairo_t *cr, int x, int y, const char* text) {
-	PangoLayout *layout = init_pango_layout(cr, conf.font_size());
+void draw_text_of_day(cairo_t *cr, int x, int y, const char* text,
+		PangoWeight weight) {
+	PangoLayout *layout = init_pango_layout(cr, conf.font_size(), weight);
 	pango_layout_set_text(layout, text, -1);
 
 	int width, height;
@@ -171,16 +171,16 @@ void set_rgb(cairo_t *cr, const config::RGB& rgb) {
 void year_label(cairo_t *cr, int this_year) {
 	char buf[5];
 
-
 	for (int i = 0; i < conf.num_years(); i++) {
 		int year = this_year + i;
 		sprintf(buf, "%d", year);
 		if (year % 5) {
 			set_rgb(cr, conf.rgb_header());
+			draw_text_of_year(cr, i, buf, PANGO_WEIGHT_NORMAL);
 		} else {
 			cairo_set_source_rgb(cr, 0, 0, 0);
+			draw_text_of_year(cr, i, buf, PANGO_WEIGHT_SEMIBOLD);
 		}
-		draw_text_of_year(cr, i, buf);
 	}
 }
 
@@ -214,14 +214,15 @@ void month_label(cairo_t *cr) {
 void wday_label(cairo_t *cr) {
 	const char *wday_text[] = {"M", "T", "W", "Th", "F", "S", "Su"};
 
-
 	for (int d = 0; d < 365 + 6; d++) {
-		if (d % 7 == 6) {
-			cairo_set_source_rgb(cr, 0, 0, 0);
+		int wday_index = d % 7;
+		if (wday_index == 6) {
+			set_rgb(cr, conf.rgb_header_sunday());
+			draw_text_of_day(cr, d, 0, wday_text[wday_index], PANGO_WEIGHT_SEMIBOLD);
 		} else {
 			set_rgb(cr, conf.rgb_header());
+			draw_text_of_day(cr, d, 0, wday_text[wday_index], PANGO_WEIGHT_NORMAL);
 		}
-		draw_text_of_day(cr, d, 0, wday_text[d % 7]);
 	}
 }
 
@@ -239,12 +240,22 @@ void year(cairo_t *cr, int y, int year) {
 
 	int i = get_wday_index(timeinfo);
 	while (timeinfo.tm_year == year) {
-		// Rectangle
+		const config::SpecialDay* special_day = get_special_day(timeinfo);
 		bool draw_label = true;
 
-		cairo_set_source_rgb(cr, 0, 0, 0);
-		if (is_special_day(timeinfo)) {
+		if (special_day != nullptr) {
+			if (special_day->has_first_year() &&
+					is_every_tenth_year(special_day->first_year(), timeinfo)) {
+				draw_rectangle_of_day(cr, i, y + 1);
+				set_rgb(cr, special_day->rgb());
+				cairo_fill(cr);
+
+				cairo_set_source_rgb(cr, 1, 1, 1);
+			} else {
+				cairo_set_source_rgb(cr, 0, 0, 0);
+			}
 		} else if (timeinfo.tm_wday == 0) {
+			cairo_set_source_rgb(cr, 0, 0, 0);
 		} else if (is_holiday(t)) {
 			draw_rectangle_of_day(cr, i, y + 1);
 			set_rgb(cr, conf.rgb_header());
@@ -252,17 +263,20 @@ void year(cairo_t *cr, int y, int year) {
 
 			cairo_set_source_rgb(cr, 1, 1, 1);
 		} else {
+			cairo_set_source_rgb(cr, 0, 0, 0);
 			draw_label = false;
 		}
 
 		// Label
 		if (draw_label) {
-			const char* label = get_special_day_label(timeinfo);
-			if (label == NULL) {
+			const char* label;
+			if (special_day != nullptr && special_day->has_label()) {
+				label = special_day->label().c_str();
+			} else {
 				sprintf(buf, "%d", timeinfo.tm_mday);
 				label = buf;
 			}
-			draw_text_of_day(cr, i, y + 1, label);
+			draw_text_of_day(cr, i, y + 1, label, PANGO_WEIGHT_SEMIBOLD);
 		} else {
 			draw_symbol_of_day(cr, i, y + 1, timeinfo.tm_mon);
 		}
