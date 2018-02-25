@@ -61,9 +61,11 @@ time_t get_first_day_of_year_in_sec(int year) {
 	return mktime(&timeinfo);
 }
 
-PangoLayout* init_pango_layout(cairo_t *cr, int font_size, PangoWeight weight) {
+PangoLayout* init_pango_layout(cairo_t *cr, const char* font_family,
+		int font_size, PangoWeight weight) {
 	PangoLayout *layout = pango_cairo_create_layout(cr);
-	PangoFontDescription *desc = pango_font_description_from_string("Roboto");
+	PangoFontDescription *desc =
+		pango_font_description_from_string(font_family);
 	pango_font_description_set_weight(desc, weight);
 	pango_font_description_set_absolute_size(desc, font_size * PANGO_SCALE);
 	pango_layout_set_font_description (layout, desc);
@@ -72,7 +74,8 @@ PangoLayout* init_pango_layout(cairo_t *cr, int font_size, PangoWeight weight) {
 }
 
 void draw_text_of_year(cairo_t *cr, int y, const char* text, PangoWeight weight) {
-	PangoLayout *layout = init_pango_layout(cr, conf.font_size(), weight);
+	PangoLayout *layout = init_pango_layout(cr, "Roboto", conf.font_size(),
+			weight);
 	pango_layout_set_text(layout, text, -1);
 
 	int width, height;
@@ -100,7 +103,8 @@ int get_day_y(int year_index) {
 
 double draw_text_of_month(cairo_t *cr, int x, const char* text) {
 	PangoLayout *layout =
-		init_pango_layout(cr, conf.bigger_font_size(), PANGO_WEIGHT_SEMIBOLD);
+		init_pango_layout(cr, "Roboto", conf.bigger_font_size(),
+				PANGO_WEIGHT_SEMIBOLD);
 	pango_layout_set_text(layout, text, -1);
 
 	int width, height;
@@ -118,7 +122,8 @@ double draw_text_of_month(cairo_t *cr, int x, const char* text) {
 
 void draw_text_of_day(cairo_t *cr, int x, int y, const char* text,
 		PangoWeight weight) {
-	PangoLayout *layout = init_pango_layout(cr, conf.font_size(), weight);
+	PangoLayout *layout = init_pango_layout(cr, "Roboto", conf.font_size(),
+			weight);
 	pango_layout_set_text(layout, text, -1);
 
 	int width, height;
@@ -128,6 +133,42 @@ void draw_text_of_day(cairo_t *cr, int x, int y, const char* text,
 			(conf.cell_size() - ((double)width / PANGO_SCALE)) / 2 +
 			conf.year_label_width(),
 			y * (conf.cell_size() + conf.cell_margin()) +
+			(conf.cell_size() - ((double)height / PANGO_SCALE)) / 2 +
+			conf.month_label_height());
+	pango_cairo_show_layout(cr, layout);
+
+	g_object_unref(layout);
+}
+
+void draw_text_on_bottom_left(cairo_t *cr) {
+	PangoLayout *layout = init_pango_layout(cr, "Courgette", conf.font_size(),
+			PANGO_WEIGHT_NORMAL);
+	pango_layout_set_text(layout, conf.bottom_left_label().c_str(), -1);
+
+	int width, height;
+	pango_layout_get_size(layout, &width, &height);
+	cairo_move_to(cr,
+			conf.year_label_width(),
+			(conf.num_years() + 1) * (conf.cell_size() + conf.cell_margin()) +
+			(conf.cell_size() - ((double)height / PANGO_SCALE)) / 2 +
+			conf.month_label_height());
+	pango_cairo_show_layout(cr, layout);
+
+	g_object_unref(layout);
+}
+
+void draw_text_on_bottom_right(cairo_t *cr) {
+	PangoLayout *layout = init_pango_layout(cr, "Courgette", conf.font_size(),
+			PANGO_WEIGHT_NORMAL);
+	pango_layout_set_text(layout, conf.bottom_right_label().c_str(), -1);
+
+	int width, height;
+	pango_layout_get_size(layout, &width, &height);
+	cairo_move_to(cr,
+			(366 + 5) * (conf.cell_size() + conf.cell_margin()) -
+			conf.cell_margin() * 2 +
+			conf.year_label_width() - ((double)width / PANGO_SCALE),
+			(conf.num_years() + 1) * (conf.cell_size() + conf.cell_margin()) +
 			(conf.cell_size() - ((double)height / PANGO_SCALE)) / 2 +
 			conf.month_label_height());
 	pango_cairo_show_layout(cr, layout);
@@ -321,20 +362,21 @@ bool parse_config() {
 
 int main(int argc, char *argv[])
 {
-	console->info(cairo_version_string());
 	if (!parse_config()) {
 		console->error("Error");
 		return EXIT_FAILURE;
 	}
 
+	int surface_width = (366 + 6) * (conf.cell_size() + conf.cell_margin()) +
+			conf.year_label_width();
+	int surface_height = (conf.num_years() + 2) *
+			(conf.cell_size() + conf.cell_margin()) +
+			conf.month_label_height();
+	console->info("Size: {} x {}", surface_width, surface_height);
 	cairo_surface_t *surface = NULL;
 //	surface = cairo_pdf_surface_create("example.pdf",
 	surface = cairo_svg_surface_create("example.svg",
-			(366 + 6) * (conf.cell_size() + conf.cell_margin()) +
-			conf.year_label_width(),
-			(conf.num_years() + 1) *
-			(conf.cell_size() + conf.cell_margin()) +
-			conf.month_label_height());
+			surface_width, surface_height);
 	cairo_t *cr = cairo_create(surface);
 
 	int this_year = get_this_year();
@@ -344,6 +386,10 @@ int main(int argc, char *argv[])
 	for (int i = 0; i < conf.num_years(); i++) {
 		year(cr, i, this_year + i);
 	}
+
+	set_rgb(cr, conf.rgb_header());
+	draw_text_on_bottom_left(cr);
+	draw_text_on_bottom_right(cr);
 
 	cairo_destroy(cr);
 	cairo_surface_destroy(surface);

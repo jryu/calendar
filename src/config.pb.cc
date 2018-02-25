@@ -42,7 +42,7 @@ void protobuf_AssignDesc_config_2eproto() {
       "config.proto");
   GOOGLE_CHECK(file != NULL);
   CalendarConfig_descriptor_ = file->message_type(0);
-  static const int CalendarConfig_offsets_[12] = {
+  static const int CalendarConfig_offsets_[14] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, num_years_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, special_day_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, cell_size_),
@@ -55,6 +55,8 @@ void protobuf_AssignDesc_config_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, rgb_header_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, rgb_header_sunday_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, rgb_month_line_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, bottom_left_label_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, bottom_right_label_),
   };
   CalendarConfig_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -144,7 +146,7 @@ void protobuf_AddDesc_config_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\014config.proto\022\006config\"\335\002\n\016CalendarConfi"
+    "\n\014config.proto\022\006config\"\224\003\n\016CalendarConfi"
     "g\022\025\n\tnum_years\030\001 \001(\005:\00230\022\'\n\013special_day\030"
     "\002 \003(\0132\022.config.SpecialDay\022\021\n\tcell_size\030\003"
     " \001(\005\022\023\n\013cell_margin\030\004 \001(\005\022\021\n\tfont_size\030\005"
@@ -153,11 +155,12 @@ void protobuf_AddDesc_config_2eproto() {
     "\n\020year_label_width\030\t \001(\005\022\037\n\nrgb_header\030\n"
     " \001(\0132\013.config.RGB\022&\n\021rgb_header_sunday\030\013"
     " \001(\0132\013.config.RGB\022#\n\016rgb_month_line\030\014 \001("
-    "\0132\013.config.RGB\"s\n\nSpecialDay\022\r\n\005month\030\001 "
-    "\002(\005\022\013\n\003day\030\002 \002(\005\022\r\n\005label\030\003 \001(\t\022\022\n\nfirst"
-    "_year\030\004 \001(\005\022\014\n\004year\030\005 \001(\005\022\030\n\003rgb\030\006 \001(\0132\013"
-    ".config.RGB\"/\n\003RGB\022\013\n\003red\030\001 \002(\005\022\r\n\005green"
-    "\030\002 \002(\005\022\014\n\004blue\030\003 \002(\005", 540);
+    "\0132\013.config.RGB\022\031\n\021bottom_left_label\030\r \001("
+    "\t\022\032\n\022bottom_right_label\030\016 \001(\t\"s\n\nSpecial"
+    "Day\022\r\n\005month\030\001 \002(\005\022\013\n\003day\030\002 \002(\005\022\r\n\005label"
+    "\030\003 \001(\t\022\022\n\nfirst_year\030\004 \001(\005\022\014\n\004year\030\005 \001(\005"
+    "\022\030\n\003rgb\030\006 \001(\0132\013.config.RGB\"/\n\003RGB\022\013\n\003red"
+    "\030\001 \002(\005\022\r\n\005green\030\002 \002(\005\022\014\n\004blue\030\003 \002(\005", 595);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "config.proto", &protobuf_RegisterTypes);
   CalendarConfig::default_instance_ = new CalendarConfig();
@@ -191,6 +194,8 @@ const int CalendarConfig::kYearLabelWidthFieldNumber;
 const int CalendarConfig::kRgbHeaderFieldNumber;
 const int CalendarConfig::kRgbHeaderSundayFieldNumber;
 const int CalendarConfig::kRgbMonthLineFieldNumber;
+const int CalendarConfig::kBottomLeftLabelFieldNumber;
+const int CalendarConfig::kBottomRightLabelFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 CalendarConfig::CalendarConfig()
@@ -214,6 +219,7 @@ CalendarConfig::CalendarConfig(const CalendarConfig& from)
 }
 
 void CalendarConfig::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   num_years_ = 30;
   cell_size_ = 0;
@@ -226,6 +232,8 @@ void CalendarConfig::SharedCtor() {
   rgb_header_ = NULL;
   rgb_header_sunday_ = NULL;
   rgb_month_line_ = NULL;
+  bottom_left_label_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  bottom_right_label_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -235,6 +243,8 @@ CalendarConfig::~CalendarConfig() {
 }
 
 void CalendarConfig::SharedDtor() {
+  bottom_left_label_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  bottom_right_label_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
     delete rgb_header_;
     delete rgb_header_sunday_;
@@ -289,7 +299,7 @@ void CalendarConfig::Clear() {
     ZR_(cell_size_, month_label_height_);
     num_years_ = 30;
   }
-  if (_has_bits_[8 / 32] & 3840u) {
+  if (_has_bits_[8 / 32] & 16128u) {
     year_label_width_ = 0;
     if (has_rgb_header()) {
       if (rgb_header_ != NULL) rgb_header_->::config::RGB::Clear();
@@ -299,6 +309,12 @@ void CalendarConfig::Clear() {
     }
     if (has_rgb_month_line()) {
       if (rgb_month_line_ != NULL) rgb_month_line_->::config::RGB::Clear();
+    }
+    if (has_bottom_left_label()) {
+      bottom_left_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    if (has_bottom_right_label()) {
+      bottom_right_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
   }
 
@@ -493,6 +509,40 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(106)) goto parse_bottom_left_label;
+        break;
+      }
+
+      // optional string bottom_left_label = 13;
+      case 13: {
+        if (tag == 106) {
+         parse_bottom_left_label:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_bottom_left_label()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->bottom_left_label().data(), this->bottom_left_label().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "config.CalendarConfig.bottom_left_label");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(114)) goto parse_bottom_right_label;
+        break;
+      }
+
+      // optional string bottom_right_label = 14;
+      case 14: {
+        if (tag == 114) {
+         parse_bottom_right_label:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_bottom_right_label()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->bottom_right_label().data(), this->bottom_right_label().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "config.CalendarConfig.bottom_right_label");
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -586,6 +636,26 @@ void CalendarConfig::SerializeWithCachedSizes(
       12, *this->rgb_month_line_, output);
   }
 
+  // optional string bottom_left_label = 13;
+  if (has_bottom_left_label()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->bottom_left_label().data(), this->bottom_left_label().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "config.CalendarConfig.bottom_left_label");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      13, this->bottom_left_label(), output);
+  }
+
+  // optional string bottom_right_label = 14;
+  if (has_bottom_right_label()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->bottom_right_label().data(), this->bottom_right_label().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "config.CalendarConfig.bottom_right_label");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      14, this->bottom_right_label(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -664,6 +734,28 @@ void CalendarConfig::SerializeWithCachedSizes(
         12, *this->rgb_month_line_, false, target);
   }
 
+  // optional string bottom_left_label = 13;
+  if (has_bottom_left_label()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->bottom_left_label().data(), this->bottom_left_label().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "config.CalendarConfig.bottom_left_label");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        13, this->bottom_left_label(), target);
+  }
+
+  // optional string bottom_right_label = 14;
+  if (has_bottom_right_label()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->bottom_right_label().data(), this->bottom_right_label().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "config.CalendarConfig.bottom_right_label");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        14, this->bottom_right_label(), target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -727,7 +819,7 @@ int CalendarConfig::ByteSize() const {
     }
 
   }
-  if (_has_bits_[8 / 32] & 3840u) {
+  if (_has_bits_[8 / 32] & 16128u) {
     // optional int32 year_label_width = 9;
     if (has_year_label_width()) {
       total_size += 1 +
@@ -754,6 +846,20 @@ int CalendarConfig::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *this->rgb_month_line_);
+    }
+
+    // optional string bottom_left_label = 13;
+    if (has_bottom_left_label()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->bottom_left_label());
+    }
+
+    // optional string bottom_right_label = 14;
+    if (has_bottom_right_label()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->bottom_right_label());
     }
 
   }
@@ -835,6 +941,14 @@ void CalendarConfig::MergeFrom(const CalendarConfig& from) {
     if (from.has_rgb_month_line()) {
       mutable_rgb_month_line()->::config::RGB::MergeFrom(from.rgb_month_line());
     }
+    if (from.has_bottom_left_label()) {
+      set_has_bottom_left_label();
+      bottom_left_label_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.bottom_left_label_);
+    }
+    if (from.has_bottom_right_label()) {
+      set_has_bottom_right_label();
+      bottom_right_label_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.bottom_right_label_);
+    }
   }
   if (from._internal_metadata_.have_unknown_fields()) {
     mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -887,6 +1001,8 @@ void CalendarConfig::InternalSwap(CalendarConfig* other) {
   std::swap(rgb_header_, other->rgb_header_);
   std::swap(rgb_header_sunday_, other->rgb_header_sunday_);
   std::swap(rgb_month_line_, other->rgb_month_line_);
+  bottom_left_label_.Swap(&other->bottom_left_label_);
+  bottom_right_label_.Swap(&other->bottom_right_label_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -1255,6 +1371,114 @@ void CalendarConfig::set_allocated_rgb_month_line(::config::RGB* rgb_month_line)
     clear_has_rgb_month_line();
   }
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_month_line)
+}
+
+// optional string bottom_left_label = 13;
+bool CalendarConfig::has_bottom_left_label() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
+}
+void CalendarConfig::set_has_bottom_left_label() {
+  _has_bits_[0] |= 0x00001000u;
+}
+void CalendarConfig::clear_has_bottom_left_label() {
+  _has_bits_[0] &= ~0x00001000u;
+}
+void CalendarConfig::clear_bottom_left_label() {
+  bottom_left_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_bottom_left_label();
+}
+ const ::std::string& CalendarConfig::bottom_left_label() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.bottom_left_label)
+  return bottom_left_label_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CalendarConfig::set_bottom_left_label(const ::std::string& value) {
+  set_has_bottom_left_label();
+  bottom_left_label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.bottom_left_label)
+}
+ void CalendarConfig::set_bottom_left_label(const char* value) {
+  set_has_bottom_left_label();
+  bottom_left_label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:config.CalendarConfig.bottom_left_label)
+}
+ void CalendarConfig::set_bottom_left_label(const char* value, size_t size) {
+  set_has_bottom_left_label();
+  bottom_left_label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:config.CalendarConfig.bottom_left_label)
+}
+ ::std::string* CalendarConfig::mutable_bottom_left_label() {
+  set_has_bottom_left_label();
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.bottom_left_label)
+  return bottom_left_label_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* CalendarConfig::release_bottom_left_label() {
+  // @@protoc_insertion_point(field_release:config.CalendarConfig.bottom_left_label)
+  clear_has_bottom_left_label();
+  return bottom_left_label_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CalendarConfig::set_allocated_bottom_left_label(::std::string* bottom_left_label) {
+  if (bottom_left_label != NULL) {
+    set_has_bottom_left_label();
+  } else {
+    clear_has_bottom_left_label();
+  }
+  bottom_left_label_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), bottom_left_label);
+  // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.bottom_left_label)
+}
+
+// optional string bottom_right_label = 14;
+bool CalendarConfig::has_bottom_right_label() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+void CalendarConfig::set_has_bottom_right_label() {
+  _has_bits_[0] |= 0x00002000u;
+}
+void CalendarConfig::clear_has_bottom_right_label() {
+  _has_bits_[0] &= ~0x00002000u;
+}
+void CalendarConfig::clear_bottom_right_label() {
+  bottom_right_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_bottom_right_label();
+}
+ const ::std::string& CalendarConfig::bottom_right_label() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.bottom_right_label)
+  return bottom_right_label_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CalendarConfig::set_bottom_right_label(const ::std::string& value) {
+  set_has_bottom_right_label();
+  bottom_right_label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.bottom_right_label)
+}
+ void CalendarConfig::set_bottom_right_label(const char* value) {
+  set_has_bottom_right_label();
+  bottom_right_label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:config.CalendarConfig.bottom_right_label)
+}
+ void CalendarConfig::set_bottom_right_label(const char* value, size_t size) {
+  set_has_bottom_right_label();
+  bottom_right_label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:config.CalendarConfig.bottom_right_label)
+}
+ ::std::string* CalendarConfig::mutable_bottom_right_label() {
+  set_has_bottom_right_label();
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.bottom_right_label)
+  return bottom_right_label_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* CalendarConfig::release_bottom_right_label() {
+  // @@protoc_insertion_point(field_release:config.CalendarConfig.bottom_right_label)
+  clear_has_bottom_right_label();
+  return bottom_right_label_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CalendarConfig::set_allocated_bottom_right_label(::std::string* bottom_right_label) {
+  if (bottom_right_label != NULL) {
+    set_has_bottom_right_label();
+  } else {
+    clear_has_bottom_right_label();
+  }
+  bottom_right_label_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), bottom_right_label);
+  // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.bottom_right_label)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
