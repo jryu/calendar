@@ -1,8 +1,14 @@
 num_years: 30
 cell_size: 32
 cell_margin: 8
+
 font_size: 18
 bigger_font_size: 24
+
+header_font_family: "Lato"
+number_font_family: "Titillium Web"
+quote_font_family: "Courgette"
+
 line_width: 2
 month_label_height: 70
 year_label_width: 120
@@ -99,3 +105,7 @@ rgb_month_line {
 	green: 215
 	blue: 215
 }
+
+bottom_left_label: "Teach us to number our days, that we may gain a heart of wisdom. - Psalm 90:12"
+
+bottom_right_label: "The world and its desires pass away, but whoever does the will of God lives forever. - 1 John 2:17"

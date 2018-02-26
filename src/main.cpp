@@ -61,11 +61,11 @@ time_t get_first_day_of_year_in_sec(int year) {
 	return mktime(&timeinfo);
 }
 
-PangoLayout* init_pango_layout(cairo_t *cr, const char* font_family,
+PangoLayout* init_pango_layout(cairo_t *cr, const std::string& font_family,
 		int font_size, PangoWeight weight) {
 	PangoLayout *layout = pango_cairo_create_layout(cr);
 	PangoFontDescription *desc =
-		pango_font_description_from_string(font_family);
+		pango_font_description_from_string(font_family.c_str());
 	pango_font_description_set_weight(desc, weight);
 	pango_font_description_set_absolute_size(desc, font_size * PANGO_SCALE);
 	pango_layout_set_font_description (layout, desc);
@@ -74,8 +74,8 @@ PangoLayout* init_pango_layout(cairo_t *cr, const char* font_family,
 }
 
 void draw_text_of_year(cairo_t *cr, int y, const char* text, PangoWeight weight) {
-	PangoLayout *layout = init_pango_layout(cr, "Roboto", conf.font_size(),
-			weight);
+	PangoLayout *layout = init_pango_layout(cr, conf.number_font_family(),
+			conf.font_size(), weight);
 	pango_layout_set_text(layout, text, -1);
 
 	int width, height;
@@ -102,9 +102,8 @@ int get_day_y(int year_index) {
 }
 
 double draw_text_of_month(cairo_t *cr, int x, const char* text) {
-	PangoLayout *layout =
-		init_pango_layout(cr, "Roboto", conf.bigger_font_size(),
-				PANGO_WEIGHT_SEMIBOLD);
+	PangoLayout *layout = init_pango_layout(cr, conf.header_font_family(),
+			conf.bigger_font_size(), PANGO_WEIGHT_SEMIBOLD);
 	pango_layout_set_text(layout, text, -1);
 
 	int width, height;
@@ -121,8 +120,8 @@ double draw_text_of_month(cairo_t *cr, int x, const char* text) {
 }
 
 void draw_text_of_day(cairo_t *cr, int x, int y, const char* text,
-		PangoWeight weight) {
-	PangoLayout *layout = init_pango_layout(cr, "Roboto", conf.font_size(),
+		const std::string& font_family, PangoWeight weight) {
+	PangoLayout *layout = init_pango_layout(cr, font_family, conf.font_size(),
 			weight);
 	pango_layout_set_text(layout, text, -1);
 
@@ -141,8 +140,8 @@ void draw_text_of_day(cairo_t *cr, int x, int y, const char* text,
 }
 
 void draw_text_on_bottom_left(cairo_t *cr) {
-	PangoLayout *layout = init_pango_layout(cr, "Courgette", conf.font_size(),
-			PANGO_WEIGHT_NORMAL);
+	PangoLayout *layout = init_pango_layout(cr, conf.quote_font_family(),
+			conf.font_size(), PANGO_WEIGHT_NORMAL);
 	pango_layout_set_text(layout, conf.bottom_left_label().c_str(), -1);
 
 	int width, height;
@@ -158,8 +157,8 @@ void draw_text_on_bottom_left(cairo_t *cr) {
 }
 
 void draw_text_on_bottom_right(cairo_t *cr) {
-	PangoLayout *layout = init_pango_layout(cr, "Courgette", conf.font_size(),
-			PANGO_WEIGHT_NORMAL);
+	PangoLayout *layout = init_pango_layout(cr, conf.quote_font_family(),
+			conf.font_size(), PANGO_WEIGHT_NORMAL);
 	pango_layout_set_text(layout, conf.bottom_right_label().c_str(), -1);
 
 	int width, height;
@@ -270,10 +269,12 @@ void wday_label(cairo_t *cr) {
 		int wday_index = d % 7;
 		if (wday_index == 6) {
 			set_rgb(cr, conf.rgb_header_sunday());
-			draw_text_of_day(cr, d, 0, wday_text[wday_index], PANGO_WEIGHT_SEMIBOLD);
+			draw_text_of_day(cr, d, 0, wday_text[wday_index],
+					conf.header_font_family(), PANGO_WEIGHT_SEMIBOLD);
 		} else {
 			set_rgb(cr, conf.rgb_header());
-			draw_text_of_day(cr, d, 0, wday_text[wday_index], PANGO_WEIGHT_NORMAL);
+			draw_text_of_day(cr, d, 0, wday_text[wday_index],
+					conf.header_font_family(), PANGO_WEIGHT_NORMAL);
 		}
 	}
 }
@@ -329,7 +330,8 @@ void year(cairo_t *cr, int y, int year) {
 				sprintf(buf, "%d", timeinfo.tm_mday);
 				label = buf;
 			}
-			draw_text_of_day(cr, i, y + 1, label, PANGO_WEIGHT_SEMIBOLD);
+			draw_text_of_day(cr, i, y + 1, label, conf.number_font_family(),
+					PANGO_WEIGHT_SEMIBOLD);
 		} else {
 			draw_symbol_of_day(cr, i, y + 1, timeinfo.tm_mon);
 		}

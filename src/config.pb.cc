@@ -42,7 +42,7 @@ void protobuf_AssignDesc_config_2eproto() {
       "config.proto");
   GOOGLE_CHECK(file != NULL);
   CalendarConfig_descriptor_ = file->message_type(0);
-  static const int CalendarConfig_offsets_[14] = {
+  static const int CalendarConfig_offsets_[17] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, num_years_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, special_day_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, cell_size_),
@@ -57,6 +57,9 @@ void protobuf_AssignDesc_config_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, rgb_month_line_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, bottom_left_label_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, bottom_right_label_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, header_font_family_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, number_font_family_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, quote_font_family_),
   };
   CalendarConfig_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -146,7 +149,7 @@ void protobuf_AddDesc_config_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\014config.proto\022\006config\"\224\003\n\016CalendarConfi"
+    "\n\014config.proto\022\006config\"\347\003\n\016CalendarConfi"
     "g\022\025\n\tnum_years\030\001 \001(\005:\00230\022\'\n\013special_day\030"
     "\002 \003(\0132\022.config.SpecialDay\022\021\n\tcell_size\030\003"
     " \001(\005\022\023\n\013cell_margin\030\004 \001(\005\022\021\n\tfont_size\030\005"
@@ -156,11 +159,13 @@ void protobuf_AddDesc_config_2eproto() {
     " \001(\0132\013.config.RGB\022&\n\021rgb_header_sunday\030\013"
     " \001(\0132\013.config.RGB\022#\n\016rgb_month_line\030\014 \001("
     "\0132\013.config.RGB\022\031\n\021bottom_left_label\030\r \001("
-    "\t\022\032\n\022bottom_right_label\030\016 \001(\t\"s\n\nSpecial"
-    "Day\022\r\n\005month\030\001 \002(\005\022\013\n\003day\030\002 \002(\005\022\r\n\005label"
-    "\030\003 \001(\t\022\022\n\nfirst_year\030\004 \001(\005\022\014\n\004year\030\005 \001(\005"
-    "\022\030\n\003rgb\030\006 \001(\0132\013.config.RGB\"/\n\003RGB\022\013\n\003red"
-    "\030\001 \002(\005\022\r\n\005green\030\002 \002(\005\022\014\n\004blue\030\003 \002(\005", 595);
+    "\t\022\032\n\022bottom_right_label\030\016 \001(\t\022\032\n\022header_"
+    "font_family\030\017 \001(\t\022\032\n\022number_font_family\030"
+    "\020 \001(\t\022\031\n\021quote_font_family\030\021 \001(\t\"s\n\nSpec"
+    "ialDay\022\r\n\005month\030\001 \002(\005\022\013\n\003day\030\002 \002(\005\022\r\n\005la"
+    "bel\030\003 \001(\t\022\022\n\nfirst_year\030\004 \001(\005\022\014\n\004year\030\005 "
+    "\001(\005\022\030\n\003rgb\030\006 \001(\0132\013.config.RGB\"/\n\003RGB\022\013\n\003"
+    "red\030\001 \002(\005\022\r\n\005green\030\002 \002(\005\022\014\n\004blue\030\003 \002(\005", 678);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "config.proto", &protobuf_RegisterTypes);
   CalendarConfig::default_instance_ = new CalendarConfig();
@@ -196,6 +201,9 @@ const int CalendarConfig::kRgbHeaderSundayFieldNumber;
 const int CalendarConfig::kRgbMonthLineFieldNumber;
 const int CalendarConfig::kBottomLeftLabelFieldNumber;
 const int CalendarConfig::kBottomRightLabelFieldNumber;
+const int CalendarConfig::kHeaderFontFamilyFieldNumber;
+const int CalendarConfig::kNumberFontFamilyFieldNumber;
+const int CalendarConfig::kQuoteFontFamilyFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 CalendarConfig::CalendarConfig()
@@ -234,6 +242,9 @@ void CalendarConfig::SharedCtor() {
   rgb_month_line_ = NULL;
   bottom_left_label_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   bottom_right_label_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  header_font_family_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  number_font_family_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  quote_font_family_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -245,6 +256,9 @@ CalendarConfig::~CalendarConfig() {
 void CalendarConfig::SharedDtor() {
   bottom_left_label_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   bottom_right_label_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  header_font_family_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  number_font_family_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  quote_font_family_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
     delete rgb_header_;
     delete rgb_header_sunday_;
@@ -299,7 +313,7 @@ void CalendarConfig::Clear() {
     ZR_(cell_size_, month_label_height_);
     num_years_ = 30;
   }
-  if (_has_bits_[8 / 32] & 16128u) {
+  if (_has_bits_[8 / 32] & 65280u) {
     year_label_width_ = 0;
     if (has_rgb_header()) {
       if (rgb_header_ != NULL) rgb_header_->::config::RGB::Clear();
@@ -316,6 +330,15 @@ void CalendarConfig::Clear() {
     if (has_bottom_right_label()) {
       bottom_right_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
+    if (has_header_font_family()) {
+      header_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    if (has_number_font_family()) {
+      number_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+  }
+  if (has_quote_font_family()) {
+    quote_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
 
 #undef ZR_HELPER_
@@ -334,7 +357,7 @@ bool CalendarConfig::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:config.CalendarConfig)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -543,6 +566,57 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(122)) goto parse_header_font_family;
+        break;
+      }
+
+      // optional string header_font_family = 15;
+      case 15: {
+        if (tag == 122) {
+         parse_header_font_family:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_header_font_family()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->header_font_family().data(), this->header_font_family().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "config.CalendarConfig.header_font_family");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(130)) goto parse_number_font_family;
+        break;
+      }
+
+      // optional string number_font_family = 16;
+      case 16: {
+        if (tag == 130) {
+         parse_number_font_family:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_number_font_family()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->number_font_family().data(), this->number_font_family().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "config.CalendarConfig.number_font_family");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(138)) goto parse_quote_font_family;
+        break;
+      }
+
+      // optional string quote_font_family = 17;
+      case 17: {
+        if (tag == 138) {
+         parse_quote_font_family:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_quote_font_family()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->quote_font_family().data(), this->quote_font_family().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "config.CalendarConfig.quote_font_family");
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -656,6 +730,36 @@ void CalendarConfig::SerializeWithCachedSizes(
       14, this->bottom_right_label(), output);
   }
 
+  // optional string header_font_family = 15;
+  if (has_header_font_family()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->header_font_family().data(), this->header_font_family().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "config.CalendarConfig.header_font_family");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      15, this->header_font_family(), output);
+  }
+
+  // optional string number_font_family = 16;
+  if (has_number_font_family()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->number_font_family().data(), this->number_font_family().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "config.CalendarConfig.number_font_family");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      16, this->number_font_family(), output);
+  }
+
+  // optional string quote_font_family = 17;
+  if (has_quote_font_family()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->quote_font_family().data(), this->quote_font_family().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "config.CalendarConfig.quote_font_family");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      17, this->quote_font_family(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -756,6 +860,39 @@ void CalendarConfig::SerializeWithCachedSizes(
         14, this->bottom_right_label(), target);
   }
 
+  // optional string header_font_family = 15;
+  if (has_header_font_family()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->header_font_family().data(), this->header_font_family().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "config.CalendarConfig.header_font_family");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        15, this->header_font_family(), target);
+  }
+
+  // optional string number_font_family = 16;
+  if (has_number_font_family()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->number_font_family().data(), this->number_font_family().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "config.CalendarConfig.number_font_family");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        16, this->number_font_family(), target);
+  }
+
+  // optional string quote_font_family = 17;
+  if (has_quote_font_family()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->quote_font_family().data(), this->quote_font_family().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "config.CalendarConfig.quote_font_family");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        17, this->quote_font_family(), target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -819,7 +956,7 @@ int CalendarConfig::ByteSize() const {
     }
 
   }
-  if (_has_bits_[8 / 32] & 16128u) {
+  if (_has_bits_[8 / 32] & 65280u) {
     // optional int32 year_label_width = 9;
     if (has_year_label_width()) {
       total_size += 1 +
@@ -862,7 +999,28 @@ int CalendarConfig::ByteSize() const {
           this->bottom_right_label());
     }
 
+    // optional string header_font_family = 15;
+    if (has_header_font_family()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->header_font_family());
+    }
+
+    // optional string number_font_family = 16;
+    if (has_number_font_family()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->number_font_family());
+    }
+
   }
+  // optional string quote_font_family = 17;
+  if (has_quote_font_family()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->quote_font_family());
+  }
+
   // repeated .config.SpecialDay special_day = 2;
   total_size += 1 * this->special_day_size();
   for (int i = 0; i < this->special_day_size(); i++) {
@@ -949,6 +1107,20 @@ void CalendarConfig::MergeFrom(const CalendarConfig& from) {
       set_has_bottom_right_label();
       bottom_right_label_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.bottom_right_label_);
     }
+    if (from.has_header_font_family()) {
+      set_has_header_font_family();
+      header_font_family_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.header_font_family_);
+    }
+    if (from.has_number_font_family()) {
+      set_has_number_font_family();
+      number_font_family_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.number_font_family_);
+    }
+  }
+  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+    if (from.has_quote_font_family()) {
+      set_has_quote_font_family();
+      quote_font_family_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.quote_font_family_);
+    }
   }
   if (from._internal_metadata_.have_unknown_fields()) {
     mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -1003,6 +1175,9 @@ void CalendarConfig::InternalSwap(CalendarConfig* other) {
   std::swap(rgb_month_line_, other->rgb_month_line_);
   bottom_left_label_.Swap(&other->bottom_left_label_);
   bottom_right_label_.Swap(&other->bottom_right_label_);
+  header_font_family_.Swap(&other->header_font_family_);
+  number_font_family_.Swap(&other->number_font_family_);
+  quote_font_family_.Swap(&other->quote_font_family_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -1479,6 +1654,168 @@ void CalendarConfig::clear_bottom_right_label() {
   }
   bottom_right_label_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), bottom_right_label);
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.bottom_right_label)
+}
+
+// optional string header_font_family = 15;
+bool CalendarConfig::has_header_font_family() const {
+  return (_has_bits_[0] & 0x00004000u) != 0;
+}
+void CalendarConfig::set_has_header_font_family() {
+  _has_bits_[0] |= 0x00004000u;
+}
+void CalendarConfig::clear_has_header_font_family() {
+  _has_bits_[0] &= ~0x00004000u;
+}
+void CalendarConfig::clear_header_font_family() {
+  header_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_header_font_family();
+}
+ const ::std::string& CalendarConfig::header_font_family() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.header_font_family)
+  return header_font_family_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CalendarConfig::set_header_font_family(const ::std::string& value) {
+  set_has_header_font_family();
+  header_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.header_font_family)
+}
+ void CalendarConfig::set_header_font_family(const char* value) {
+  set_has_header_font_family();
+  header_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:config.CalendarConfig.header_font_family)
+}
+ void CalendarConfig::set_header_font_family(const char* value, size_t size) {
+  set_has_header_font_family();
+  header_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:config.CalendarConfig.header_font_family)
+}
+ ::std::string* CalendarConfig::mutable_header_font_family() {
+  set_has_header_font_family();
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.header_font_family)
+  return header_font_family_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* CalendarConfig::release_header_font_family() {
+  // @@protoc_insertion_point(field_release:config.CalendarConfig.header_font_family)
+  clear_has_header_font_family();
+  return header_font_family_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CalendarConfig::set_allocated_header_font_family(::std::string* header_font_family) {
+  if (header_font_family != NULL) {
+    set_has_header_font_family();
+  } else {
+    clear_has_header_font_family();
+  }
+  header_font_family_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), header_font_family);
+  // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.header_font_family)
+}
+
+// optional string number_font_family = 16;
+bool CalendarConfig::has_number_font_family() const {
+  return (_has_bits_[0] & 0x00008000u) != 0;
+}
+void CalendarConfig::set_has_number_font_family() {
+  _has_bits_[0] |= 0x00008000u;
+}
+void CalendarConfig::clear_has_number_font_family() {
+  _has_bits_[0] &= ~0x00008000u;
+}
+void CalendarConfig::clear_number_font_family() {
+  number_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_number_font_family();
+}
+ const ::std::string& CalendarConfig::number_font_family() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.number_font_family)
+  return number_font_family_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CalendarConfig::set_number_font_family(const ::std::string& value) {
+  set_has_number_font_family();
+  number_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.number_font_family)
+}
+ void CalendarConfig::set_number_font_family(const char* value) {
+  set_has_number_font_family();
+  number_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:config.CalendarConfig.number_font_family)
+}
+ void CalendarConfig::set_number_font_family(const char* value, size_t size) {
+  set_has_number_font_family();
+  number_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:config.CalendarConfig.number_font_family)
+}
+ ::std::string* CalendarConfig::mutable_number_font_family() {
+  set_has_number_font_family();
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.number_font_family)
+  return number_font_family_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* CalendarConfig::release_number_font_family() {
+  // @@protoc_insertion_point(field_release:config.CalendarConfig.number_font_family)
+  clear_has_number_font_family();
+  return number_font_family_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CalendarConfig::set_allocated_number_font_family(::std::string* number_font_family) {
+  if (number_font_family != NULL) {
+    set_has_number_font_family();
+  } else {
+    clear_has_number_font_family();
+  }
+  number_font_family_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), number_font_family);
+  // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.number_font_family)
+}
+
+// optional string quote_font_family = 17;
+bool CalendarConfig::has_quote_font_family() const {
+  return (_has_bits_[0] & 0x00010000u) != 0;
+}
+void CalendarConfig::set_has_quote_font_family() {
+  _has_bits_[0] |= 0x00010000u;
+}
+void CalendarConfig::clear_has_quote_font_family() {
+  _has_bits_[0] &= ~0x00010000u;
+}
+void CalendarConfig::clear_quote_font_family() {
+  quote_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_quote_font_family();
+}
+ const ::std::string& CalendarConfig::quote_font_family() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.quote_font_family)
+  return quote_font_family_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CalendarConfig::set_quote_font_family(const ::std::string& value) {
+  set_has_quote_font_family();
+  quote_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.quote_font_family)
+}
+ void CalendarConfig::set_quote_font_family(const char* value) {
+  set_has_quote_font_family();
+  quote_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:config.CalendarConfig.quote_font_family)
+}
+ void CalendarConfig::set_quote_font_family(const char* value, size_t size) {
+  set_has_quote_font_family();
+  quote_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:config.CalendarConfig.quote_font_family)
+}
+ ::std::string* CalendarConfig::mutable_quote_font_family() {
+  set_has_quote_font_family();
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.quote_font_family)
+  return quote_font_family_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* CalendarConfig::release_quote_font_family() {
+  // @@protoc_insertion_point(field_release:config.CalendarConfig.quote_font_family)
+  clear_has_quote_font_family();
+  return quote_font_family_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void CalendarConfig::set_allocated_quote_font_family(::std::string* quote_font_family) {
+  if (quote_font_family != NULL) {
+    set_has_quote_font_family();
+  } else {
+    clear_has_quote_font_family();
+  }
+  quote_font_family_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), quote_font_family);
+  // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.quote_font_family)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

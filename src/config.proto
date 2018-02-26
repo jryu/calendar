@@ -18,6 +18,10 @@ message CalendarConfig {
 
 	optional string bottom_left_label = 13;
 	optional string bottom_right_label = 14;
+
+	optional string header_font_family = 15;
+	optional string number_font_family = 16;
+	optional string quote_font_family = 17;
 }
 
 message SpecialDay {

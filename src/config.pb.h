@@ -229,6 +229,42 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::std::string* release_bottom_right_label();
   void set_allocated_bottom_right_label(::std::string* bottom_right_label);
 
+  // optional string header_font_family = 15;
+  bool has_header_font_family() const;
+  void clear_header_font_family();
+  static const int kHeaderFontFamilyFieldNumber = 15;
+  const ::std::string& header_font_family() const;
+  void set_header_font_family(const ::std::string& value);
+  void set_header_font_family(const char* value);
+  void set_header_font_family(const char* value, size_t size);
+  ::std::string* mutable_header_font_family();
+  ::std::string* release_header_font_family();
+  void set_allocated_header_font_family(::std::string* header_font_family);
+
+  // optional string number_font_family = 16;
+  bool has_number_font_family() const;
+  void clear_number_font_family();
+  static const int kNumberFontFamilyFieldNumber = 16;
+  const ::std::string& number_font_family() const;
+  void set_number_font_family(const ::std::string& value);
+  void set_number_font_family(const char* value);
+  void set_number_font_family(const char* value, size_t size);
+  ::std::string* mutable_number_font_family();
+  ::std::string* release_number_font_family();
+  void set_allocated_number_font_family(::std::string* number_font_family);
+
+  // optional string quote_font_family = 17;
+  bool has_quote_font_family() const;
+  void clear_quote_font_family();
+  static const int kQuoteFontFamilyFieldNumber = 17;
+  const ::std::string& quote_font_family() const;
+  void set_quote_font_family(const ::std::string& value);
+  void set_quote_font_family(const char* value);
+  void set_quote_font_family(const char* value, size_t size);
+  ::std::string* mutable_quote_font_family();
+  ::std::string* release_quote_font_family();
+  void set_allocated_quote_font_family(::std::string* quote_font_family);
+
   // @@protoc_insertion_point(class_scope:config.CalendarConfig)
  private:
   inline void set_has_num_years();
@@ -257,6 +293,12 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   inline void clear_has_bottom_left_label();
   inline void set_has_bottom_right_label();
   inline void clear_has_bottom_right_label();
+  inline void set_has_header_font_family();
+  inline void clear_has_header_font_family();
+  inline void set_has_number_font_family();
+  inline void clear_has_number_font_family();
+  inline void set_has_quote_font_family();
+  inline void clear_has_quote_font_family();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::uint32 _has_bits_[1];
@@ -275,6 +317,9 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::config::RGB* rgb_month_line_;
   ::google::protobuf::internal::ArenaStringPtr bottom_left_label_;
   ::google::protobuf::internal::ArenaStringPtr bottom_right_label_;
+  ::google::protobuf::internal::ArenaStringPtr header_font_family_;
+  ::google::protobuf::internal::ArenaStringPtr number_font_family_;
+  ::google::protobuf::internal::ArenaStringPtr quote_font_family_;
   friend void  protobuf_AddDesc_config_2eproto();
   friend void protobuf_AssignDesc_config_2eproto();
   friend void protobuf_ShutdownFile_config_2eproto();
@@ -1019,6 +1064,168 @@ inline void CalendarConfig::set_allocated_bottom_right_label(::std::string* bott
   }
   bottom_right_label_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), bottom_right_label);
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.bottom_right_label)
+}
+
+// optional string header_font_family = 15;
+inline bool CalendarConfig::has_header_font_family() const {
+  return (_has_bits_[0] & 0x00004000u) != 0;
+}
+inline void CalendarConfig::set_has_header_font_family() {
+  _has_bits_[0] |= 0x00004000u;
+}
+inline void CalendarConfig::clear_has_header_font_family() {
+  _has_bits_[0] &= ~0x00004000u;
+}
+inline void CalendarConfig::clear_header_font_family() {
+  header_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_header_font_family();
+}
+inline const ::std::string& CalendarConfig::header_font_family() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.header_font_family)
+  return header_font_family_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void CalendarConfig::set_header_font_family(const ::std::string& value) {
+  set_has_header_font_family();
+  header_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.header_font_family)
+}
+inline void CalendarConfig::set_header_font_family(const char* value) {
+  set_has_header_font_family();
+  header_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:config.CalendarConfig.header_font_family)
+}
+inline void CalendarConfig::set_header_font_family(const char* value, size_t size) {
+  set_has_header_font_family();
+  header_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:config.CalendarConfig.header_font_family)
+}
+inline ::std::string* CalendarConfig::mutable_header_font_family() {
+  set_has_header_font_family();
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.header_font_family)
+  return header_font_family_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* CalendarConfig::release_header_font_family() {
+  // @@protoc_insertion_point(field_release:config.CalendarConfig.header_font_family)
+  clear_has_header_font_family();
+  return header_font_family_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void CalendarConfig::set_allocated_header_font_family(::std::string* header_font_family) {
+  if (header_font_family != NULL) {
+    set_has_header_font_family();
+  } else {
+    clear_has_header_font_family();
+  }
+  header_font_family_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), header_font_family);
+  // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.header_font_family)
+}
+
+// optional string number_font_family = 16;
+inline bool CalendarConfig::has_number_font_family() const {
+  return (_has_bits_[0] & 0x00008000u) != 0;
+}
+inline void CalendarConfig::set_has_number_font_family() {
+  _has_bits_[0] |= 0x00008000u;
+}
+inline void CalendarConfig::clear_has_number_font_family() {
+  _has_bits_[0] &= ~0x00008000u;
+}
+inline void CalendarConfig::clear_number_font_family() {
+  number_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_number_font_family();
+}
+inline const ::std::string& CalendarConfig::number_font_family() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.number_font_family)
+  return number_font_family_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void CalendarConfig::set_number_font_family(const ::std::string& value) {
+  set_has_number_font_family();
+  number_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.number_font_family)
+}
+inline void CalendarConfig::set_number_font_family(const char* value) {
+  set_has_number_font_family();
+  number_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:config.CalendarConfig.number_font_family)
+}
+inline void CalendarConfig::set_number_font_family(const char* value, size_t size) {
+  set_has_number_font_family();
+  number_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:config.CalendarConfig.number_font_family)
+}
+inline ::std::string* CalendarConfig::mutable_number_font_family() {
+  set_has_number_font_family();
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.number_font_family)
+  return number_font_family_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* CalendarConfig::release_number_font_family() {
+  // @@protoc_insertion_point(field_release:config.CalendarConfig.number_font_family)
+  clear_has_number_font_family();
+  return number_font_family_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void CalendarConfig::set_allocated_number_font_family(::std::string* number_font_family) {
+  if (number_font_family != NULL) {
+    set_has_number_font_family();
+  } else {
+    clear_has_number_font_family();
+  }
+  number_font_family_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), number_font_family);
+  // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.number_font_family)
+}
+
+// optional string quote_font_family = 17;
+inline bool CalendarConfig::has_quote_font_family() const {
+  return (_has_bits_[0] & 0x00010000u) != 0;
+}
+inline void CalendarConfig::set_has_quote_font_family() {
+  _has_bits_[0] |= 0x00010000u;
+}
+inline void CalendarConfig::clear_has_quote_font_family() {
+  _has_bits_[0] &= ~0x00010000u;
+}
+inline void CalendarConfig::clear_quote_font_family() {
+  quote_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_quote_font_family();
+}
+inline const ::std::string& CalendarConfig::quote_font_family() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.quote_font_family)
+  return quote_font_family_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void CalendarConfig::set_quote_font_family(const ::std::string& value) {
+  set_has_quote_font_family();
+  quote_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.quote_font_family)
+}
+inline void CalendarConfig::set_quote_font_family(const char* value) {
+  set_has_quote_font_family();
+  quote_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:config.CalendarConfig.quote_font_family)
+}
+inline void CalendarConfig::set_quote_font_family(const char* value, size_t size) {
+  set_has_quote_font_family();
+  quote_font_family_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:config.CalendarConfig.quote_font_family)
+}
+inline ::std::string* CalendarConfig::mutable_quote_font_family() {
+  set_has_quote_font_family();
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.quote_font_family)
+  return quote_font_family_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* CalendarConfig::release_quote_font_family() {
+  // @@protoc_insertion_point(field_release:config.CalendarConfig.quote_font_family)
+  clear_has_quote_font_family();
+  return quote_font_family_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void CalendarConfig::set_allocated_quote_font_family(::std::string* quote_font_family) {
+  if (quote_font_family != NULL) {
+    set_has_quote_font_family();
+  } else {
+    clear_has_quote_font_family();
+  }
+  quote_font_family_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), quote_font_family);
+  // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.quote_font_family)
 }
 
 // -------------------------------------------------------------------
