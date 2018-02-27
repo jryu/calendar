@@ -312,7 +312,7 @@ void year(cairo_t *cr, int y, int year) {
 			cairo_set_source_rgb(cr, 0, 0, 0);
 		} else if (is_holiday(t)) {
 			draw_rectangle_of_day(cr, i, y + 1);
-			set_rgb(cr, conf.rgb_header());
+			set_rgb(cr, conf.rgb_holiday());
 			cairo_fill(cr);
 
 			cairo_set_source_rgb(cr, 1, 1, 1);

@@ -205,6 +205,15 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::config::RGB* release_rgb_month_line();
   void set_allocated_rgb_month_line(::config::RGB* rgb_month_line);
 
+  // optional .config.RGB rgb_holiday = 18;
+  bool has_rgb_holiday() const;
+  void clear_rgb_holiday();
+  static const int kRgbHolidayFieldNumber = 18;
+  const ::config::RGB& rgb_holiday() const;
+  ::config::RGB* mutable_rgb_holiday();
+  ::config::RGB* release_rgb_holiday();
+  void set_allocated_rgb_holiday(::config::RGB* rgb_holiday);
+
   // optional string bottom_left_label = 13;
   bool has_bottom_left_label() const;
   void clear_bottom_left_label();
@@ -289,6 +298,8 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   inline void clear_has_rgb_header_sunday();
   inline void set_has_rgb_month_line();
   inline void clear_has_rgb_month_line();
+  inline void set_has_rgb_holiday();
+  inline void clear_has_rgb_holiday();
   inline void set_has_bottom_left_label();
   inline void clear_has_bottom_left_label();
   inline void set_has_bottom_right_label();
@@ -315,6 +326,7 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::config::RGB* rgb_header_;
   ::config::RGB* rgb_header_sunday_;
   ::config::RGB* rgb_month_line_;
+  ::config::RGB* rgb_holiday_;
   ::google::protobuf::internal::ArenaStringPtr bottom_left_label_;
   ::google::protobuf::internal::ArenaStringPtr bottom_right_label_;
   ::google::protobuf::internal::ArenaStringPtr header_font_family_;
@@ -958,15 +970,59 @@ inline void CalendarConfig::set_allocated_rgb_month_line(::config::RGB* rgb_mont
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_month_line)
 }
 
-// optional string bottom_left_label = 13;
-inline bool CalendarConfig::has_bottom_left_label() const {
+// optional .config.RGB rgb_holiday = 18;
+inline bool CalendarConfig::has_rgb_holiday() const {
   return (_has_bits_[0] & 0x00001000u) != 0;
 }
-inline void CalendarConfig::set_has_bottom_left_label() {
+inline void CalendarConfig::set_has_rgb_holiday() {
   _has_bits_[0] |= 0x00001000u;
 }
-inline void CalendarConfig::clear_has_bottom_left_label() {
+inline void CalendarConfig::clear_has_rgb_holiday() {
   _has_bits_[0] &= ~0x00001000u;
+}
+inline void CalendarConfig::clear_rgb_holiday() {
+  if (rgb_holiday_ != NULL) rgb_holiday_->::config::RGB::Clear();
+  clear_has_rgb_holiday();
+}
+inline const ::config::RGB& CalendarConfig::rgb_holiday() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.rgb_holiday)
+  return rgb_holiday_ != NULL ? *rgb_holiday_ : *default_instance_->rgb_holiday_;
+}
+inline ::config::RGB* CalendarConfig::mutable_rgb_holiday() {
+  set_has_rgb_holiday();
+  if (rgb_holiday_ == NULL) {
+    rgb_holiday_ = new ::config::RGB;
+  }
+  // @@protoc_insertion_point(field_mutable:config.CalendarConfig.rgb_holiday)
+  return rgb_holiday_;
+}
+inline ::config::RGB* CalendarConfig::release_rgb_holiday() {
+  // @@protoc_insertion_point(field_release:config.CalendarConfig.rgb_holiday)
+  clear_has_rgb_holiday();
+  ::config::RGB* temp = rgb_holiday_;
+  rgb_holiday_ = NULL;
+  return temp;
+}
+inline void CalendarConfig::set_allocated_rgb_holiday(::config::RGB* rgb_holiday) {
+  delete rgb_holiday_;
+  rgb_holiday_ = rgb_holiday;
+  if (rgb_holiday) {
+    set_has_rgb_holiday();
+  } else {
+    clear_has_rgb_holiday();
+  }
+  // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_holiday)
+}
+
+// optional string bottom_left_label = 13;
+inline bool CalendarConfig::has_bottom_left_label() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void CalendarConfig::set_has_bottom_left_label() {
+  _has_bits_[0] |= 0x00002000u;
+}
+inline void CalendarConfig::clear_has_bottom_left_label() {
+  _has_bits_[0] &= ~0x00002000u;
 }
 inline void CalendarConfig::clear_bottom_left_label() {
   bottom_left_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -1014,13 +1070,13 @@ inline void CalendarConfig::set_allocated_bottom_left_label(::std::string* botto
 
 // optional string bottom_right_label = 14;
 inline bool CalendarConfig::has_bottom_right_label() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+  return (_has_bits_[0] & 0x00004000u) != 0;
 }
 inline void CalendarConfig::set_has_bottom_right_label() {
-  _has_bits_[0] |= 0x00002000u;
+  _has_bits_[0] |= 0x00004000u;
 }
 inline void CalendarConfig::clear_has_bottom_right_label() {
-  _has_bits_[0] &= ~0x00002000u;
+  _has_bits_[0] &= ~0x00004000u;
 }
 inline void CalendarConfig::clear_bottom_right_label() {
   bottom_right_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -1068,13 +1124,13 @@ inline void CalendarConfig::set_allocated_bottom_right_label(::std::string* bott
 
 // optional string header_font_family = 15;
 inline bool CalendarConfig::has_header_font_family() const {
-  return (_has_bits_[0] & 0x00004000u) != 0;
+  return (_has_bits_[0] & 0x00008000u) != 0;
 }
 inline void CalendarConfig::set_has_header_font_family() {
-  _has_bits_[0] |= 0x00004000u;
+  _has_bits_[0] |= 0x00008000u;
 }
 inline void CalendarConfig::clear_has_header_font_family() {
-  _has_bits_[0] &= ~0x00004000u;
+  _has_bits_[0] &= ~0x00008000u;
 }
 inline void CalendarConfig::clear_header_font_family() {
   header_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -1122,13 +1178,13 @@ inline void CalendarConfig::set_allocated_header_font_family(::std::string* head
 
 // optional string number_font_family = 16;
 inline bool CalendarConfig::has_number_font_family() const {
-  return (_has_bits_[0] & 0x00008000u) != 0;
+  return (_has_bits_[0] & 0x00010000u) != 0;
 }
 inline void CalendarConfig::set_has_number_font_family() {
-  _has_bits_[0] |= 0x00008000u;
+  _has_bits_[0] |= 0x00010000u;
 }
 inline void CalendarConfig::clear_has_number_font_family() {
-  _has_bits_[0] &= ~0x00008000u;
+  _has_bits_[0] &= ~0x00010000u;
 }
 inline void CalendarConfig::clear_number_font_family() {
   number_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -1176,13 +1232,13 @@ inline void CalendarConfig::set_allocated_number_font_family(::std::string* numb
 
 // optional string quote_font_family = 17;
 inline bool CalendarConfig::has_quote_font_family() const {
-  return (_has_bits_[0] & 0x00010000u) != 0;
+  return (_has_bits_[0] & 0x00020000u) != 0;
 }
 inline void CalendarConfig::set_has_quote_font_family() {
-  _has_bits_[0] |= 0x00010000u;
+  _has_bits_[0] |= 0x00020000u;
 }
 inline void CalendarConfig::clear_has_quote_font_family() {
-  _has_bits_[0] &= ~0x00010000u;
+  _has_bits_[0] &= ~0x00020000u;
 }
 inline void CalendarConfig::clear_quote_font_family() {
   quote_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());

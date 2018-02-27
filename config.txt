@@ -18,9 +18,9 @@ special_day {
 	label: "♥"
 	first_year: 2008
 	rgb {
-		red: 218
-		green: 40
-		blue: 162
+		red: 233
+		green: 30
+		blue: 99
 	}
 }
 special_day {
@@ -29,9 +29,9 @@ special_day {
 	label: "♫"
 	first_year: 2010
 	rgb {
-		red: 248
-		green: 167
-		blue: 26
+		red: 255
+		green: 152
+		blue: 0
 	}
 }
 special_day {
@@ -40,9 +40,9 @@ special_day {
 	label: "♫"
 	first_year: 2012
 	rgb {
-		red: 198
-		green: 0
-		blue: 51
+		red: 244
+		green: 67
+		blue: 54
 	}
 }
 special_day {
@@ -51,9 +51,9 @@ special_day {
 	label: "✔"
 	first_year: 1981
 	rgb {
-		red: 0
-		green: 67
-		blue: 196
+		red: 63
+		green: 81
+		blue: 181
 	}
 }
 special_day {
@@ -62,9 +62,9 @@ special_day {
 	label: "♪"
 	first_year: 1979
 	rgb {
-		red: 0
-		green: 198
-		blue: 0
+		red: 103
+		green: 58
+		blue: 183
 	}
 }
 special_day {
@@ -73,9 +73,9 @@ special_day {
 	label: "☀"
 	year: 2024
 	rgb {
-		red: 198
-		green: 145
-		blue: 0
+		red: 0
+		green: 150
+		blue: 136
 	}
 }
 special_day {
@@ -84,9 +84,9 @@ special_day {
 	label: "☀"
 	year: 2045
 	rgb {
-		red: 198
-		green: 145
-		blue: 0
+		red: 0
+		green: 150
+		blue: 136
 	}
 }
 
@@ -95,10 +95,15 @@ rgb_header {
 	green: 77
 	blue: 77
 }
+rgb_holiday {
+	red: 96
+	green: 125
+	blue: 139
+}
 rgb_header_sunday {
-	red: 198
-	green: 0
-	blue: 51
+	red: 244
+	green: 67
+	blue: 54
 }
 rgb_month_line {
 	red: 215
