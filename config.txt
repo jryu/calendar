@@ -96,9 +96,9 @@ rgb_header {
 	blue: 77
 }
 rgb_holiday {
-	red: 96
-	green: 125
-	blue: 139
+	red: 117
+	green: 117
+	blue: 117
 }
 rgb_header_sunday {
 	red: 244
