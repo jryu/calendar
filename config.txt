@@ -1,17 +1,17 @@
 num_years: 30
-cell_size: 32
-cell_margin: 8
+cell_size: 16
+cell_margin: 4
 
-font_size: 18
-bigger_font_size: 24
+font_size: 9
+bigger_font_size: 12
 
 header_font_family: "Lato"
 number_font_family: "Titillium Web"
 quote_font_family: "Courgette"
 
-line_width: 2
-month_label_height: 70
-year_label_width: 120
+line_width: 1
+month_label_height: 35
+year_label_width: 60
 special_day {
 	month: 4
 	day: 5

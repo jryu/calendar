@@ -129,54 +129,54 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   const ::google::protobuf::RepeatedPtrField< ::config::SpecialDay >&
       special_day() const;
 
-  // optional int32 cell_size = 3;
+  // optional double cell_size = 3;
   bool has_cell_size() const;
   void clear_cell_size();
   static const int kCellSizeFieldNumber = 3;
-  ::google::protobuf::int32 cell_size() const;
-  void set_cell_size(::google::protobuf::int32 value);
+  double cell_size() const;
+  void set_cell_size(double value);
 
-  // optional int32 cell_margin = 4;
+  // optional double cell_margin = 4;
   bool has_cell_margin() const;
   void clear_cell_margin();
   static const int kCellMarginFieldNumber = 4;
-  ::google::protobuf::int32 cell_margin() const;
-  void set_cell_margin(::google::protobuf::int32 value);
+  double cell_margin() const;
+  void set_cell_margin(double value);
 
-  // optional int32 font_size = 5;
+  // optional double font_size = 5;
   bool has_font_size() const;
   void clear_font_size();
   static const int kFontSizeFieldNumber = 5;
-  ::google::protobuf::int32 font_size() const;
-  void set_font_size(::google::protobuf::int32 value);
+  double font_size() const;
+  void set_font_size(double value);
 
-  // optional int32 bigger_font_size = 6;
+  // optional double bigger_font_size = 6;
   bool has_bigger_font_size() const;
   void clear_bigger_font_size();
   static const int kBiggerFontSizeFieldNumber = 6;
-  ::google::protobuf::int32 bigger_font_size() const;
-  void set_bigger_font_size(::google::protobuf::int32 value);
+  double bigger_font_size() const;
+  void set_bigger_font_size(double value);
 
-  // optional int32 line_width = 7;
+  // optional double line_width = 7;
   bool has_line_width() const;
   void clear_line_width();
   static const int kLineWidthFieldNumber = 7;
-  ::google::protobuf::int32 line_width() const;
-  void set_line_width(::google::protobuf::int32 value);
+  double line_width() const;
+  void set_line_width(double value);
 
-  // optional int32 month_label_height = 8;
+  // optional double month_label_height = 8;
   bool has_month_label_height() const;
   void clear_month_label_height();
   static const int kMonthLabelHeightFieldNumber = 8;
-  ::google::protobuf::int32 month_label_height() const;
-  void set_month_label_height(::google::protobuf::int32 value);
+  double month_label_height() const;
+  void set_month_label_height(double value);
 
-  // optional int32 year_label_width = 9;
+  // optional double year_label_width = 9;
   bool has_year_label_width() const;
   void clear_year_label_width();
   static const int kYearLabelWidthFieldNumber = 9;
-  ::google::protobuf::int32 year_label_width() const;
-  void set_year_label_width(::google::protobuf::int32 value);
+  double year_label_width() const;
+  void set_year_label_width(double value);
 
   // optional .config.RGB rgb_header = 10;
   bool has_rgb_header() const;
@@ -315,14 +315,13 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::google::protobuf::RepeatedPtrField< ::config::SpecialDay > special_day_;
-  ::google::protobuf::int32 num_years_;
-  ::google::protobuf::int32 cell_size_;
-  ::google::protobuf::int32 cell_margin_;
-  ::google::protobuf::int32 font_size_;
-  ::google::protobuf::int32 bigger_font_size_;
-  ::google::protobuf::int32 line_width_;
-  ::google::protobuf::int32 month_label_height_;
-  ::google::protobuf::int32 year_label_width_;
+  double cell_size_;
+  double cell_margin_;
+  double font_size_;
+  double bigger_font_size_;
+  double line_width_;
+  double month_label_height_;
+  double year_label_width_;
   ::config::RGB* rgb_header_;
   ::config::RGB* rgb_header_sunday_;
   ::config::RGB* rgb_month_line_;
@@ -332,6 +331,7 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::internal::ArenaStringPtr header_font_family_;
   ::google::protobuf::internal::ArenaStringPtr number_font_family_;
   ::google::protobuf::internal::ArenaStringPtr quote_font_family_;
+  ::google::protobuf::int32 num_years_;
   friend void  protobuf_AddDesc_config_2eproto();
   friend void protobuf_AssignDesc_config_2eproto();
   friend void protobuf_ShutdownFile_config_2eproto();
@@ -670,7 +670,7 @@ CalendarConfig::special_day() const {
   return special_day_;
 }
 
-// optional int32 cell_size = 3;
+// optional double cell_size = 3;
 inline bool CalendarConfig::has_cell_size() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -684,17 +684,17 @@ inline void CalendarConfig::clear_cell_size() {
   cell_size_ = 0;
   clear_has_cell_size();
 }
-inline ::google::protobuf::int32 CalendarConfig::cell_size() const {
+inline double CalendarConfig::cell_size() const {
   // @@protoc_insertion_point(field_get:config.CalendarConfig.cell_size)
   return cell_size_;
 }
-inline void CalendarConfig::set_cell_size(::google::protobuf::int32 value) {
+inline void CalendarConfig::set_cell_size(double value) {
   set_has_cell_size();
   cell_size_ = value;
   // @@protoc_insertion_point(field_set:config.CalendarConfig.cell_size)
 }
 
-// optional int32 cell_margin = 4;
+// optional double cell_margin = 4;
 inline bool CalendarConfig::has_cell_margin() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -708,17 +708,17 @@ inline void CalendarConfig::clear_cell_margin() {
   cell_margin_ = 0;
   clear_has_cell_margin();
 }
-inline ::google::protobuf::int32 CalendarConfig::cell_margin() const {
+inline double CalendarConfig::cell_margin() const {
   // @@protoc_insertion_point(field_get:config.CalendarConfig.cell_margin)
   return cell_margin_;
 }
-inline void CalendarConfig::set_cell_margin(::google::protobuf::int32 value) {
+inline void CalendarConfig::set_cell_margin(double value) {
   set_has_cell_margin();
   cell_margin_ = value;
   // @@protoc_insertion_point(field_set:config.CalendarConfig.cell_margin)
 }
 
-// optional int32 font_size = 5;
+// optional double font_size = 5;
 inline bool CalendarConfig::has_font_size() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -732,17 +732,17 @@ inline void CalendarConfig::clear_font_size() {
   font_size_ = 0;
   clear_has_font_size();
 }
-inline ::google::protobuf::int32 CalendarConfig::font_size() const {
+inline double CalendarConfig::font_size() const {
   // @@protoc_insertion_point(field_get:config.CalendarConfig.font_size)
   return font_size_;
 }
-inline void CalendarConfig::set_font_size(::google::protobuf::int32 value) {
+inline void CalendarConfig::set_font_size(double value) {
   set_has_font_size();
   font_size_ = value;
   // @@protoc_insertion_point(field_set:config.CalendarConfig.font_size)
 }
 
-// optional int32 bigger_font_size = 6;
+// optional double bigger_font_size = 6;
 inline bool CalendarConfig::has_bigger_font_size() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -756,17 +756,17 @@ inline void CalendarConfig::clear_bigger_font_size() {
   bigger_font_size_ = 0;
   clear_has_bigger_font_size();
 }
-inline ::google::protobuf::int32 CalendarConfig::bigger_font_size() const {
+inline double CalendarConfig::bigger_font_size() const {
   // @@protoc_insertion_point(field_get:config.CalendarConfig.bigger_font_size)
   return bigger_font_size_;
 }
-inline void CalendarConfig::set_bigger_font_size(::google::protobuf::int32 value) {
+inline void CalendarConfig::set_bigger_font_size(double value) {
   set_has_bigger_font_size();
   bigger_font_size_ = value;
   // @@protoc_insertion_point(field_set:config.CalendarConfig.bigger_font_size)
 }
 
-// optional int32 line_width = 7;
+// optional double line_width = 7;
 inline bool CalendarConfig::has_line_width() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
@@ -780,17 +780,17 @@ inline void CalendarConfig::clear_line_width() {
   line_width_ = 0;
   clear_has_line_width();
 }
-inline ::google::protobuf::int32 CalendarConfig::line_width() const {
+inline double CalendarConfig::line_width() const {
   // @@protoc_insertion_point(field_get:config.CalendarConfig.line_width)
   return line_width_;
 }
-inline void CalendarConfig::set_line_width(::google::protobuf::int32 value) {
+inline void CalendarConfig::set_line_width(double value) {
   set_has_line_width();
   line_width_ = value;
   // @@protoc_insertion_point(field_set:config.CalendarConfig.line_width)
 }
 
-// optional int32 month_label_height = 8;
+// optional double month_label_height = 8;
 inline bool CalendarConfig::has_month_label_height() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
@@ -804,17 +804,17 @@ inline void CalendarConfig::clear_month_label_height() {
   month_label_height_ = 0;
   clear_has_month_label_height();
 }
-inline ::google::protobuf::int32 CalendarConfig::month_label_height() const {
+inline double CalendarConfig::month_label_height() const {
   // @@protoc_insertion_point(field_get:config.CalendarConfig.month_label_height)
   return month_label_height_;
 }
-inline void CalendarConfig::set_month_label_height(::google::protobuf::int32 value) {
+inline void CalendarConfig::set_month_label_height(double value) {
   set_has_month_label_height();
   month_label_height_ = value;
   // @@protoc_insertion_point(field_set:config.CalendarConfig.month_label_height)
 }
 
-// optional int32 year_label_width = 9;
+// optional double year_label_width = 9;
 inline bool CalendarConfig::has_year_label_width() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
@@ -828,11 +828,11 @@ inline void CalendarConfig::clear_year_label_width() {
   year_label_width_ = 0;
   clear_has_year_label_width();
 }
-inline ::google::protobuf::int32 CalendarConfig::year_label_width() const {
+inline double CalendarConfig::year_label_width() const {
   // @@protoc_insertion_point(field_get:config.CalendarConfig.year_label_width)
   return year_label_width_;
 }
-inline void CalendarConfig::set_year_label_width(::google::protobuf::int32 value) {
+inline void CalendarConfig::set_year_label_width(double value) {
   set_has_year_label_width();
   year_label_width_ = value;
   // @@protoc_insertion_point(field_set:config.CalendarConfig.year_label_width)
