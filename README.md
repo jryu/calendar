@@ -3,7 +3,7 @@
 ### Install Libraries ###
 * For Debian and Debian derivatives including Ubuntu:
 ```
-sudo apt-get install libcairo2-dev libpango1.0-dev libcppunit-dev libprotobuf-dev protobuf-compiler libspdlog-dev
+sudo apt-get install libcairo2-dev libpango1.0-dev libcppunit-dev libprotobuf-dev protobuf-compiler libspdlog-dev librsvg2-dev
 ```
 
 * Others:

@@ -423,17 +423,17 @@ class SpecialDay : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::int32 day() const;
   void set_day(::google::protobuf::int32 value);
 
-  // optional string label = 3;
-  bool has_label() const;
-  void clear_label();
-  static const int kLabelFieldNumber = 3;
-  const ::std::string& label() const;
-  void set_label(const ::std::string& value);
-  void set_label(const char* value);
-  void set_label(const char* value, size_t size);
-  ::std::string* mutable_label();
-  ::std::string* release_label();
-  void set_allocated_label(::std::string* label);
+  // optional string svg = 3;
+  bool has_svg() const;
+  void clear_svg();
+  static const int kSvgFieldNumber = 3;
+  const ::std::string& svg() const;
+  void set_svg(const ::std::string& value);
+  void set_svg(const char* value);
+  void set_svg(const char* value, size_t size);
+  ::std::string* mutable_svg();
+  ::std::string* release_svg();
+  void set_allocated_svg(::std::string* svg);
 
   // optional int32 first_year = 4;
   bool has_first_year() const;
@@ -464,8 +464,8 @@ class SpecialDay : public ::google::protobuf::Message /* @@protoc_insertion_poin
   inline void clear_has_month();
   inline void set_has_day();
   inline void clear_has_day();
-  inline void set_has_label();
-  inline void clear_has_label();
+  inline void set_has_svg();
+  inline void clear_has_svg();
   inline void set_has_first_year();
   inline void clear_has_first_year();
   inline void set_has_year();
@@ -481,7 +481,7 @@ class SpecialDay : public ::google::protobuf::Message /* @@protoc_insertion_poin
   mutable int _cached_size_;
   ::google::protobuf::int32 month_;
   ::google::protobuf::int32 day_;
-  ::google::protobuf::internal::ArenaStringPtr label_;
+  ::google::protobuf::internal::ArenaStringPtr svg_;
   ::google::protobuf::int32 first_year_;
   ::google::protobuf::int32 year_;
   ::config::RGB* rgb_;
@@ -1336,58 +1336,58 @@ inline void SpecialDay::set_day(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:config.SpecialDay.day)
 }
 
-// optional string label = 3;
-inline bool SpecialDay::has_label() const {
+// optional string svg = 3;
+inline bool SpecialDay::has_svg() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void SpecialDay::set_has_label() {
+inline void SpecialDay::set_has_svg() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void SpecialDay::clear_has_label() {
+inline void SpecialDay::clear_has_svg() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void SpecialDay::clear_label() {
-  label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_label();
+inline void SpecialDay::clear_svg() {
+  svg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_svg();
 }
-inline const ::std::string& SpecialDay::label() const {
-  // @@protoc_insertion_point(field_get:config.SpecialDay.label)
-  return label_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline const ::std::string& SpecialDay::svg() const {
+  // @@protoc_insertion_point(field_get:config.SpecialDay.svg)
+  return svg_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void SpecialDay::set_label(const ::std::string& value) {
-  set_has_label();
-  label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:config.SpecialDay.label)
+inline void SpecialDay::set_svg(const ::std::string& value) {
+  set_has_svg();
+  svg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:config.SpecialDay.svg)
 }
-inline void SpecialDay::set_label(const char* value) {
-  set_has_label();
-  label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:config.SpecialDay.label)
+inline void SpecialDay::set_svg(const char* value) {
+  set_has_svg();
+  svg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:config.SpecialDay.svg)
 }
-inline void SpecialDay::set_label(const char* value, size_t size) {
-  set_has_label();
-  label_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+inline void SpecialDay::set_svg(const char* value, size_t size) {
+  set_has_svg();
+  svg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:config.SpecialDay.label)
+  // @@protoc_insertion_point(field_set_pointer:config.SpecialDay.svg)
 }
-inline ::std::string* SpecialDay::mutable_label() {
-  set_has_label();
-  // @@protoc_insertion_point(field_mutable:config.SpecialDay.label)
-  return label_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline ::std::string* SpecialDay::mutable_svg() {
+  set_has_svg();
+  // @@protoc_insertion_point(field_mutable:config.SpecialDay.svg)
+  return svg_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* SpecialDay::release_label() {
-  // @@protoc_insertion_point(field_release:config.SpecialDay.label)
-  clear_has_label();
-  return label_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline ::std::string* SpecialDay::release_svg() {
+  // @@protoc_insertion_point(field_release:config.SpecialDay.svg)
+  clear_has_svg();
+  return svg_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void SpecialDay::set_allocated_label(::std::string* label) {
-  if (label != NULL) {
-    set_has_label();
+inline void SpecialDay::set_allocated_svg(::std::string* svg) {
+  if (svg != NULL) {
+    set_has_svg();
   } else {
-    clear_has_label();
+    clear_has_svg();
   }
-  label_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), label);
-  // @@protoc_insertion_point(field_set_allocated:config.SpecialDay.label)
+  svg_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), svg);
+  // @@protoc_insertion_point(field_set_allocated:config.SpecialDay.svg)
 }
 
 // optional int32 first_year = 4;

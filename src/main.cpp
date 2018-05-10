@@ -4,6 +4,7 @@
 #include <fcntl.h>
 #include <google/protobuf/io/zero_copy_stream_impl.h>
 #include <google/protobuf/text_format.h>
+#include <librsvg/rsvg.h>
 #include <pango/pangocairo.h>
 #include <spdlog/spdlog.h>
 #include <stdio.h>
@@ -18,6 +19,9 @@ auto console = spdlog::stdout_logger_mt("console");
 
 const int days_per_months[] = {
 	31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 + 6};
+
+const std::string BLACK_HEX_CODE = "#000000";
+const std::string WHITE_HEX_CODE = "#ffffff";
 
 double month_label_x[12];
 
@@ -104,6 +108,33 @@ double get_day_x(int day_index) {
 double get_day_y(int year_index) {
 	return year_index * (conf.cell_size() + conf.cell_margin()) +
 		conf.month_label_height();
+}
+
+int render_svg(const std::string& svg, cairo_t *cr, int x, int y)
+{
+	cairo_save(cr);
+
+	GError *error = NULL;
+	RsvgHandle *handle = rsvg_handle_new_from_data(
+			reinterpret_cast<const guint8*>(svg.c_str()),
+			svg.length(), &error);
+	if (handle == NULL) {
+		console->error(error->message);
+	}
+
+	cairo_translate(cr, get_day_x(x) + 3, get_day_y(y) + 3);
+
+	RsvgDimensionData dimensions;
+	rsvg_handle_get_dimensions(handle, &dimensions);
+
+	double dst_size = conf.cell_size() - 6;
+	double scale_factor =
+		std::min(dst_size / dimensions.width, dst_size / dimensions.height);
+	cairo_scale(cr, scale_factor, scale_factor);
+
+	rsvg_handle_render_cairo(handle, cr);
+
+	cairo_restore(cr);
 }
 
 double draw_text_of_month(cairo_t *cr, double x, const char* text) {
@@ -252,6 +283,7 @@ void month_label(cairo_t *cr) {
 		double end_of_label =
 			draw_text_of_month(cr, month_label_x[m], month_text[m]);
 
+		cairo_set_line_width(cr, 1);
 		set_rgb(cr, conf.rgb_month_line());
 		cairo_move_to(cr,
 				end_of_label + conf.cell_size() / 2,
@@ -310,6 +342,7 @@ void year(cairo_t *cr, int y, int year) {
 		bool draw_label = true;
 
 		if (special_day != nullptr) {
+			std::string svg = special_day->svg();
 			if (special_day->has_year() || (
 						special_day->has_first_year() &&
 						is_every_tenth_year(special_day->first_year(), timeinfo))) {
@@ -317,10 +350,11 @@ void year(cairo_t *cr, int y, int year) {
 				set_rgb(cr, special_day->rgb());
 				cairo_fill(cr);
 
-				cairo_set_source_rgb(cr, 1, 1, 1);
-			} else {
-				cairo_set_source_rgb(cr, 0, 0, 0);
+				svg.replace(svg.find(BLACK_HEX_CODE), BLACK_HEX_CODE.length(),
+						WHITE_HEX_CODE);
 			}
+			render_svg(svg, cr, i, y + 1);
+			draw_label = false;
 		} else if (timeinfo.tm_wday == 0) {
 			cairo_set_source_rgb(cr, 0, 0, 0);
 		} else if (is_holiday(t)) {
@@ -336,16 +370,10 @@ void year(cairo_t *cr, int y, int year) {
 
 		// Label
 		if (draw_label) {
-			const char* label;
-			if (special_day != nullptr && special_day->has_label()) {
-				label = special_day->label().c_str();
-			} else {
-				sprintf(buf, "%d", timeinfo.tm_mday);
-				label = buf;
-			}
-			draw_text_of_day(cr, i, y + 1, label, conf.number_font_family(),
+			sprintf(buf, "%d", timeinfo.tm_mday);
+			draw_text_of_day(cr, i, y + 1, buf, conf.number_font_family(),
 					PANGO_WEIGHT_SEMIBOLD);
-		} else {
+		} else if (special_day == nullptr) {
 			draw_symbol_of_day(cr, i, y + 1, timeinfo.tm_mon);
 		}
 

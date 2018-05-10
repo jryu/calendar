@@ -10,8 +10,9 @@ BUILT_SOURCES = config.pb.cc
 
 noinst_PROGRAMS = calendar
 calendar_SOURCES = main.cpp config.pb.cc config.pb.h
-calendar_CPPFLAGS = $(CAIRO_CFLAGS)
-calendar_LDADD = $(CAIRO_LIBS) $(PROTOBUF_LIBS) libholidays.a
+calendar_CPPFLAGS = $(CAIRO_CFLAGS) $(LIBRSVG2_CFLAGS)
+calendar_LDADD = $(CAIRO_LIBS) $(PROTOBUF_LIBS) $(LIBRSVG2_LIBS) libholidays.a
+
 
 check_PROGRAMS = holidays_test
 holidays_test_SOURCES = holidays_test.cpp

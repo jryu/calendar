@@ -28,7 +28,7 @@ message CalendarConfig {
 message SpecialDay {
 	required int32 month = 1;
 	required int32 day = 2;
-	optional string label = 3;
+	optional string svg = 3;
 	optional int32 first_year = 4;
 	optional int32 year = 5;
 	optional RGB rgb = 6;
