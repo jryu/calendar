@@ -30,6 +30,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* RGB_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   RGB_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* OutputType_descriptor_ = NULL;
 
 }  // namespace
 
@@ -42,8 +43,10 @@ void protobuf_AssignDesc_config_2eproto() {
       "config.proto");
   GOOGLE_CHECK(file != NULL);
   CalendarConfig_descriptor_ = file->message_type(0);
-  static const int CalendarConfig_offsets_[18] = {
+  static const int CalendarConfig_offsets_[22] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, num_years_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, first_month_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, num_months_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, special_day_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, cell_size_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, cell_margin_),
@@ -61,6 +64,8 @@ void protobuf_AssignDesc_config_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, header_font_family_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, number_font_family_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, quote_font_family_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, dotted_line_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, output_type_),
   };
   CalendarConfig_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -110,6 +115,7 @@ void protobuf_AssignDesc_config_2eproto() {
       sizeof(RGB),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RGB, _internal_metadata_),
       -1);
+  OutputType_descriptor_ = file->enum_type(0);
 }
 
 namespace {
@@ -150,24 +156,28 @@ void protobuf_AddDesc_config_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\014config.proto\022\006config\"\211\004\n\016CalendarConfi"
-    "g\022\025\n\tnum_years\030\001 \001(\005:\00230\022\'\n\013special_day\030"
-    "\002 \003(\0132\022.config.SpecialDay\022\021\n\tcell_size\030\003"
-    " \001(\001\022\023\n\013cell_margin\030\004 \001(\001\022\021\n\tfont_size\030\005"
-    " \001(\001\022\030\n\020bigger_font_size\030\006 \001(\001\022\022\n\nline_w"
-    "idth\030\007 \001(\001\022\032\n\022month_label_height\030\010 \001(\001\022\030"
-    "\n\020year_label_width\030\t \001(\001\022\037\n\nrgb_header\030\n"
-    " \001(\0132\013.config.RGB\022&\n\021rgb_header_sunday\030\013"
-    " \001(\0132\013.config.RGB\022#\n\016rgb_month_line\030\014 \001("
-    "\0132\013.config.RGB\022 \n\013rgb_holiday\030\022 \001(\0132\013.co"
-    "nfig.RGB\022\031\n\021bottom_left_label\030\r \001(\t\022\032\n\022b"
-    "ottom_right_label\030\016 \001(\t\022\032\n\022header_font_f"
-    "amily\030\017 \001(\t\022\032\n\022number_font_family\030\020 \001(\t\022"
-    "\031\n\021quote_font_family\030\021 \001(\t\"q\n\nSpecialDay"
-    "\022\r\n\005month\030\001 \002(\005\022\013\n\003day\030\002 \002(\005\022\013\n\003svg\030\003 \001("
-    "\t\022\022\n\nfirst_year\030\004 \001(\005\022\014\n\004year\030\005 \001(\005\022\030\n\003r"
-    "gb\030\006 \001(\0132\013.config.RGB\"/\n\003RGB\022\013\n\003red\030\001 \002("
-    "\005\022\r\n\005green\030\002 \002(\005\022\014\n\004blue\030\003 \002(\005", 710);
+    "\n\014config.proto\022\006config\"\203\005\n\016CalendarConfi"
+    "g\022\025\n\tnum_years\030\001 \001(\005:\00230\022\026\n\013first_month\030"
+    "\002 \001(\005:\0011\022\026\n\nnum_months\030\003 \001(\005:\00212\022\'\n\013spec"
+    "ial_day\030\004 \003(\0132\022.config.SpecialDay\022\021\n\tcel"
+    "l_size\030\005 \001(\001\022\023\n\013cell_margin\030\006 \001(\001\022\021\n\tfon"
+    "t_size\030\007 \001(\001\022\030\n\020bigger_font_size\030\010 \001(\001\022\022"
+    "\n\nline_width\030\t \001(\001\022\032\n\022month_label_height"
+    "\030\n \001(\001\022\030\n\020year_label_width\030\013 \001(\001\022\037\n\nrgb_"
+    "header\030\014 \001(\0132\013.config.RGB\022&\n\021rgb_header_"
+    "sunday\030\r \001(\0132\013.config.RGB\022#\n\016rgb_month_l"
+    "ine\030\016 \001(\0132\013.config.RGB\022 \n\013rgb_holiday\030\017 "
+    "\001(\0132\013.config.RGB\022\031\n\021bottom_left_label\030\020 "
+    "\001(\t\022\032\n\022bottom_right_label\030\021 \001(\t\022\032\n\022heade"
+    "r_font_family\030\022 \001(\t\022\032\n\022number_font_famil"
+    "y\030\023 \001(\t\022\031\n\021quote_font_family\030\024 \001(\t\022\032\n\013do"
+    "tted_line\030\025 \001(\010:\005false\022,\n\013output_type\030\026 "
+    "\001(\0162\022.config.OutputType:\003SVG\"q\n\nSpecialD"
+    "ay\022\r\n\005month\030\001 \002(\005\022\013\n\003day\030\002 \002(\005\022\013\n\003svg\030\003 "
+    "\001(\t\022\022\n\nfirst_year\030\004 \001(\005\022\014\n\004year\030\005 \001(\005\022\030\n"
+    "\003rgb\030\006 \001(\0132\013.config.RGB\"/\n\003RGB\022\013\n\003red\030\001 "
+    "\002(\005\022\r\n\005green\030\002 \002(\005\022\014\n\004blue\030\003 \002(\005*\'\n\nOutp"
+    "utType\022\007\n\003SVG\020\000\022\007\n\003PDF\020\001\022\007\n\003PNG\020\002", 873);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "config.proto", &protobuf_RegisterTypes);
   CalendarConfig::default_instance_ = new CalendarConfig();
@@ -185,11 +195,28 @@ struct StaticDescriptorInitializer_config_2eproto {
     protobuf_AddDesc_config_2eproto();
   }
 } static_descriptor_initializer_config_2eproto_;
+const ::google::protobuf::EnumDescriptor* OutputType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return OutputType_descriptor_;
+}
+bool OutputType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int CalendarConfig::kNumYearsFieldNumber;
+const int CalendarConfig::kFirstMonthFieldNumber;
+const int CalendarConfig::kNumMonthsFieldNumber;
 const int CalendarConfig::kSpecialDayFieldNumber;
 const int CalendarConfig::kCellSizeFieldNumber;
 const int CalendarConfig::kCellMarginFieldNumber;
@@ -207,6 +234,8 @@ const int CalendarConfig::kBottomRightLabelFieldNumber;
 const int CalendarConfig::kHeaderFontFamilyFieldNumber;
 const int CalendarConfig::kNumberFontFamilyFieldNumber;
 const int CalendarConfig::kQuoteFontFamilyFieldNumber;
+const int CalendarConfig::kDottedLineFieldNumber;
+const int CalendarConfig::kOutputTypeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 CalendarConfig::CalendarConfig()
@@ -234,6 +263,8 @@ void CalendarConfig::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   num_years_ = 30;
+  first_month_ = 1;
+  num_months_ = 12;
   cell_size_ = 0;
   cell_margin_ = 0;
   font_size_ = 0;
@@ -250,6 +281,8 @@ void CalendarConfig::SharedCtor() {
   header_font_family_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   number_font_family_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   quote_font_family_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  dotted_line_ = false;
+  output_type_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -315,12 +348,14 @@ void CalendarConfig::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  if (_has_bits_[0 / 32] & 253u) {
-    ZR_(cell_size_, month_label_height_);
+  if (_has_bits_[0 / 32] & 247u) {
+    ZR_(cell_size_, bigger_font_size_);
     num_years_ = 30;
+    first_month_ = 1;
+    num_months_ = 12;
   }
   if (_has_bits_[8 / 32] & 65280u) {
-    year_label_width_ = 0;
+    ZR_(line_width_, year_label_width_);
     if (has_rgb_header()) {
       if (rgb_header_ != NULL) rgb_header_->::config::RGB::Clear();
     }
@@ -336,20 +371,22 @@ void CalendarConfig::Clear() {
     if (has_bottom_left_label()) {
       bottom_left_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
+  }
+  if (_has_bits_[16 / 32] & 4128768u) {
     if (has_bottom_right_label()) {
       bottom_right_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_header_font_family()) {
       header_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
-  }
-  if (_has_bits_[16 / 32] & 196608u) {
     if (has_number_font_family()) {
       number_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_quote_font_family()) {
       quote_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
+    dotted_line_ = false;
+    output_type_ = 0;
   }
 
 #undef ZR_HELPER_
@@ -382,13 +419,43 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_special_day;
+        if (input->ExpectTag(16)) goto parse_first_month;
         break;
       }
 
-      // repeated .config.SpecialDay special_day = 2;
+      // optional int32 first_month = 2 [default = 1];
       case 2: {
-        if (tag == 18) {
+        if (tag == 16) {
+         parse_first_month:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &first_month_)));
+          set_has_first_month();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_num_months;
+        break;
+      }
+
+      // optional int32 num_months = 3 [default = 12];
+      case 3: {
+        if (tag == 24) {
+         parse_num_months:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &num_months_)));
+          set_has_num_months();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_special_day;
+        break;
+      }
+
+      // repeated .config.SpecialDay special_day = 4;
+      case 4: {
+        if (tag == 34) {
          parse_special_day:
           DO_(input->IncrementRecursionDepth());
          parse_loop_special_day:
@@ -397,15 +464,15 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_loop_special_day;
+        if (input->ExpectTag(34)) goto parse_loop_special_day;
         input->UnsafeDecrementRecursionDepth();
-        if (input->ExpectTag(25)) goto parse_cell_size;
+        if (input->ExpectTag(41)) goto parse_cell_size;
         break;
       }
 
-      // optional double cell_size = 3;
-      case 3: {
-        if (tag == 25) {
+      // optional double cell_size = 5;
+      case 5: {
+        if (tag == 41) {
          parse_cell_size:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -414,13 +481,13 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(33)) goto parse_cell_margin;
+        if (input->ExpectTag(49)) goto parse_cell_margin;
         break;
       }
 
-      // optional double cell_margin = 4;
-      case 4: {
-        if (tag == 33) {
+      // optional double cell_margin = 6;
+      case 6: {
+        if (tag == 49) {
          parse_cell_margin:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -429,13 +496,13 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(41)) goto parse_font_size;
+        if (input->ExpectTag(57)) goto parse_font_size;
         break;
       }
 
-      // optional double font_size = 5;
-      case 5: {
-        if (tag == 41) {
+      // optional double font_size = 7;
+      case 7: {
+        if (tag == 57) {
          parse_font_size:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -444,13 +511,13 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(49)) goto parse_bigger_font_size;
+        if (input->ExpectTag(65)) goto parse_bigger_font_size;
         break;
       }
 
-      // optional double bigger_font_size = 6;
-      case 6: {
-        if (tag == 49) {
+      // optional double bigger_font_size = 8;
+      case 8: {
+        if (tag == 65) {
          parse_bigger_font_size:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -459,13 +526,13 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(57)) goto parse_line_width;
+        if (input->ExpectTag(73)) goto parse_line_width;
         break;
       }
 
-      // optional double line_width = 7;
-      case 7: {
-        if (tag == 57) {
+      // optional double line_width = 9;
+      case 9: {
+        if (tag == 73) {
          parse_line_width:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -474,13 +541,13 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(65)) goto parse_month_label_height;
+        if (input->ExpectTag(81)) goto parse_month_label_height;
         break;
       }
 
-      // optional double month_label_height = 8;
-      case 8: {
-        if (tag == 65) {
+      // optional double month_label_height = 10;
+      case 10: {
+        if (tag == 81) {
          parse_month_label_height:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -489,13 +556,13 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(73)) goto parse_year_label_width;
+        if (input->ExpectTag(89)) goto parse_year_label_width;
         break;
       }
 
-      // optional double year_label_width = 9;
-      case 9: {
-        if (tag == 73) {
+      // optional double year_label_width = 11;
+      case 11: {
+        if (tag == 89) {
          parse_year_label_width:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
@@ -504,52 +571,65 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(82)) goto parse_rgb_header;
+        if (input->ExpectTag(98)) goto parse_rgb_header;
         break;
       }
 
-      // optional .config.RGB rgb_header = 10;
-      case 10: {
-        if (tag == 82) {
+      // optional .config.RGB rgb_header = 12;
+      case 12: {
+        if (tag == 98) {
          parse_rgb_header:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rgb_header()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(90)) goto parse_rgb_header_sunday;
+        if (input->ExpectTag(106)) goto parse_rgb_header_sunday;
         break;
       }
 
-      // optional .config.RGB rgb_header_sunday = 11;
-      case 11: {
-        if (tag == 90) {
+      // optional .config.RGB rgb_header_sunday = 13;
+      case 13: {
+        if (tag == 106) {
          parse_rgb_header_sunday:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rgb_header_sunday()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(98)) goto parse_rgb_month_line;
+        if (input->ExpectTag(114)) goto parse_rgb_month_line;
         break;
       }
 
-      // optional .config.RGB rgb_month_line = 12;
-      case 12: {
-        if (tag == 98) {
+      // optional .config.RGB rgb_month_line = 14;
+      case 14: {
+        if (tag == 114) {
          parse_rgb_month_line:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rgb_month_line()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(106)) goto parse_bottom_left_label;
+        if (input->ExpectTag(122)) goto parse_rgb_holiday;
         break;
       }
 
-      // optional string bottom_left_label = 13;
-      case 13: {
-        if (tag == 106) {
+      // optional .config.RGB rgb_holiday = 15;
+      case 15: {
+        if (tag == 122) {
+         parse_rgb_holiday:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_rgb_holiday()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(130)) goto parse_bottom_left_label;
+        break;
+      }
+
+      // optional string bottom_left_label = 16;
+      case 16: {
+        if (tag == 130) {
          parse_bottom_left_label:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_bottom_left_label()));
@@ -560,13 +640,13 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(114)) goto parse_bottom_right_label;
+        if (input->ExpectTag(138)) goto parse_bottom_right_label;
         break;
       }
 
-      // optional string bottom_right_label = 14;
-      case 14: {
-        if (tag == 114) {
+      // optional string bottom_right_label = 17;
+      case 17: {
+        if (tag == 138) {
          parse_bottom_right_label:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_bottom_right_label()));
@@ -577,13 +657,13 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(122)) goto parse_header_font_family;
+        if (input->ExpectTag(146)) goto parse_header_font_family;
         break;
       }
 
-      // optional string header_font_family = 15;
-      case 15: {
-        if (tag == 122) {
+      // optional string header_font_family = 18;
+      case 18: {
+        if (tag == 146) {
          parse_header_font_family:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_header_font_family()));
@@ -594,13 +674,13 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(130)) goto parse_number_font_family;
+        if (input->ExpectTag(154)) goto parse_number_font_family;
         break;
       }
 
-      // optional string number_font_family = 16;
-      case 16: {
-        if (tag == 130) {
+      // optional string number_font_family = 19;
+      case 19: {
+        if (tag == 154) {
          parse_number_font_family:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_number_font_family()));
@@ -611,13 +691,13 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(138)) goto parse_quote_font_family;
+        if (input->ExpectTag(162)) goto parse_quote_font_family;
         break;
       }
 
-      // optional string quote_font_family = 17;
-      case 17: {
-        if (tag == 138) {
+      // optional string quote_font_family = 20;
+      case 20: {
+        if (tag == 162) {
          parse_quote_font_family:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_quote_font_family()));
@@ -628,16 +708,38 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(146)) goto parse_rgb_holiday;
+        if (input->ExpectTag(168)) goto parse_dotted_line;
         break;
       }
 
-      // optional .config.RGB rgb_holiday = 18;
-      case 18: {
-        if (tag == 146) {
-         parse_rgb_holiday:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_rgb_holiday()));
+      // optional bool dotted_line = 21 [default = false];
+      case 21: {
+        if (tag == 168) {
+         parse_dotted_line:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &dotted_line_)));
+          set_has_dotted_line();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(176)) goto parse_output_type;
+        break;
+      }
+
+      // optional .config.OutputType output_type = 22 [default = SVG];
+      case 22: {
+        if (tag == 176) {
+         parse_output_type:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::config::OutputType_IsValid(value)) {
+            set_output_type(static_cast< ::config::OutputType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(22, value);
+          }
         } else {
           goto handle_unusual;
         }
@@ -675,119 +777,140 @@ void CalendarConfig::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->num_years(), output);
   }
 
-  // repeated .config.SpecialDay special_day = 2;
+  // optional int32 first_month = 2 [default = 1];
+  if (has_first_month()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->first_month(), output);
+  }
+
+  // optional int32 num_months = 3 [default = 12];
+  if (has_num_months()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->num_months(), output);
+  }
+
+  // repeated .config.SpecialDay special_day = 4;
   for (unsigned int i = 0, n = this->special_day_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->special_day(i), output);
+      4, this->special_day(i), output);
   }
 
-  // optional double cell_size = 3;
+  // optional double cell_size = 5;
   if (has_cell_size()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->cell_size(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->cell_size(), output);
   }
 
-  // optional double cell_margin = 4;
+  // optional double cell_margin = 6;
   if (has_cell_margin()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->cell_margin(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->cell_margin(), output);
   }
 
-  // optional double font_size = 5;
+  // optional double font_size = 7;
   if (has_font_size()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->font_size(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->font_size(), output);
   }
 
-  // optional double bigger_font_size = 6;
+  // optional double bigger_font_size = 8;
   if (has_bigger_font_size()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->bigger_font_size(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(8, this->bigger_font_size(), output);
   }
 
-  // optional double line_width = 7;
+  // optional double line_width = 9;
   if (has_line_width()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->line_width(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(9, this->line_width(), output);
   }
 
-  // optional double month_label_height = 8;
+  // optional double month_label_height = 10;
   if (has_month_label_height()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(8, this->month_label_height(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(10, this->month_label_height(), output);
   }
 
-  // optional double year_label_width = 9;
+  // optional double year_label_width = 11;
   if (has_year_label_width()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(9, this->year_label_width(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(11, this->year_label_width(), output);
   }
 
-  // optional .config.RGB rgb_header = 10;
+  // optional .config.RGB rgb_header = 12;
   if (has_rgb_header()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, *this->rgb_header_, output);
+      12, *this->rgb_header_, output);
   }
 
-  // optional .config.RGB rgb_header_sunday = 11;
+  // optional .config.RGB rgb_header_sunday = 13;
   if (has_rgb_header_sunday()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, *this->rgb_header_sunday_, output);
+      13, *this->rgb_header_sunday_, output);
   }
 
-  // optional .config.RGB rgb_month_line = 12;
+  // optional .config.RGB rgb_month_line = 14;
   if (has_rgb_month_line()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      12, *this->rgb_month_line_, output);
+      14, *this->rgb_month_line_, output);
   }
 
-  // optional string bottom_left_label = 13;
+  // optional .config.RGB rgb_holiday = 15;
+  if (has_rgb_holiday()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      15, *this->rgb_holiday_, output);
+  }
+
+  // optional string bottom_left_label = 16;
   if (has_bottom_left_label()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->bottom_left_label().data(), this->bottom_left_label().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "config.CalendarConfig.bottom_left_label");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      13, this->bottom_left_label(), output);
+      16, this->bottom_left_label(), output);
   }
 
-  // optional string bottom_right_label = 14;
+  // optional string bottom_right_label = 17;
   if (has_bottom_right_label()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->bottom_right_label().data(), this->bottom_right_label().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "config.CalendarConfig.bottom_right_label");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      14, this->bottom_right_label(), output);
+      17, this->bottom_right_label(), output);
   }
 
-  // optional string header_font_family = 15;
+  // optional string header_font_family = 18;
   if (has_header_font_family()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->header_font_family().data(), this->header_font_family().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "config.CalendarConfig.header_font_family");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      15, this->header_font_family(), output);
+      18, this->header_font_family(), output);
   }
 
-  // optional string number_font_family = 16;
+  // optional string number_font_family = 19;
   if (has_number_font_family()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->number_font_family().data(), this->number_font_family().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "config.CalendarConfig.number_font_family");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      16, this->number_font_family(), output);
+      19, this->number_font_family(), output);
   }
 
-  // optional string quote_font_family = 17;
+  // optional string quote_font_family = 20;
   if (has_quote_font_family()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->quote_font_family().data(), this->quote_font_family().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "config.CalendarConfig.quote_font_family");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      17, this->quote_font_family(), output);
+      20, this->quote_font_family(), output);
   }
 
-  // optional .config.RGB rgb_holiday = 18;
-  if (has_rgb_holiday()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      18, *this->rgb_holiday_, output);
+  // optional bool dotted_line = 21 [default = false];
+  if (has_dotted_line()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(21, this->dotted_line(), output);
+  }
+
+  // optional .config.OutputType output_type = 22 [default = SVG];
+  if (has_output_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      22, this->output_type(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -805,70 +928,87 @@ void CalendarConfig::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->num_years(), target);
   }
 
-  // repeated .config.SpecialDay special_day = 2;
+  // optional int32 first_month = 2 [default = 1];
+  if (has_first_month()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->first_month(), target);
+  }
+
+  // optional int32 num_months = 3 [default = 12];
+  if (has_num_months()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->num_months(), target);
+  }
+
+  // repeated .config.SpecialDay special_day = 4;
   for (unsigned int i = 0, n = this->special_day_size(); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        2, this->special_day(i), false, target);
+        4, this->special_day(i), false, target);
   }
 
-  // optional double cell_size = 3;
+  // optional double cell_size = 5;
   if (has_cell_size()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->cell_size(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->cell_size(), target);
   }
 
-  // optional double cell_margin = 4;
+  // optional double cell_margin = 6;
   if (has_cell_margin()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->cell_margin(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->cell_margin(), target);
   }
 
-  // optional double font_size = 5;
+  // optional double font_size = 7;
   if (has_font_size()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->font_size(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->font_size(), target);
   }
 
-  // optional double bigger_font_size = 6;
+  // optional double bigger_font_size = 8;
   if (has_bigger_font_size()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->bigger_font_size(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(8, this->bigger_font_size(), target);
   }
 
-  // optional double line_width = 7;
+  // optional double line_width = 9;
   if (has_line_width()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->line_width(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(9, this->line_width(), target);
   }
 
-  // optional double month_label_height = 8;
+  // optional double month_label_height = 10;
   if (has_month_label_height()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(8, this->month_label_height(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(10, this->month_label_height(), target);
   }
 
-  // optional double year_label_width = 9;
+  // optional double year_label_width = 11;
   if (has_year_label_width()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(9, this->year_label_width(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(11, this->year_label_width(), target);
   }
 
-  // optional .config.RGB rgb_header = 10;
+  // optional .config.RGB rgb_header = 12;
   if (has_rgb_header()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        10, *this->rgb_header_, false, target);
+        12, *this->rgb_header_, false, target);
   }
 
-  // optional .config.RGB rgb_header_sunday = 11;
+  // optional .config.RGB rgb_header_sunday = 13;
   if (has_rgb_header_sunday()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        11, *this->rgb_header_sunday_, false, target);
+        13, *this->rgb_header_sunday_, false, target);
   }
 
-  // optional .config.RGB rgb_month_line = 12;
+  // optional .config.RGB rgb_month_line = 14;
   if (has_rgb_month_line()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        12, *this->rgb_month_line_, false, target);
+        14, *this->rgb_month_line_, false, target);
   }
 
-  // optional string bottom_left_label = 13;
+  // optional .config.RGB rgb_holiday = 15;
+  if (has_rgb_holiday()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        15, *this->rgb_holiday_, false, target);
+  }
+
+  // optional string bottom_left_label = 16;
   if (has_bottom_left_label()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->bottom_left_label().data(), this->bottom_left_label().length(),
@@ -876,10 +1016,10 @@ void CalendarConfig::SerializeWithCachedSizes(
       "config.CalendarConfig.bottom_left_label");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        13, this->bottom_left_label(), target);
+        16, this->bottom_left_label(), target);
   }
 
-  // optional string bottom_right_label = 14;
+  // optional string bottom_right_label = 17;
   if (has_bottom_right_label()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->bottom_right_label().data(), this->bottom_right_label().length(),
@@ -887,10 +1027,10 @@ void CalendarConfig::SerializeWithCachedSizes(
       "config.CalendarConfig.bottom_right_label");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        14, this->bottom_right_label(), target);
+        17, this->bottom_right_label(), target);
   }
 
-  // optional string header_font_family = 15;
+  // optional string header_font_family = 18;
   if (has_header_font_family()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->header_font_family().data(), this->header_font_family().length(),
@@ -898,10 +1038,10 @@ void CalendarConfig::SerializeWithCachedSizes(
       "config.CalendarConfig.header_font_family");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        15, this->header_font_family(), target);
+        18, this->header_font_family(), target);
   }
 
-  // optional string number_font_family = 16;
+  // optional string number_font_family = 19;
   if (has_number_font_family()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->number_font_family().data(), this->number_font_family().length(),
@@ -909,10 +1049,10 @@ void CalendarConfig::SerializeWithCachedSizes(
       "config.CalendarConfig.number_font_family");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        16, this->number_font_family(), target);
+        19, this->number_font_family(), target);
   }
 
-  // optional string quote_font_family = 17;
+  // optional string quote_font_family = 20;
   if (has_quote_font_family()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->quote_font_family().data(), this->quote_font_family().length(),
@@ -920,14 +1060,18 @@ void CalendarConfig::SerializeWithCachedSizes(
       "config.CalendarConfig.quote_font_family");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        17, this->quote_font_family(), target);
+        20, this->quote_font_family(), target);
   }
 
-  // optional .config.RGB rgb_holiday = 18;
-  if (has_rgb_holiday()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        18, *this->rgb_holiday_, false, target);
+  // optional bool dotted_line = 21 [default = false];
+  if (has_dotted_line()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(21, this->dotted_line(), target);
+  }
+
+  // optional .config.OutputType output_type = 22 [default = SVG];
+  if (has_output_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      22, this->output_type(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -942,7 +1086,7 @@ int CalendarConfig::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:config.CalendarConfig)
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & 253u) {
+  if (_has_bits_[0 / 32] & 247u) {
     // optional int32 num_years = 1 [default = 30];
     if (has_num_years()) {
       total_size += 1 +
@@ -950,110 +1094,135 @@ int CalendarConfig::ByteSize() const {
           this->num_years());
     }
 
-    // optional double cell_size = 3;
+    // optional int32 first_month = 2 [default = 1];
+    if (has_first_month()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->first_month());
+    }
+
+    // optional int32 num_months = 3 [default = 12];
+    if (has_num_months()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->num_months());
+    }
+
+    // optional double cell_size = 5;
     if (has_cell_size()) {
       total_size += 1 + 8;
     }
 
-    // optional double cell_margin = 4;
+    // optional double cell_margin = 6;
     if (has_cell_margin()) {
       total_size += 1 + 8;
     }
 
-    // optional double font_size = 5;
+    // optional double font_size = 7;
     if (has_font_size()) {
       total_size += 1 + 8;
     }
 
-    // optional double bigger_font_size = 6;
+    // optional double bigger_font_size = 8;
     if (has_bigger_font_size()) {
-      total_size += 1 + 8;
-    }
-
-    // optional double line_width = 7;
-    if (has_line_width()) {
-      total_size += 1 + 8;
-    }
-
-    // optional double month_label_height = 8;
-    if (has_month_label_height()) {
       total_size += 1 + 8;
     }
 
   }
   if (_has_bits_[8 / 32] & 65280u) {
-    // optional double year_label_width = 9;
+    // optional double line_width = 9;
+    if (has_line_width()) {
+      total_size += 1 + 8;
+    }
+
+    // optional double month_label_height = 10;
+    if (has_month_label_height()) {
+      total_size += 1 + 8;
+    }
+
+    // optional double year_label_width = 11;
     if (has_year_label_width()) {
       total_size += 1 + 8;
     }
 
-    // optional .config.RGB rgb_header = 10;
+    // optional .config.RGB rgb_header = 12;
     if (has_rgb_header()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *this->rgb_header_);
     }
 
-    // optional .config.RGB rgb_header_sunday = 11;
+    // optional .config.RGB rgb_header_sunday = 13;
     if (has_rgb_header_sunday()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *this->rgb_header_sunday_);
     }
 
-    // optional .config.RGB rgb_month_line = 12;
+    // optional .config.RGB rgb_month_line = 14;
     if (has_rgb_month_line()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *this->rgb_month_line_);
     }
 
-    // optional .config.RGB rgb_holiday = 18;
+    // optional .config.RGB rgb_holiday = 15;
     if (has_rgb_holiday()) {
-      total_size += 2 +
+      total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *this->rgb_holiday_);
     }
 
-    // optional string bottom_left_label = 13;
+    // optional string bottom_left_label = 16;
     if (has_bottom_left_label()) {
-      total_size += 1 +
+      total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->bottom_left_label());
     }
 
-    // optional string bottom_right_label = 14;
+  }
+  if (_has_bits_[16 / 32] & 4128768u) {
+    // optional string bottom_right_label = 17;
     if (has_bottom_right_label()) {
-      total_size += 1 +
+      total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->bottom_right_label());
     }
 
-    // optional string header_font_family = 15;
+    // optional string header_font_family = 18;
     if (has_header_font_family()) {
-      total_size += 1 +
+      total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->header_font_family());
     }
 
-  }
-  if (_has_bits_[16 / 32] & 196608u) {
-    // optional string number_font_family = 16;
+    // optional string number_font_family = 19;
     if (has_number_font_family()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->number_font_family());
     }
 
-    // optional string quote_font_family = 17;
+    // optional string quote_font_family = 20;
     if (has_quote_font_family()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->quote_font_family());
     }
 
+    // optional bool dotted_line = 21 [default = false];
+    if (has_dotted_line()) {
+      total_size += 2 + 1;
+    }
+
+    // optional .config.OutputType output_type = 22 [default = SVG];
+    if (has_output_type()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->output_type());
+    }
+
   }
-  // repeated .config.SpecialDay special_day = 2;
+  // repeated .config.SpecialDay special_day = 4;
   total_size += 1 * this->special_day_size();
   for (int i = 0; i < this->special_day_size(); i++) {
     total_size +=
@@ -1099,6 +1268,12 @@ void CalendarConfig::MergeFrom(const CalendarConfig& from) {
     if (from.has_num_years()) {
       set_num_years(from.num_years());
     }
+    if (from.has_first_month()) {
+      set_first_month(from.first_month());
+    }
+    if (from.has_num_months()) {
+      set_num_months(from.num_months());
+    }
     if (from.has_cell_size()) {
       set_cell_size(from.cell_size());
     }
@@ -1111,14 +1286,14 @@ void CalendarConfig::MergeFrom(const CalendarConfig& from) {
     if (from.has_bigger_font_size()) {
       set_bigger_font_size(from.bigger_font_size());
     }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_line_width()) {
       set_line_width(from.line_width());
     }
     if (from.has_month_label_height()) {
       set_month_label_height(from.month_label_height());
     }
-  }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_year_label_width()) {
       set_year_label_width(from.year_label_width());
     }
@@ -1138,6 +1313,8 @@ void CalendarConfig::MergeFrom(const CalendarConfig& from) {
       set_has_bottom_left_label();
       bottom_left_label_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.bottom_left_label_);
     }
+  }
+  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     if (from.has_bottom_right_label()) {
       set_has_bottom_right_label();
       bottom_right_label_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.bottom_right_label_);
@@ -1146,8 +1323,6 @@ void CalendarConfig::MergeFrom(const CalendarConfig& from) {
       set_has_header_font_family();
       header_font_family_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.header_font_family_);
     }
-  }
-  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     if (from.has_number_font_family()) {
       set_has_number_font_family();
       number_font_family_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.number_font_family_);
@@ -1155,6 +1330,12 @@ void CalendarConfig::MergeFrom(const CalendarConfig& from) {
     if (from.has_quote_font_family()) {
       set_has_quote_font_family();
       quote_font_family_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.quote_font_family_);
+    }
+    if (from.has_dotted_line()) {
+      set_dotted_line(from.dotted_line());
+    }
+    if (from.has_output_type()) {
+      set_output_type(from.output_type());
     }
   }
   if (from._internal_metadata_.have_unknown_fields()) {
@@ -1200,6 +1381,8 @@ void CalendarConfig::Swap(CalendarConfig* other) {
 }
 void CalendarConfig::InternalSwap(CalendarConfig* other) {
   std::swap(num_years_, other->num_years_);
+  std::swap(first_month_, other->first_month_);
+  std::swap(num_months_, other->num_months_);
   special_day_.UnsafeArenaSwap(&other->special_day_);
   std::swap(cell_size_, other->cell_size_);
   std::swap(cell_margin_, other->cell_margin_);
@@ -1217,6 +1400,8 @@ void CalendarConfig::InternalSwap(CalendarConfig* other) {
   header_font_family_.Swap(&other->header_font_family_);
   number_font_family_.Swap(&other->number_font_family_);
   quote_font_family_.Swap(&other->quote_font_family_);
+  std::swap(dotted_line_, other->dotted_line_);
+  std::swap(output_type_, other->output_type_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -1257,7 +1442,55 @@ void CalendarConfig::clear_num_years() {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.num_years)
 }
 
-// repeated .config.SpecialDay special_day = 2;
+// optional int32 first_month = 2 [default = 1];
+bool CalendarConfig::has_first_month() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void CalendarConfig::set_has_first_month() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void CalendarConfig::clear_has_first_month() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void CalendarConfig::clear_first_month() {
+  first_month_ = 1;
+  clear_has_first_month();
+}
+ ::google::protobuf::int32 CalendarConfig::first_month() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.first_month)
+  return first_month_;
+}
+ void CalendarConfig::set_first_month(::google::protobuf::int32 value) {
+  set_has_first_month();
+  first_month_ = value;
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.first_month)
+}
+
+// optional int32 num_months = 3 [default = 12];
+bool CalendarConfig::has_num_months() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+void CalendarConfig::set_has_num_months() {
+  _has_bits_[0] |= 0x00000004u;
+}
+void CalendarConfig::clear_has_num_months() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+void CalendarConfig::clear_num_months() {
+  num_months_ = 12;
+  clear_has_num_months();
+}
+ ::google::protobuf::int32 CalendarConfig::num_months() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.num_months)
+  return num_months_;
+}
+ void CalendarConfig::set_num_months(::google::protobuf::int32 value) {
+  set_has_num_months();
+  num_months_ = value;
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.num_months)
+}
+
+// repeated .config.SpecialDay special_day = 4;
 int CalendarConfig::special_day_size() const {
   return special_day_.size();
 }
@@ -1287,15 +1520,15 @@ CalendarConfig::special_day() const {
   return special_day_;
 }
 
-// optional double cell_size = 3;
+// optional double cell_size = 5;
 bool CalendarConfig::has_cell_size() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 void CalendarConfig::set_has_cell_size() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000010u;
 }
 void CalendarConfig::clear_has_cell_size() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 void CalendarConfig::clear_cell_size() {
   cell_size_ = 0;
@@ -1311,15 +1544,15 @@ void CalendarConfig::clear_cell_size() {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.cell_size)
 }
 
-// optional double cell_margin = 4;
+// optional double cell_margin = 6;
 bool CalendarConfig::has_cell_margin() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 void CalendarConfig::set_has_cell_margin() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000020u;
 }
 void CalendarConfig::clear_has_cell_margin() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 void CalendarConfig::clear_cell_margin() {
   cell_margin_ = 0;
@@ -1335,15 +1568,15 @@ void CalendarConfig::clear_cell_margin() {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.cell_margin)
 }
 
-// optional double font_size = 5;
+// optional double font_size = 7;
 bool CalendarConfig::has_font_size() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 void CalendarConfig::set_has_font_size() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000040u;
 }
 void CalendarConfig::clear_has_font_size() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 void CalendarConfig::clear_font_size() {
   font_size_ = 0;
@@ -1359,15 +1592,15 @@ void CalendarConfig::clear_font_size() {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.font_size)
 }
 
-// optional double bigger_font_size = 6;
+// optional double bigger_font_size = 8;
 bool CalendarConfig::has_bigger_font_size() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 void CalendarConfig::set_has_bigger_font_size() {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000080u;
 }
 void CalendarConfig::clear_has_bigger_font_size() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 void CalendarConfig::clear_bigger_font_size() {
   bigger_font_size_ = 0;
@@ -1383,15 +1616,15 @@ void CalendarConfig::clear_bigger_font_size() {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.bigger_font_size)
 }
 
-// optional double line_width = 7;
+// optional double line_width = 9;
 bool CalendarConfig::has_line_width() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 void CalendarConfig::set_has_line_width() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000100u;
 }
 void CalendarConfig::clear_has_line_width() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 void CalendarConfig::clear_line_width() {
   line_width_ = 0;
@@ -1407,15 +1640,15 @@ void CalendarConfig::clear_line_width() {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.line_width)
 }
 
-// optional double month_label_height = 8;
+// optional double month_label_height = 10;
 bool CalendarConfig::has_month_label_height() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 void CalendarConfig::set_has_month_label_height() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000200u;
 }
 void CalendarConfig::clear_has_month_label_height() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 void CalendarConfig::clear_month_label_height() {
   month_label_height_ = 0;
@@ -1431,15 +1664,15 @@ void CalendarConfig::clear_month_label_height() {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.month_label_height)
 }
 
-// optional double year_label_width = 9;
+// optional double year_label_width = 11;
 bool CalendarConfig::has_year_label_width() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 void CalendarConfig::set_has_year_label_width() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000400u;
 }
 void CalendarConfig::clear_has_year_label_width() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 void CalendarConfig::clear_year_label_width() {
   year_label_width_ = 0;
@@ -1455,15 +1688,15 @@ void CalendarConfig::clear_year_label_width() {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.year_label_width)
 }
 
-// optional .config.RGB rgb_header = 10;
+// optional .config.RGB rgb_header = 12;
 bool CalendarConfig::has_rgb_header() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
 void CalendarConfig::set_has_rgb_header() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000800u;
 }
 void CalendarConfig::clear_has_rgb_header() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000800u;
 }
 void CalendarConfig::clear_rgb_header() {
   if (rgb_header_ != NULL) rgb_header_->::config::RGB::Clear();
@@ -1499,15 +1732,15 @@ void CalendarConfig::set_allocated_rgb_header(::config::RGB* rgb_header) {
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_header)
 }
 
-// optional .config.RGB rgb_header_sunday = 11;
+// optional .config.RGB rgb_header_sunday = 13;
 bool CalendarConfig::has_rgb_header_sunday() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
+  return (_has_bits_[0] & 0x00001000u) != 0;
 }
 void CalendarConfig::set_has_rgb_header_sunday() {
-  _has_bits_[0] |= 0x00000400u;
+  _has_bits_[0] |= 0x00001000u;
 }
 void CalendarConfig::clear_has_rgb_header_sunday() {
-  _has_bits_[0] &= ~0x00000400u;
+  _has_bits_[0] &= ~0x00001000u;
 }
 void CalendarConfig::clear_rgb_header_sunday() {
   if (rgb_header_sunday_ != NULL) rgb_header_sunday_->::config::RGB::Clear();
@@ -1543,15 +1776,15 @@ void CalendarConfig::set_allocated_rgb_header_sunday(::config::RGB* rgb_header_s
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_header_sunday)
 }
 
-// optional .config.RGB rgb_month_line = 12;
+// optional .config.RGB rgb_month_line = 14;
 bool CalendarConfig::has_rgb_month_line() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
+  return (_has_bits_[0] & 0x00002000u) != 0;
 }
 void CalendarConfig::set_has_rgb_month_line() {
-  _has_bits_[0] |= 0x00000800u;
+  _has_bits_[0] |= 0x00002000u;
 }
 void CalendarConfig::clear_has_rgb_month_line() {
-  _has_bits_[0] &= ~0x00000800u;
+  _has_bits_[0] &= ~0x00002000u;
 }
 void CalendarConfig::clear_rgb_month_line() {
   if (rgb_month_line_ != NULL) rgb_month_line_->::config::RGB::Clear();
@@ -1587,15 +1820,15 @@ void CalendarConfig::set_allocated_rgb_month_line(::config::RGB* rgb_month_line)
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_month_line)
 }
 
-// optional .config.RGB rgb_holiday = 18;
+// optional .config.RGB rgb_holiday = 15;
 bool CalendarConfig::has_rgb_holiday() const {
-  return (_has_bits_[0] & 0x00001000u) != 0;
+  return (_has_bits_[0] & 0x00004000u) != 0;
 }
 void CalendarConfig::set_has_rgb_holiday() {
-  _has_bits_[0] |= 0x00001000u;
+  _has_bits_[0] |= 0x00004000u;
 }
 void CalendarConfig::clear_has_rgb_holiday() {
-  _has_bits_[0] &= ~0x00001000u;
+  _has_bits_[0] &= ~0x00004000u;
 }
 void CalendarConfig::clear_rgb_holiday() {
   if (rgb_holiday_ != NULL) rgb_holiday_->::config::RGB::Clear();
@@ -1631,15 +1864,15 @@ void CalendarConfig::set_allocated_rgb_holiday(::config::RGB* rgb_holiday) {
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.rgb_holiday)
 }
 
-// optional string bottom_left_label = 13;
+// optional string bottom_left_label = 16;
 bool CalendarConfig::has_bottom_left_label() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+  return (_has_bits_[0] & 0x00008000u) != 0;
 }
 void CalendarConfig::set_has_bottom_left_label() {
-  _has_bits_[0] |= 0x00002000u;
+  _has_bits_[0] |= 0x00008000u;
 }
 void CalendarConfig::clear_has_bottom_left_label() {
-  _has_bits_[0] &= ~0x00002000u;
+  _has_bits_[0] &= ~0x00008000u;
 }
 void CalendarConfig::clear_bottom_left_label() {
   bottom_left_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -1685,15 +1918,15 @@ void CalendarConfig::clear_bottom_left_label() {
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.bottom_left_label)
 }
 
-// optional string bottom_right_label = 14;
+// optional string bottom_right_label = 17;
 bool CalendarConfig::has_bottom_right_label() const {
-  return (_has_bits_[0] & 0x00004000u) != 0;
+  return (_has_bits_[0] & 0x00010000u) != 0;
 }
 void CalendarConfig::set_has_bottom_right_label() {
-  _has_bits_[0] |= 0x00004000u;
+  _has_bits_[0] |= 0x00010000u;
 }
 void CalendarConfig::clear_has_bottom_right_label() {
-  _has_bits_[0] &= ~0x00004000u;
+  _has_bits_[0] &= ~0x00010000u;
 }
 void CalendarConfig::clear_bottom_right_label() {
   bottom_right_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -1739,15 +1972,15 @@ void CalendarConfig::clear_bottom_right_label() {
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.bottom_right_label)
 }
 
-// optional string header_font_family = 15;
+// optional string header_font_family = 18;
 bool CalendarConfig::has_header_font_family() const {
-  return (_has_bits_[0] & 0x00008000u) != 0;
+  return (_has_bits_[0] & 0x00020000u) != 0;
 }
 void CalendarConfig::set_has_header_font_family() {
-  _has_bits_[0] |= 0x00008000u;
+  _has_bits_[0] |= 0x00020000u;
 }
 void CalendarConfig::clear_has_header_font_family() {
-  _has_bits_[0] &= ~0x00008000u;
+  _has_bits_[0] &= ~0x00020000u;
 }
 void CalendarConfig::clear_header_font_family() {
   header_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -1793,15 +2026,15 @@ void CalendarConfig::clear_header_font_family() {
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.header_font_family)
 }
 
-// optional string number_font_family = 16;
+// optional string number_font_family = 19;
 bool CalendarConfig::has_number_font_family() const {
-  return (_has_bits_[0] & 0x00010000u) != 0;
+  return (_has_bits_[0] & 0x00040000u) != 0;
 }
 void CalendarConfig::set_has_number_font_family() {
-  _has_bits_[0] |= 0x00010000u;
+  _has_bits_[0] |= 0x00040000u;
 }
 void CalendarConfig::clear_has_number_font_family() {
-  _has_bits_[0] &= ~0x00010000u;
+  _has_bits_[0] &= ~0x00040000u;
 }
 void CalendarConfig::clear_number_font_family() {
   number_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -1847,15 +2080,15 @@ void CalendarConfig::clear_number_font_family() {
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.number_font_family)
 }
 
-// optional string quote_font_family = 17;
+// optional string quote_font_family = 20;
 bool CalendarConfig::has_quote_font_family() const {
-  return (_has_bits_[0] & 0x00020000u) != 0;
+  return (_has_bits_[0] & 0x00080000u) != 0;
 }
 void CalendarConfig::set_has_quote_font_family() {
-  _has_bits_[0] |= 0x00020000u;
+  _has_bits_[0] |= 0x00080000u;
 }
 void CalendarConfig::clear_has_quote_font_family() {
-  _has_bits_[0] &= ~0x00020000u;
+  _has_bits_[0] &= ~0x00080000u;
 }
 void CalendarConfig::clear_quote_font_family() {
   quote_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -1899,6 +2132,55 @@ void CalendarConfig::clear_quote_font_family() {
   }
   quote_font_family_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), quote_font_family);
   // @@protoc_insertion_point(field_set_allocated:config.CalendarConfig.quote_font_family)
+}
+
+// optional bool dotted_line = 21 [default = false];
+bool CalendarConfig::has_dotted_line() const {
+  return (_has_bits_[0] & 0x00100000u) != 0;
+}
+void CalendarConfig::set_has_dotted_line() {
+  _has_bits_[0] |= 0x00100000u;
+}
+void CalendarConfig::clear_has_dotted_line() {
+  _has_bits_[0] &= ~0x00100000u;
+}
+void CalendarConfig::clear_dotted_line() {
+  dotted_line_ = false;
+  clear_has_dotted_line();
+}
+ bool CalendarConfig::dotted_line() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.dotted_line)
+  return dotted_line_;
+}
+ void CalendarConfig::set_dotted_line(bool value) {
+  set_has_dotted_line();
+  dotted_line_ = value;
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.dotted_line)
+}
+
+// optional .config.OutputType output_type = 22 [default = SVG];
+bool CalendarConfig::has_output_type() const {
+  return (_has_bits_[0] & 0x00200000u) != 0;
+}
+void CalendarConfig::set_has_output_type() {
+  _has_bits_[0] |= 0x00200000u;
+}
+void CalendarConfig::clear_has_output_type() {
+  _has_bits_[0] &= ~0x00200000u;
+}
+void CalendarConfig::clear_output_type() {
+  output_type_ = 0;
+  clear_has_output_type();
+}
+ ::config::OutputType CalendarConfig::output_type() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.output_type)
+  return static_cast< ::config::OutputType >(output_type_);
+}
+ void CalendarConfig::set_output_type(::config::OutputType value) {
+  assert(::config::OutputType_IsValid(value));
+  set_has_output_type();
+  output_type_ = value;
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.output_type)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

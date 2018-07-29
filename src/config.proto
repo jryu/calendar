@@ -2,27 +2,39 @@ package config;
 
 message CalendarConfig {
 	optional int32 num_years = 1 [default = 30];
-	repeated SpecialDay special_day = 2;
+	optional int32 first_month = 2 [default = 1];
+	optional int32 num_months = 3 [default = 12];
+	repeated SpecialDay special_day = 4;
 
-	optional double cell_size = 3;
-	optional double cell_margin = 4;
-	optional double font_size = 5;
-	optional double bigger_font_size = 6;
-	optional double line_width = 7;
-	optional double month_label_height = 8;
-	optional double year_label_width = 9;
+	optional double cell_size = 5;
+	optional double cell_margin = 6;
+	optional double font_size = 7;
+	optional double bigger_font_size = 8;
+	optional double line_width = 9;
+	optional double month_label_height = 10;
+	optional double year_label_width = 11;
 
-	optional RGB rgb_header = 10;
-	optional RGB rgb_header_sunday = 11;
-	optional RGB rgb_month_line = 12;
-	optional RGB rgb_holiday = 18;
+	optional RGB rgb_header = 12;
+	optional RGB rgb_header_sunday = 13;
+	optional RGB rgb_month_line = 14;
+	optional RGB rgb_holiday = 15;
 
-	optional string bottom_left_label = 13;
-	optional string bottom_right_label = 14;
+	optional string bottom_left_label = 16;
+	optional string bottom_right_label = 17;
 
-	optional string header_font_family = 15;
-	optional string number_font_family = 16;
-	optional string quote_font_family = 17;
+	optional string header_font_family = 18;
+	optional string number_font_family = 19;
+	optional string quote_font_family = 20;
+
+	optional bool dotted_line = 21 [default = false];
+
+	optional OutputType output_type = 22 [default = SVG];
+}
+
+enum OutputType {
+	SVG = 0;
+	PDF = 1;
+	PNG = 2;
 }
 
 message SpecialDay {

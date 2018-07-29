@@ -1,4 +1,8 @@
 num_years: 30
+first_month: 1
+num_months: 1
+dotted_line: true
+output_type: PDF
 cell_size: 16
 cell_margin: 4
 
@@ -16,11 +20,6 @@ special_day {
 	month: 4
 	day: 5
 	first_year: 2008
-	rgb {
-		red: 233
-		green: 30
-		blue: 99
-	}
 	svg:
 		'<svg width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" fill="#000000">'
 		'<g>'
@@ -32,11 +31,6 @@ special_day {
 	month: 7
 	day: 16
 	first_year: 2010
-	rgb {
-		red: 255
-		green: 152
-		blue: 0
-	}
 	svg:
 		'<svg width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"  fill="#000000">'
 		'<path d="M416,319.9V78l-224,34.6v237.2c-9,0-20.9,0.4-43.5,1.3c-42.6,1.6-52.5,21.8-52.5,41.3c0,24.9,13.5,43.5,62.6,41.4'
@@ -48,11 +42,6 @@ special_day {
 	month: 7
 	day: 16
 	first_year: 2012
-	rgb {
-		red: 244
-		green: 67
-		blue: 54
-	}
 	svg:
 		'<svg width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"  fill="#000000">'
 		'<path d="M416,319.9V78l-224,34.6v237.2c-9,0-20.9,0.4-43.5,1.3c-42.6,1.6-52.5,21.8-52.5,41.3c0,24.9,13.5,43.5,62.6,41.4'
@@ -64,11 +53,6 @@ special_day {
 	month: 7
 	day: 29
 	first_year: 1981
-	rgb {
-		red: 63
-		green: 81
-		blue: 181
-	}
 	svg:
 		'<svg width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve" fill="#000000">'
 		'<path d="M416.349,256.046c-0.001-21.013,13.143-38.948,31.651-46.062c-4.887-20.466-12.957-39.7-23.664-57.139'
@@ -88,11 +72,6 @@ special_day {
 	month: 10
 	day: 17
 	first_year: 1979
-	rgb {
-		red: 103
-		green: 58
-		blue: 183
-	}
 	svg:
 		'<svg width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" fill="#000000">'
 		'<path d="M352.1,102.3c0-0.1,0-0.2,0-0.2c-0.1-0.3-0.1-0.5-0.2-0.8c0,0,0-0.1,0-0.1c-0.6-1.5-1.8-3-3.5-3.4l-2-0.4L256,78v272.6'
@@ -104,11 +83,6 @@ special_day {
 	month: 4
 	day: 8
 	year: 2024
-	rgb {
-		red: 0
-		green: 150
-		blue: 136
-	}
 	svg:
 		"<svg style='width:24px;height:24px' viewBox='0 0 24 24'>"
 		"<path fill='#000000' d='M3.55,18.54L4.96,19.95L6.76,18.16L5.34,16.74M11,22.45C11.32,22.45 13,22.45 13,22.45V19.5H11M12,5.5A6,6 0 0,0 6,11.5A6,6 0 0,0 12,17.5A6,6 0 0,0 18,11.5C18,8.18 15.31,5.5 12,5.5M20,12.5H23V10.5H20M17.24,18.16L19.04,19.95L20.45,18.54L18.66,16.74M20.45,4.46L19.04,3.05L17.24,4.84L18.66,6.26M13,0.55H11V3.5H13M4,10.5H1V12.5H4M6.76,4.84L4.96,3.05L3.55,4.46L5.34,6.26L6.76,4.84Z' />"
@@ -118,11 +92,6 @@ special_day {
 	month: 8
 	day: 12
 	year: 2045
-	rgb {
-		red: 0
-		green: 150
-		blue: 136
-	}
 	svg:
 		"<svg style='width:24px;height:24px' viewBox='0 0 24 24'>"
 		"<path fill='#000000' d='M3.55,18.54L4.96,19.95L6.76,18.16L5.34,16.74M11,22.45C11.32,22.45 13,22.45 13,22.45V19.5H11M12,5.5A6,6 0 0,0 6,11.5A6,6 0 0,0 12,17.5A6,6 0 0,0 18,11.5C18,8.18 15.31,5.5 12,5.5M20,12.5H23V10.5H20M17.24,18.16L19.04,19.95L20.45,18.54L18.66,16.74M20.45,4.46L19.04,3.05L17.24,4.84L18.66,6.26M13,0.55H11V3.5H13M4,10.5H1V12.5H4M6.76,4.84L4.96,3.05L3.55,4.46L5.34,6.26L6.76,4.84Z' />"
@@ -130,24 +99,24 @@ special_day {
 }
 
 rgb_header {
-	red: 77
-	green: 77
-	blue: 77
+	red: 120
+	green: 120
+	blue: 120
 }
 rgb_holiday {
-	red: 117
-	green: 117
-	blue: 117
+	red: 50
+	green: 50
+	blue: 50
 }
 rgb_header_sunday {
-	red: 244
-	green: 67
-	blue: 54
+	red: 0
+	green: 0
+	blue: 0
 }
 rgb_month_line {
-	red: 215
-	green: 215
-	blue: 215
+	red: 160
+	green: 160
+	blue: 160
 }
 
 bottom_left_label: "Teach us to number our days, that we may gain a heart of wisdom. - Psalm 90:12"

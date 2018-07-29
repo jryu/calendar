@@ -146,7 +146,8 @@ double draw_text_of_month(cairo_t *cr, double x, const char* text) {
 	pango_layout_get_size(layout, &width, &height);
 
 	cairo_move_to(cr, x,
-			(conf.month_label_height() - ((double)height / PANGO_SCALE)) / 2);
+			(conf.month_label_height() - ((double)height / PANGO_SCALE) +
+			 conf.cell_margin()) / 2);
 	pango_cairo_show_layout(cr, layout);
 
 	g_object_unref(layout);
@@ -278,6 +279,7 @@ void month_label(cairo_t *cr) {
 		"AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
 
 	int d = 0;
+	double month_line_y = (conf.month_label_height() + conf.cell_margin()) / 2;
 	for (int m = 0; m < 12; m++) {
 		set_rgb(cr, conf.rgb_header());
 		double end_of_label =
@@ -287,14 +289,14 @@ void month_label(cairo_t *cr) {
 		set_rgb(cr, conf.rgb_month_line());
 		cairo_move_to(cr,
 				end_of_label + conf.cell_size() / 2,
-				conf.month_label_height() / 2);
+				month_line_y);
 
 		d += days_per_months[m];
 
 		cairo_line_to(cr,
 				get_day_x(d) -
 				(m < 11 ? conf.cell_size() : conf.cell_margin()),
-				conf.month_label_height() / 2);
+				month_line_y);
 		cairo_stroke(cr);
 	}
 }
@@ -347,7 +349,11 @@ void year(cairo_t *cr, int y, int year) {
 						special_day->has_first_year() &&
 						is_every_tenth_year(special_day->first_year(), timeinfo))) {
 				draw_rectangle_of_day(cr, i, y + 1);
-				set_rgb(cr, special_day->rgb());
+				if (special_day->has_rgb()) {
+					set_rgb(cr, special_day->rgb());
+				} else {
+					set_rgb(cr, conf.rgb_holiday());
+				}
 				cairo_fill(cr);
 
 				svg.replace(svg.find(BLACK_HEX_CODE), BLACK_HEX_CODE.length(),
@@ -403,6 +409,46 @@ bool parse_config() {
 	return true;
 }
 
+double calc_offset_width() {
+	if (conf.first_month() <= 1) {
+		return 0;
+	}
+
+	int d = 0;
+	for (int m = 0; m < conf.first_month() - 1; m++) {
+		d += days_per_months[m];
+	}
+	return d * (conf.cell_size() + conf.cell_margin()) +
+		conf.year_label_width();
+}
+
+double calc_visible_width() {
+	int d = 0;
+	for (int m = conf.first_month() - 1;
+			m < conf.first_month() + conf.num_months() - 1; m++) {
+		d += days_per_months[m];
+		if (m == 11) {
+			d++;
+		}
+	}
+	double width = d * (conf.cell_size() + conf.cell_margin());
+	if (conf.first_month() == 1) {
+		width += conf.year_label_width();
+	}
+	width += conf.cell_margin();
+	return width;
+}
+
+void draw_dashes(cairo_t *cr, double x, double y, double width, double height)
+{
+	set_rgb(cr, conf.rgb_header());
+	cairo_set_line_width(cr, 2);
+	double dashes[] = {5, 5};
+	cairo_set_dash(cr, dashes, 2, 0);
+	cairo_rectangle(cr, x, y, width, height);
+	cairo_stroke(cr);
+}
+
 int main(int argc, char *argv[])
 {
 	if (!parse_config()) {
@@ -412,15 +458,36 @@ int main(int argc, char *argv[])
 
 	int surface_width = (366 + 6) * (conf.cell_size() + conf.cell_margin()) +
 			conf.year_label_width();
+
+	double offset_width = calc_offset_width();
+	double visible_width = calc_visible_width();
+
 	int surface_height = (conf.num_years() + 2) *
 			(conf.cell_size() + conf.cell_margin()) +
-			conf.month_label_height();
+			conf.month_label_height() + conf.cell_margin();
 	console->info("Size: {} x {}", surface_width, surface_height);
+	console->info("Offset: {}", offset_width);
+	console->info("Visible: {}", visible_width);
 	cairo_surface_t *surface = NULL;
-//	surface = cairo_pdf_surface_create("example.pdf",
-	surface = cairo_svg_surface_create("example.svg",
-			surface_width, surface_height);
+	switch (conf.output_type()) {
+		case config::OutputType::PDF:
+			surface = cairo_pdf_surface_create("example.pdf",
+					visible_width, surface_height);
+			break;
+		case config::OutputType::PNG:
+			surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
+					visible_width, surface_height);
+			break;
+		default:
+			surface = cairo_svg_surface_create("example.svg",
+					visible_width, surface_height);
+			break;
+	}
 	cairo_t *cr = cairo_create(surface);
+
+	if (offset_width != 0) {
+		cairo_translate(cr, -offset_width + conf.cell_margin(), 0);
+	}
 
 	int this_year = get_this_year();
 	year_label(cr, this_year + 1900);
@@ -433,6 +500,16 @@ int main(int argc, char *argv[])
 	set_rgb(cr, conf.rgb_header());
 	draw_text_on_bottom_left(cr);
 	draw_text_on_bottom_right(cr);
+
+	if (conf.dotted_line()) {
+		draw_dashes(cr,
+				std::max(0.0, offset_width - conf.cell_margin()), 0,
+				visible_width, surface_height);
+	}
+
+	if (conf.output_type() == config::OutputType::PNG) {
+		cairo_surface_write_to_png(surface, "example.png");
+	}
 
 	cairo_destroy(cr);
 	cairo_surface_destroy(surface);
