@@ -27,8 +27,9 @@ message CalendarConfig {
 	optional string quote_font_family = 20;
 
 	optional bool dotted_line = 21 [default = false];
+	optional double vertical_dotted_line_x = 22;
 
-	optional OutputType output_type = 22 [default = SVG];
+	optional OutputType output_type = 23 [default = SVG];
 }
 
 enum OutputType {

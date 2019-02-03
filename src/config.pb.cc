@@ -43,7 +43,7 @@ void protobuf_AssignDesc_config_2eproto() {
       "config.proto");
   GOOGLE_CHECK(file != NULL);
   CalendarConfig_descriptor_ = file->message_type(0);
-  static const int CalendarConfig_offsets_[22] = {
+  static const int CalendarConfig_offsets_[23] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, num_years_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, first_month_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, num_months_),
@@ -65,6 +65,7 @@ void protobuf_AssignDesc_config_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, number_font_family_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, quote_font_family_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, dotted_line_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, vertical_dotted_line_x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CalendarConfig, output_type_),
   };
   CalendarConfig_reflection_ =
@@ -156,7 +157,7 @@ void protobuf_AddDesc_config_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\014config.proto\022\006config\"\203\005\n\016CalendarConfi"
+    "\n\014config.proto\022\006config\"\243\005\n\016CalendarConfi"
     "g\022\025\n\tnum_years\030\001 \001(\005:\00230\022\026\n\013first_month\030"
     "\002 \001(\005:\0011\022\026\n\nnum_months\030\003 \001(\005:\00212\022\'\n\013spec"
     "ial_day\030\004 \003(\0132\022.config.SpecialDay\022\021\n\tcel"
@@ -171,13 +172,14 @@ void protobuf_AddDesc_config_2eproto() {
     "\001(\t\022\032\n\022bottom_right_label\030\021 \001(\t\022\032\n\022heade"
     "r_font_family\030\022 \001(\t\022\032\n\022number_font_famil"
     "y\030\023 \001(\t\022\031\n\021quote_font_family\030\024 \001(\t\022\032\n\013do"
-    "tted_line\030\025 \001(\010:\005false\022,\n\013output_type\030\026 "
-    "\001(\0162\022.config.OutputType:\003SVG\"q\n\nSpecialD"
-    "ay\022\r\n\005month\030\001 \002(\005\022\013\n\003day\030\002 \002(\005\022\013\n\003svg\030\003 "
-    "\001(\t\022\022\n\nfirst_year\030\004 \001(\005\022\014\n\004year\030\005 \001(\005\022\030\n"
-    "\003rgb\030\006 \001(\0132\013.config.RGB\"/\n\003RGB\022\013\n\003red\030\001 "
-    "\002(\005\022\r\n\005green\030\002 \002(\005\022\014\n\004blue\030\003 \002(\005*\'\n\nOutp"
-    "utType\022\007\n\003SVG\020\000\022\007\n\003PDF\020\001\022\007\n\003PNG\020\002", 873);
+    "tted_line\030\025 \001(\010:\005false\022\036\n\026vertical_dotte"
+    "d_line_x\030\026 \001(\001\022,\n\013output_type\030\027 \001(\0162\022.co"
+    "nfig.OutputType:\003SVG\"q\n\nSpecialDay\022\r\n\005mo"
+    "nth\030\001 \002(\005\022\013\n\003day\030\002 \002(\005\022\013\n\003svg\030\003 \001(\t\022\022\n\nf"
+    "irst_year\030\004 \001(\005\022\014\n\004year\030\005 \001(\005\022\030\n\003rgb\030\006 \001"
+    "(\0132\013.config.RGB\"/\n\003RGB\022\013\n\003red\030\001 \002(\005\022\r\n\005g"
+    "reen\030\002 \002(\005\022\014\n\004blue\030\003 \002(\005*\'\n\nOutputType\022\007"
+    "\n\003SVG\020\000\022\007\n\003PDF\020\001\022\007\n\003PNG\020\002", 905);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "config.proto", &protobuf_RegisterTypes);
   CalendarConfig::default_instance_ = new CalendarConfig();
@@ -235,6 +237,7 @@ const int CalendarConfig::kHeaderFontFamilyFieldNumber;
 const int CalendarConfig::kNumberFontFamilyFieldNumber;
 const int CalendarConfig::kQuoteFontFamilyFieldNumber;
 const int CalendarConfig::kDottedLineFieldNumber;
+const int CalendarConfig::kVerticalDottedLineXFieldNumber;
 const int CalendarConfig::kOutputTypeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -282,6 +285,7 @@ void CalendarConfig::SharedCtor() {
   number_font_family_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   quote_font_family_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   dotted_line_ = false;
+  vertical_dotted_line_x_ = 0;
   output_type_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -372,7 +376,8 @@ void CalendarConfig::Clear() {
       bottom_left_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
   }
-  if (_has_bits_[16 / 32] & 4128768u) {
+  if (_has_bits_[16 / 32] & 8323072u) {
+    ZR_(vertical_dotted_line_x_, output_type_);
     if (has_bottom_right_label()) {
       bottom_right_label_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
@@ -386,7 +391,6 @@ void CalendarConfig::Clear() {
       quote_font_family_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     dotted_line_ = false;
-    output_type_ = 0;
   }
 
 #undef ZR_HELPER_
@@ -723,13 +727,28 @@ bool CalendarConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(176)) goto parse_output_type;
+        if (input->ExpectTag(177)) goto parse_vertical_dotted_line_x;
         break;
       }
 
-      // optional .config.OutputType output_type = 22 [default = SVG];
+      // optional double vertical_dotted_line_x = 22;
       case 22: {
-        if (tag == 176) {
+        if (tag == 177) {
+         parse_vertical_dotted_line_x:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &vertical_dotted_line_x_)));
+          set_has_vertical_dotted_line_x();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(184)) goto parse_output_type;
+        break;
+      }
+
+      // optional .config.OutputType output_type = 23 [default = SVG];
+      case 23: {
+        if (tag == 184) {
          parse_output_type:
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -738,7 +757,7 @@ bool CalendarConfig::MergePartialFromCodedStream(
           if (::config::OutputType_IsValid(value)) {
             set_output_type(static_cast< ::config::OutputType >(value));
           } else {
-            mutable_unknown_fields()->AddVarint(22, value);
+            mutable_unknown_fields()->AddVarint(23, value);
           }
         } else {
           goto handle_unusual;
@@ -907,10 +926,15 @@ void CalendarConfig::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(21, this->dotted_line(), output);
   }
 
-  // optional .config.OutputType output_type = 22 [default = SVG];
+  // optional double vertical_dotted_line_x = 22;
+  if (has_vertical_dotted_line_x()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(22, this->vertical_dotted_line_x(), output);
+  }
+
+  // optional .config.OutputType output_type = 23 [default = SVG];
   if (has_output_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      22, this->output_type(), output);
+      23, this->output_type(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1068,10 +1092,15 @@ void CalendarConfig::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(21, this->dotted_line(), target);
   }
 
-  // optional .config.OutputType output_type = 22 [default = SVG];
+  // optional double vertical_dotted_line_x = 22;
+  if (has_vertical_dotted_line_x()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(22, this->vertical_dotted_line_x(), target);
+  }
+
+  // optional .config.OutputType output_type = 23 [default = SVG];
   if (has_output_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      22, this->output_type(), target);
+      23, this->output_type(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1181,7 +1210,7 @@ int CalendarConfig::ByteSize() const {
     }
 
   }
-  if (_has_bits_[16 / 32] & 4128768u) {
+  if (_has_bits_[16 / 32] & 8323072u) {
     // optional string bottom_right_label = 17;
     if (has_bottom_right_label()) {
       total_size += 2 +
@@ -1215,7 +1244,12 @@ int CalendarConfig::ByteSize() const {
       total_size += 2 + 1;
     }
 
-    // optional .config.OutputType output_type = 22 [default = SVG];
+    // optional double vertical_dotted_line_x = 22;
+    if (has_vertical_dotted_line_x()) {
+      total_size += 2 + 8;
+    }
+
+    // optional .config.OutputType output_type = 23 [default = SVG];
     if (has_output_type()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->output_type());
@@ -1334,6 +1368,9 @@ void CalendarConfig::MergeFrom(const CalendarConfig& from) {
     if (from.has_dotted_line()) {
       set_dotted_line(from.dotted_line());
     }
+    if (from.has_vertical_dotted_line_x()) {
+      set_vertical_dotted_line_x(from.vertical_dotted_line_x());
+    }
     if (from.has_output_type()) {
       set_output_type(from.output_type());
     }
@@ -1401,6 +1438,7 @@ void CalendarConfig::InternalSwap(CalendarConfig* other) {
   number_font_family_.Swap(&other->number_font_family_);
   quote_font_family_.Swap(&other->quote_font_family_);
   std::swap(dotted_line_, other->dotted_line_);
+  std::swap(vertical_dotted_line_x_, other->vertical_dotted_line_x_);
   std::swap(output_type_, other->output_type_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -2158,15 +2196,39 @@ void CalendarConfig::clear_dotted_line() {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.dotted_line)
 }
 
-// optional .config.OutputType output_type = 22 [default = SVG];
-bool CalendarConfig::has_output_type() const {
+// optional double vertical_dotted_line_x = 22;
+bool CalendarConfig::has_vertical_dotted_line_x() const {
   return (_has_bits_[0] & 0x00200000u) != 0;
 }
-void CalendarConfig::set_has_output_type() {
+void CalendarConfig::set_has_vertical_dotted_line_x() {
   _has_bits_[0] |= 0x00200000u;
 }
-void CalendarConfig::clear_has_output_type() {
+void CalendarConfig::clear_has_vertical_dotted_line_x() {
   _has_bits_[0] &= ~0x00200000u;
+}
+void CalendarConfig::clear_vertical_dotted_line_x() {
+  vertical_dotted_line_x_ = 0;
+  clear_has_vertical_dotted_line_x();
+}
+ double CalendarConfig::vertical_dotted_line_x() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.vertical_dotted_line_x)
+  return vertical_dotted_line_x_;
+}
+ void CalendarConfig::set_vertical_dotted_line_x(double value) {
+  set_has_vertical_dotted_line_x();
+  vertical_dotted_line_x_ = value;
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.vertical_dotted_line_x)
+}
+
+// optional .config.OutputType output_type = 23 [default = SVG];
+bool CalendarConfig::has_output_type() const {
+  return (_has_bits_[0] & 0x00400000u) != 0;
+}
+void CalendarConfig::set_has_output_type() {
+  _has_bits_[0] |= 0x00400000u;
+}
+void CalendarConfig::clear_has_output_type() {
+  _has_bits_[0] &= ~0x00400000u;
 }
 void CalendarConfig::clear_output_type() {
   output_type_ = 0;

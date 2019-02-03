@@ -1,4 +1,11 @@
 num_years: 30
+
+first_month: 1
+num_months: 2
+dotted_line: true
+vertical_dotted_line_x: 1364
+output_type: PDF
+
 cell_size: 16
 cell_margin: 4
 

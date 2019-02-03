@@ -316,10 +316,17 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   bool dotted_line() const;
   void set_dotted_line(bool value);
 
-  // optional .config.OutputType output_type = 22 [default = SVG];
+  // optional double vertical_dotted_line_x = 22;
+  bool has_vertical_dotted_line_x() const;
+  void clear_vertical_dotted_line_x();
+  static const int kVerticalDottedLineXFieldNumber = 22;
+  double vertical_dotted_line_x() const;
+  void set_vertical_dotted_line_x(double value);
+
+  // optional .config.OutputType output_type = 23 [default = SVG];
   bool has_output_type() const;
   void clear_output_type();
-  static const int kOutputTypeFieldNumber = 22;
+  static const int kOutputTypeFieldNumber = 23;
   ::config::OutputType output_type() const;
   void set_output_type(::config::OutputType value);
 
@@ -365,6 +372,8 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   inline void clear_has_quote_font_family();
   inline void set_has_dotted_line();
   inline void clear_has_dotted_line();
+  inline void set_has_vertical_dotted_line_x();
+  inline void clear_has_vertical_dotted_line_x();
   inline void set_has_output_type();
   inline void clear_has_output_type();
 
@@ -392,6 +401,7 @@ class CalendarConfig : public ::google::protobuf::Message /* @@protoc_insertion_
   ::google::protobuf::internal::ArenaStringPtr header_font_family_;
   ::google::protobuf::internal::ArenaStringPtr number_font_family_;
   ::google::protobuf::internal::ArenaStringPtr quote_font_family_;
+  double vertical_dotted_line_x_;
   int output_type_;
   friend void  protobuf_AddDesc_config_2eproto();
   friend void protobuf_AssignDesc_config_2eproto();
@@ -1417,15 +1427,39 @@ inline void CalendarConfig::set_dotted_line(bool value) {
   // @@protoc_insertion_point(field_set:config.CalendarConfig.dotted_line)
 }
 
-// optional .config.OutputType output_type = 22 [default = SVG];
-inline bool CalendarConfig::has_output_type() const {
+// optional double vertical_dotted_line_x = 22;
+inline bool CalendarConfig::has_vertical_dotted_line_x() const {
   return (_has_bits_[0] & 0x00200000u) != 0;
 }
-inline void CalendarConfig::set_has_output_type() {
+inline void CalendarConfig::set_has_vertical_dotted_line_x() {
   _has_bits_[0] |= 0x00200000u;
 }
-inline void CalendarConfig::clear_has_output_type() {
+inline void CalendarConfig::clear_has_vertical_dotted_line_x() {
   _has_bits_[0] &= ~0x00200000u;
+}
+inline void CalendarConfig::clear_vertical_dotted_line_x() {
+  vertical_dotted_line_x_ = 0;
+  clear_has_vertical_dotted_line_x();
+}
+inline double CalendarConfig::vertical_dotted_line_x() const {
+  // @@protoc_insertion_point(field_get:config.CalendarConfig.vertical_dotted_line_x)
+  return vertical_dotted_line_x_;
+}
+inline void CalendarConfig::set_vertical_dotted_line_x(double value) {
+  set_has_vertical_dotted_line_x();
+  vertical_dotted_line_x_ = value;
+  // @@protoc_insertion_point(field_set:config.CalendarConfig.vertical_dotted_line_x)
+}
+
+// optional .config.OutputType output_type = 23 [default = SVG];
+inline bool CalendarConfig::has_output_type() const {
+  return (_has_bits_[0] & 0x00400000u) != 0;
+}
+inline void CalendarConfig::set_has_output_type() {
+  _has_bits_[0] |= 0x00400000u;
+}
+inline void CalendarConfig::clear_has_output_type() {
+  _has_bits_[0] &= ~0x00400000u;
 }
 inline void CalendarConfig::clear_output_type() {
   output_type_ = 0;

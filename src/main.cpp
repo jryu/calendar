@@ -433,7 +433,7 @@ double calc_visible_width() {
 	}
 	double width = d * (conf.cell_size() + conf.cell_margin());
 	if (conf.first_month() == 1) {
-		width += conf.year_label_width();
+		width += conf.year_label_width() - conf.cell_margin();
 	}
 	width += conf.cell_margin();
 	return width;
@@ -442,11 +442,18 @@ double calc_visible_width() {
 void draw_dashes(cairo_t *cr, double x, double y, double width, double height)
 {
 	set_rgb(cr, conf.rgb_header());
-	cairo_set_line_width(cr, 2);
+	cairo_set_line_width(cr, 1);
 	double dashes[] = {5, 5};
 	cairo_set_dash(cr, dashes, 2, 0);
-	cairo_rectangle(cr, x, y, width, height);
-	cairo_stroke(cr);
+	if (conf.dotted_line()) {
+		cairo_rectangle(cr, x, y, width, height);
+		cairo_stroke(cr);
+	}
+	if (conf.has_vertical_dotted_line_x()) {
+		cairo_move_to(cr, x + conf.vertical_dotted_line_x(), 0);
+		cairo_line_to(cr, x + conf.vertical_dotted_line_x(), height);
+		cairo_stroke(cr);
+	}
 }
 
 int main(int argc, char *argv[])
@@ -461,6 +468,10 @@ int main(int argc, char *argv[])
 
 	double offset_width = calc_offset_width();
 	double visible_width = calc_visible_width();
+	double print_width = visible_width;
+	if (conf.has_vertical_dotted_line_x()) {
+		print_width = conf.vertical_dotted_line_x();
+	}
 
 	int surface_height = (conf.num_years() + 2) *
 			(conf.cell_size() + conf.cell_margin()) +
@@ -472,15 +483,15 @@ int main(int argc, char *argv[])
 	switch (conf.output_type()) {
 		case config::OutputType::PDF:
 			surface = cairo_pdf_surface_create("example.pdf",
-					visible_width, surface_height);
+					print_width, surface_height);
 			break;
 		case config::OutputType::PNG:
 			surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-					visible_width, surface_height);
+					print_width, surface_height);
 			break;
 		default:
 			surface = cairo_svg_surface_create("example.svg",
-					visible_width, surface_height);
+					print_width, surface_height);
 			break;
 	}
 	cairo_t *cr = cairo_create(surface);
@@ -501,11 +512,9 @@ int main(int argc, char *argv[])
 	draw_text_on_bottom_left(cr);
 	draw_text_on_bottom_right(cr);
 
-	if (conf.dotted_line()) {
-		draw_dashes(cr,
-				std::max(0.0, offset_width - conf.cell_margin()), 0,
-				visible_width, surface_height);
-	}
+	draw_dashes(cr,
+			std::max(0.0, offset_width - conf.cell_margin()), 0,
+			visible_width, surface_height);
 
 	if (conf.output_type() == config::OutputType::PNG) {
 		cairo_surface_write_to_png(surface, "example.png");
