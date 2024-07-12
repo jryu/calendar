@@ -7,6 +7,7 @@
 #include <librsvg/rsvg.h>
 #include <pango/pangocairo.h>
 #include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -15,7 +16,7 @@
 #include "config.pb.h"
 
 config::CalendarConfig conf;
-auto console = spdlog::stdout_logger_mt("console");
+auto console = spdlog::stdout_color_mt("console");
 
 const int days_per_months[] = {
 	31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 + 6};
@@ -110,7 +111,7 @@ double get_day_y(int year_index) {
 		conf.month_label_height();
 }
 
-int render_svg(const std::string& svg, cairo_t *cr, int x, int y)
+void render_svg(const std::string& svg, cairo_t *cr, int x, int y)
 {
 	cairo_save(cr);
 
